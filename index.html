@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Contratacao - Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+--ink:#1B2733;
+--ink-soft:#4B5A66;
+--paper:#F5F6F3;
+--card:#FFFFFF;
+--line:#DDE2E2;
+--teal:#2F6E68;
+--teal-soft:#E3EEEC;
+--amber:#C97A1E;
+--amber-soft:#FBF0DE;
+--red:#B23B33;
+--red-soft:#FBE7E4;
+--green:#3F7D57;
+--green-soft:#E7F1EA;
+--grey-soft:#EDEEEC;
+--purple:#6A5A8C;
+--purple-soft:#EEEAF4;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;padding:28px 32px 56px;}
+.wrap{max-width:1240px;margin:0 auto;}
+
+header{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:16px;}
+.header-top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.tabs{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.tab{
+background:none;border:0;color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:28px;
+font-weight:700;line-height:1.1;padding:0 0 4px;margin:0;cursor:pointer;text-align:left;
+}
+.tab + .tab{border-left:2px solid var(--ink);padding-left:16px;}
+.tab.active,.tab:hover{color:var(--amber);}
+.user{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:13px;}
+.ghost-btn,.new-btn{
+border:1px solid var(--line);border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;
+font-size:13px;padding:10px 14px;cursor:pointer;background:var(--card);color:var(--ink);
+}
+.new-btn{background:var(--ink);border-color:var(--ink);color:#fff;height:44px;padding:0 18px;}
+
+.demo-banner{border:1px solid var(--amber);background:var(--amber-soft);color:var(--amber);font-weight:700;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:13px;}
+.page{display:none;}
+.page.active{display:block;}
+.statusbar{display:flex;justify-content:space-between;gap:12px;color:var(--ink-soft);font-size:12.5px;margin-bottom:18px;}
+.save-status{display:flex;align-items:center;gap:6px;}
+.save-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+.search-row{display:flex;gap:10px;align-items:center;margin-bottom:20px;}
+.searchbar{flex:1;}
+.searchbar input{width:100%;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;background:var(--card);}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px;}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;}
+.num{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;line-height:1;}
+.lbl{font-size:11.5px;color:var(--ink-soft);margin-top:6px;text-transform:uppercase;letter-spacing:.04em;}
+.stat.warn .num{color:var(--amber);}
+.stat.alert .num{color:var(--red);}
+.stat.done .num{color:var(--green);}
+.stat.stop .num{color:var(--purple);}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;margin-bottom:22px;}
+.panel h2{font-family:'Space Grotesk',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:0 0 4px;}
+.panel .sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px;}
+
+.pipeline{display:flex;align-items:flex-start;min-width:760px;position:relative;padding-top:5px;}
+.pipeline:before{content:'';position:absolute;left:5%;right:5%;top:20px;height:2px;background:var(--line);}
+.node{flex:1;text-align:center;position:relative;z-index:1;}
+.node .dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--ink-soft);}
+.node.filled .dot{background:var(--teal);border-color:var(--teal);color:#fff;}
+.node.warn .dot{background:var(--amber);border-color:var(--amber);color:#fff;}
+.node .name{font-size:11.5px;font-weight:600;line-height:1.25;}
+.node .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:3px;}
+
+.pend-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 12px;}
+.hint{font-size:12px;color:var(--ink-soft);}
+.pend-btn{background:var(--amber);color:#fff;border:0;border-radius:4px;font-size:12px;font-weight:700;padding:9px 12px;cursor:pointer;}
+.pend-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.pend-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:8px 6px;border-bottom:1px solid var(--line);}
+.pend-table td{padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+.pend-table td:last-child{text-align:right;}
+.pend-list{list-style:none;margin:4px 0 0;padding:0;color:var(--ink-soft);line-height:1.5;}
+.last-charge{color:var(--ink-soft);font-size:12px;line-height:1.45;}
+.last-charge b{color:var(--ink);}
+
+.controls{display:flex;justify-content:flex-end;align-items:center;margin-bottom:12px;color:var(--ink-soft);font-size:13px;}
+.controls input{width:52px;border:1px solid var(--line);border-radius:4px;padding:7px 8px;text-align:center;font-family:'IBM Plex Mono',monospace;}
+.board{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:28px;}
+.col{background:#EFF0EE;border-radius:4px;min-width:160px;flex:1;padding:8px;}
+.col.drag-over{outline:2px solid var(--amber);outline-offset:-2px;background:var(--amber-soft);}
+.col-head{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;padding:2px 3px 8px;border-bottom:1px solid var(--line);margin-bottom:8px;}
+.card-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:4px;padding:8px 9px;margin-bottom:8px;font-size:13px;cursor:grab;}
+.card-item.dragging{opacity:.55;cursor:grabbing;}
+.card-item.late{border-left-color:var(--red);background:var(--red-soft);}
+.card-summary{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;cursor:pointer;}
+.name-btn{background:none;border:0;padding:0;text-align:left;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:13px;text-decoration:underline;text-decoration-color:var(--line);cursor:pointer;color:var(--ink);}
+.days{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:1px 6px;border-radius:3px;background:var(--grey-soft);color:var(--ink-soft);}
+.late .days{background:var(--red);color:#fff;}
+.toggle-card{border:1px solid var(--line);background:#fff;border-radius:3px;color:var(--ink-soft);width:24px;height:24px;cursor:pointer;}
+.details{display:none;margin-top:8px;color:var(--ink-soft);font-size:11.5px;line-height:1.5;}
+.card-item.open .details{display:block;}
+.card-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.small-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:3px;font-size:11px;padding:5px 7px;cursor:pointer;}
+.small-btn.green{background:var(--green-soft);border-color:var(--green);color:var(--green);}
+.small-btn.purple{border-color:var(--purple);color:var(--purple);}
+.small-btn.red{border-color:var(--red);color:var(--red);}
+.empty{color:#AEB6B4;font-size:12px;padding:8px 4px;}
+
+.final-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.final-tabs button{border:1px solid var(--line);background:var(--grey-soft);color:var(--ink-soft);padding:8px 13px;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;cursor:pointer;}
+.final-tabs button.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+.final-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.final-row b{text-decoration:underline;}
+.final-row .meta{color:var(--ink-soft);font-size:12px;margin-top:3px;}
+.reopen{background:var(--teal-soft);color:var(--teal);border:0;border-radius:3px;padding:7px 10px;font-weight:700;cursor:pointer;}
+
+.users-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;}
+.user-table{width:100%;border-collapse:collapse;font-size:13px;}
+.user-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:8px 6px;border-bottom:1px solid var(--line);}
+.user-table td{padding:10px 6px;border-bottom:1px solid var(--line);}
+.badge{display:inline-block;padding:3px 7px;border-radius:3px;background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:11px;}
+.badge.admin{background:var(--purple-soft);color:var(--purple);}
+.badge.active{background:var(--green-soft);color:var(--green);}
+
+.overlay{position:fixed;inset:0;background:rgba(27,39,51,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
+.overlay.show{display:flex;}
+.modal{background:#fff;border-radius:5px;padding:24px 26px;width:420px;max-width:100%;max-height:86vh;overflow-y:auto;}
+.modal h2{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:0 0 16px;}
+.modal label{display:block;font-size:12px;color:var(--ink-soft);margin:12px 0 4px;font-weight:600;}
+.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:3px;font-size:13px;font-family:'IBM Plex Sans',sans-serif;}
+.modal-actions{display:flex;gap:8px;margin-top:20px;}
+.modal-actions button{flex:1;padding:10px;border:0;border-radius:3px;font-weight:700;cursor:pointer;}
+.primary{background:var(--ink);color:#fff;}
+.secondary{background:var(--grey-soft);color:var(--ink);}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:4px;padding:10px 18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:100;}
+.toast.show{opacity:1;}
+
+@media(max-width:760px){
+body{padding:20px 16px 44px;}
+.tab{font-size:24px;}
+.search-row{flex-direction:column;align-items:stretch;}
+.new-btn{width:100%;}
+.pend-table,.user-table{font-size:12px;}
+.final-row{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="header-top">
+<div class="tabs">
+<button class="tab active" id="tabPainel" onclick="showPage('painel')">Painel de Contratacao</button>
+<button class="tab" id="tabUsuarios" onclick="showPage('usuarios')">Controle de usuarios</button>
+</div>
+<div class="user"><span>Usuario : demo-admin</span><button class="ghost-btn" onclick="toast('Demo sem logout real.')">Sair</button></div>
+</div>
+</header>
+
+<div class="demo-banner">Versao demo para portfolio: dados ficticios, sem banco de dados e sem servidor.</div>
+
+<main class="page active" id="pagePainel">
+<div class="statusbar">
+<div class="save-status"><span class="save-dot"></span><span>Demo carregada localmente</span></div>
+<div id="totalLabel"></div>
+</div>
+
+<div class="search-row">
+<div class="searchbar"><input id="busca" placeholder="Buscar por candidata, loja ou gestora..." oninput="render()"></div>
+<button class="new-btn" onclick="openCandidateModal()">+ Nova candidata</button>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<section class="panel">
+<h2>Funil de contratacao</h2>
+<div class="pipeline" id="pipeline"></div>
+</section>
+
+<section class="panel">
+<h2>Pendencias por gestora</h2>
+<p class="sub">Candidatas aprovadas pelo RH aguardando roteiro. Os e-mails abrem no cliente padrao da maquina.</p>
+<div id="pendencias"></div>
+</section>
+
+<div class="controls">Cobrar gestora apos&nbsp;<input id="threshold" type="number" value="3" min="1" oninput="render()">&nbsp;dias parada em "Aguardando roteiro"</div>
+<div class="board" id="board"></div>
+
+<section class="panel">
+<div class="final-tabs">
+<button class="active" id="tabEncerradas" onclick="setFinalTab('encerradas')">Encerradas sem contratacao</button>
+<button id="tabContratadas" onclick="setFinalTab('contratadas')">Contratadas</button>
+</div>
+<div id="finalList"></div>
+</section>
+</main>
+
+<main class="page" id="pageUsuarios">
+<section class="panel">
+<div class="users-head">
+<h2>Controle de usuarios</h2>
+<button class="new-btn" onclick="openUserModal()">+ Novo usuario</button>
+</div>
+<table class="user-table">
+<thead><tr><th>Login</th><th>E-mail</th><th>Perfil</th><th>Status</th></tr></thead>
+<tbody id="usersTable"></tbody>
+</table>
+</section>
+</main>
+</div>
+
+<div class="overlay" id="candidateModal">
+<div class="modal">
+<h2>Nova candidata</h2>
+<label>Nome</label><input id="fNome" placeholder="Nome ficticio">
+<label>Loja</label><input id="fLoja" placeholder="Loja / unidade">
+<label>Horario</label><input id="fHorario" placeholder="Ex: 09h as 18h">
+<label>Gestora</label><input id="fGestora" placeholder="Nome da gestora">
+<label>E-mail da gestora</label><input id="fEmail" type="email" placeholder="gestora@empresa.com.br">
+<div class="modal-actions"><button class="secondary" onclick="closeCandidateModal()">Cancelar</button><button class="primary" onclick="addCandidate()">Adicionar</button></div>
+</div>
+</div>
+
+<div class="overlay" id="userModal">
+<div class="modal">
+<h2>Novo usuario demo</h2>
+<label>Login</label><input id="uLogin" placeholder="rh-demo">
+<label>E-mail</label><input id="uEmail" type="email" placeholder="usuario@empresa.com.br">
+<label>Perfil</label><select id="uRole"><option>Usuario</option><option>Admin</option></select>
+<div class="modal-actions"><button class="secondary" onclick="closeUserModal()">Cancelar</button><button class="primary" onclick="addUser()">Adicionar</button></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ETAPAS = [
+"Curriculo recebido",
+"Entrevista agendada",
+"Feedback dado",
+"Aprovada pelo RH",
+"Aguardando roteiro (gestora)",
+"Exame admissional",
+"Contratada"
+];
+const BOTTLENECK = 4;
+const DONE = 6;
+const now = Date.now();
+let finalTab = "encerradas";
+let openCards = new Set();
+let dragId = null;
+
+let candidates = [
+{id:"c1",nome:"Marina Costa",loja:"Shopping Jardim",horario:"10h as 19h",gestora:"Larissa",emailGestora:"larissa.gestora@empresa.com.br",etapa:4,entrouEm:now-5*86400000,historico:[{etapa:"Aprovada pelo RH",data:now-7*86400000,obs:"Perfil aderente"}],cobrancas:[{data:now-2*86400000,usuario:"demo-admin",email:"larissa.gestora@empresa.com.br",gestora:"Larissa"}]},
+{id:"c2",nome:"Bianca Alves",loja:"Loja Centro",horario:"08h as 17h",gestora:"Larissa",emailGestora:"larissa.gestora@empresa.com.br",etapa:4,entrouEm:now-1*86400000,historico:[{etapa:"Aprovada pelo RH",data:now-2*86400000,obs:"Aguardando roteiro"}],cobrancas:[]},
+{id:"c3",nome:"Camila Souza",loja:"Outlet Norte",horario:"13h as 22h",gestora:"Jaqueline",emailGestora:"jaque.gestora@empresa.com.br",etapa:5,entrouEm:now-2*86400000,historico:[{etapa:"Exame admissional",data:now-2*86400000,obs:"Encaminhada"}],cobrancas:[]},
+{id:"c4",nome:"Renata Lima",loja:"Shopping Sul",horario:"09h as 18h",gestora:"Patricia",emailGestora:"patricia.gestora@empresa.com.br",etapa:6,entrouEm:now-3*86400000,contratadaEm:now-3*86400000,contratadaPor:"demo-admin",historico:[{etapa:"Contratada",data:now-3*86400000,obs:"Aprovada por demo-admin"}],cobrancas:[]},
+{id:"c5",nome:"Juliana Reis",loja:"Loja Leste",horario:"12h as 21h",gestora:"Marcia",emailGestora:"marcia.gestora@empresa.com.br",etapa:2,entrouEm:now-1*86400000,encerrada:true,motivo:"Desistencia da candidata",detalhe:"Aceitou outra proposta",encerradaEm:now-1*86400000,encerradaNaEtapa:"Feedback dado",historico:[{etapa:"Processo encerrado",data:now-1*86400000,obs:"Aceitou outra proposta"}],cobrancas:[]}
+];
+
+let users = [
+{login:"demo-admin",email:"admin.demo@portfolio.com",role:"Admin",active:true},
+{login:"rh-demo",email:"rh.demo@portfolio.com",role:"Usuario",active:true},
+{login:"gestao-demo",email:"gestao.demo@portfolio.com",role:"Usuario",active:false}
+];
+
+function days(ts){return Math.max(0,Math.floor((Date.now()-ts)/86400000));}
+function fmt(ts){return ts ? new Date(ts).toLocaleDateString("pt-BR") : "-";}
+function esc(v){return String(v ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function norm(v){return String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400);}
+
+function showPage(page){
+document.getElementById("pagePainel").classList.toggle("active",page==="painel");
+document.getElementById("pageUsuarios").classList.toggle("active",page==="usuarios");
+document.getElementById("tabPainel").classList.toggle("active",page==="painel");
+document.getElementById("tabUsuarios").classList.toggle("active",page==="usuarios");
+render();
+}
+
+function searchMatch(c){
+const q=norm(document.getElementById("busca").value);
+if(!q)return true;
+return [c.nome,c.loja,c.gestora,c.emailGestora,c.horario,ETAPAS[c.etapa],c.motivo,c.detalhe,c.contratadaPor].map(norm).join(" ").includes(q);
+}
+
+function render(){
+const active=candidates.filter(c=>!c.encerrada&&c.etapa<DONE);
+const awaiting=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK);
+const threshold=Number(document.getElementById("threshold")?.value||3);
+const late=awaiting.filter(c=>days(c.entrouEm)>=threshold);
+const done=candidates.filter(c=>!c.encerrada&&c.etapa===DONE);
+const closed=candidates.filter(c=>c.encerrada);
+document.getElementById("stats").innerHTML=[
+{n:active.length,l:"Em andamento",c:""},
+{n:awaiting.length,l:"Aguardando roteiro",c:"warn"},
+{n:late.length,l:"Travadas - cobrar gestora",c:late.length?"alert":""},
+{n:done.length,l:"Contratadas",c:"done"},
+{n:closed.length,l:"Encerradas sem contratacao",c:"stop"}
+].map(s=>`<div class="stat ${s.c}"><div class="num">${s.n}</div><div class="lbl">${s.l}</div></div>`).join("");
+document.getElementById("totalLabel").textContent=`${candidates.length} candidata(s) no total`;
+renderPipeline();
+renderPendencias();
+renderBoard();
+renderFinals();
+renderUsers();
+}
+
+function renderPipeline(){
+document.getElementById("pipeline").innerHTML=ETAPAS.map((etapa,i)=>{
+const count=candidates.filter(c=>!c.encerrada&&c.etapa===i).length;
+return `<div class="node ${count?"filled":""} ${i===BOTTLENECK?"warn":""}"><div class="dot">${String(i+1).padStart(2,"0")}</div><div class="name">${esc(etapa)}</div><div class="count">${count||"-"}</div></div>`;
+}).join("");
+}
+
+function lastCharge(items){
+const all=items.flatMap(c=>c.cobrancas||[]);
+return all.sort((a,b)=>(b.data||0)-(a.data||0))[0];
+}
+
+function renderPendencias(){
+const pend=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK&&c.gestora&&searchMatch(c));
+if(!pend.length){document.getElementById("pendencias").innerHTML='<p class="empty">Nenhuma pendencia de roteiro no momento.</p>';return;}
+const groups={};
+pend.forEach(c=>{(groups[c.gestora] ||= []).push(c);});
+const rows=Object.keys(groups).sort().map(g=>{
+const items=groups[g];
+const email=items.find(c=>c.emailGestora)?.emailGestora||"";
+const last=lastCharge(items);
+const list=items.map(c=>`<li>${esc(c.nome)} (${esc(c.loja)}, ${days(c.entrouEm)}d)</li>`).join("");
+return `<tr><td><b>${esc(g)}</b><br>${items.length} candidata(s) aguardando roteiro<ul class="pend-list">${list}</ul></td><td>${esc(email)||'<span class="last-charge">Sem e-mail</span>'}</td><td>${last?`<div class="last-charge"><b>${fmt(last.data)}</b><br>${esc(last.usuario)}</div>`:'<span class="last-charge">Sem cobranca registrada</span>'}</td><td><button class="pend-btn" onclick="chargeGroup('${esc(g)}')">Cobrar gestora</button></td></tr>`;
+}).join("");
+document.getElementById("pendencias").innerHTML=`<div class="pend-actions"><div class="hint">${Object.keys(groups).length} e-mail(s) prontos para abrir no Outlook, agrupados por gestora.</div><button class="pend-btn" onclick="prepareAllEmails()">Preparar e-mails no Outlook</button></div><table class="pend-table"><thead><tr><th>Gestora / candidatas</th><th>E-mail</th><th>Ultima cobranca</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderBoard(){
+const list=candidates.filter(c=>!c.encerrada&&c.etapa<DONE&&searchMatch(c));
+document.getElementById("board").innerHTML=ETAPAS.slice(0,DONE).map((etapa,i)=>{
+const items=list.filter(c=>c.etapa===i);
+const cards=items.length?items.map(c=>cardHtml(c,i)).join(""):'<div class="empty">Nenhuma candidata</div>';
+return `<div class="col" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropCard(event,${i})"><div class="col-head">${String(i+1).padStart(2,"0")} - ${esc(etapa)} (${items.length})</div>${cards}</div>`;
+}).join("");
+}
+
+function cardHtml(c,idx){
+const threshold=Number(document.getElementById("threshold").value||3);
+const late=idx===BOTTLENECK&&days(c.entrouEm)>=threshold;
+const open=openCards.has(c.id);
+return `<div class="card-item ${late?"late":""} ${open?"open":""}" draggable="true" ondragstart="dragCard(event,'${c.id}')" ondragend="endDrag(event)"><div class="card-summary" onclick="toggleCard('${c.id}')"><button class="name-btn" onclick="event.stopPropagation();showHistory('${c.id}')">${esc(c.nome)}</button><div class="days">${days(c.entrouEm)} dia(s)</div><button class="toggle-card">${open?"▲":"▼"}</button></div><div class="details">${esc(c.loja)}${c.horario?" · "+esc(c.horario):""}<br>Gestora: ${esc(c.gestora||"-")}<div class="card-actions">${late?`<button class="small-btn" onclick="chargeOne('${c.id}')">Cobrar gestora</button>`:""}<button class="small-btn green" onclick="finishCandidate('${c.id}')">Concluir candidatura</button><button class="small-btn purple" onclick="closeCandidate('${c.id}')">Encerrar / reprovar</button><button class="small-btn red" onclick="removeCandidate('${c.id}')">Remover</button></div></div></div>`;
+}
+
+function toggleCard(id){openCards.has(id)?openCards.delete(id):openCards.add(id);renderBoard();}
+function dragCard(e,id){dragId=id;e.dataTransfer.effectAllowed="move";e.currentTarget.classList.add("dragging");}
+function endDrag(e){e.currentTarget.classList.remove("dragging");document.querySelectorAll(".col.drag-over").forEach(c=>c.classList.remove("drag-over"));}
+function allowDrop(e){e.preventDefault();e.currentTarget.classList.add("drag-over");}
+function leaveDrop(e){if(!e.currentTarget.contains(e.relatedTarget))e.currentTarget.classList.remove("drag-over");}
+function dropCard(e,step){e.preventDefault();const c=candidates.find(x=>x.id===dragId);if(c&&c.etapa!==step){c.etapa=step;c.entrouEm=Date.now();c.historico.push({etapa:ETAPAS[step],data:Date.now(),obs:"Movido na demo"});toast("Etapa atualizada na demo.");render();}}
+
+function chargeText(group){
+const rows=group.items.map(c=>`- ${c.nome} (${c.loja}) - ${days(c.entrouEm)} dia(s) aguardando`).join("\n");
+return `Ola ${group.gestora}, tudo bem?\n\nSeguem as candidatas aprovadas pelo RH que ainda estao aguardando o roteiro para seguirmos com a contratacao:\n${rows}\n\nPoderia nos enviar assim que possivel?\n\nObrigado!`;
+}
+function openMail(group){
+if(!group.email){toast("Gestora sem e-mail cadastrado.");return;}
+window.location.href=`mailto:${encodeURIComponent(group.email)}?subject=${encodeURIComponent("Roteiros pendentes - "+group.gestora)}&body=${encodeURIComponent(chargeText(group))}`;
+group.items.forEach(c=>{(c.cobrancas ||= []).push({data:Date.now(),usuario:"demo-admin",email:group.email,gestora:group.gestora});});
+toast("E-mail preparado e cobranca registrada na demo.");
+render();
+}
+function groupByManager(name){
+const items=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK&&c.gestora===name);
+return {gestora:name,email:items.find(c=>c.emailGestora)?.emailGestora||"",items};
+}
+function chargeGroup(name){openMail(groupByManager(name));}
+function chargeOne(id){const c=candidates.find(x=>x.id===id);if(c)openMail({gestora:c.gestora||"gestora",email:c.emailGestora||"",items:[c]});}
+function prepareAllEmails(){const names=[...new Set(candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK).map(c=>c.gestora))];if(!names.length)return toast("Nenhuma pendencia para preparar.");openMail(groupByManager(names[0]));toast("Demo abre um e-mail por vez no cliente padrao.");}
+
+function finishCandidate(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.etapa=DONE;c.entrouEm=Date.now();c.contratadaEm=Date.now();c.contratadaPor="demo-admin";c.historico.push({etapa:"Contratada",data:Date.now(),obs:"Aprovada por demo-admin"});toast("Candidatura concluida na demo.");render();}
+function closeCandidate(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.encerrada=true;c.encerradaEm=Date.now();c.encerradaNaEtapa=ETAPAS[c.etapa];c.motivo="Encerramento demo";c.detalhe="Registro ficticio";toast("Processo encerrado na demo.");render();}
+function removeCandidate(id){candidates=candidates.filter(c=>c.id!==id);toast("Candidata removida da demo.");render();}
+function reopen(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.encerrada=false;if(c.etapa===DONE)c.etapa=DONE-1;c.contratadaEm=null;c.contratadaPor="";c.entrouEm=Date.now();toast("Processo reaberto na demo.");render();}
+function showHistory(id){const c=candidates.find(x=>x.id===id);if(!c)return;toast(`${c.nome}: ${c.historico.length} evento(s) no historico demo.`);}
+
+function setFinalTab(tab){finalTab=tab;document.getElementById("tabEncerradas").classList.toggle("active",tab==="encerradas");document.getElementById("tabContratadas").classList.toggle("active",tab==="contratadas");renderFinals();}
+function renderFinals(){
+const list=finalTab==="contratadas"?candidates.filter(c=>!c.encerrada&&c.etapa===DONE&&searchMatch(c)):candidates.filter(c=>c.encerrada&&searchMatch(c));
+document.getElementById("finalList").innerHTML=list.length?list.map(c=>`<div class="final-row"><div><b>${esc(c.nome)}</b><div class="meta">${esc(c.loja)}${c.gestora?" · Gestora: "+esc(c.gestora):""}${finalTab==="contratadas"?` · aprovada em: ${fmt(c.contratadaEm||c.entrouEm)} · por: ${esc(c.contratadaPor||"-")}`:` · parou em: ${esc(c.encerradaNaEtapa||"-")} · ${fmt(c.encerradaEm)}`}</div></div><button class="reopen" onclick="reopen('${c.id}')">Reabrir processo</button></div>`).join(""):`<p class="empty">Nenhum registro nesta aba.</p>`;
+}
+
+function renderUsers(){
+document.getElementById("usersTable").innerHTML=users.map(u=>`<tr><td><b>${esc(u.login)}</b></td><td>${esc(u.email)}</td><td><span class="badge ${u.role==="Admin"?"admin":""}">${esc(u.role)}</span></td><td><span class="badge active">${u.active?"Ativo":"Inativo"}</span></td></tr>`).join("");
+}
+function openCandidateModal(){document.getElementById("candidateModal").classList.add("show");}
+function closeCandidateModal(){document.getElementById("candidateModal").classList.remove("show");}
+function addCandidate(){
+const nome=document.getElementById("fNome").value.trim();
+const loja=document.getElementById("fLoja").value.trim();
+if(!nome||!loja)return toast("Preencha nome e loja.");
+candidates.push({id:"c"+Date.now(),nome,loja,horario:document.getElementById("fHorario").value.trim(),gestora:document.getElementById("fGestora").value.trim(),emailGestora:document.getElementById("fEmail").value.trim(),etapa:0,entrouEm:Date.now(),historico:[{etapa:ETAPAS[0],data:Date.now(),obs:"Criada na demo"}],cobrancas:[]});
+["fNome","fLoja","fHorario","fGestora","fEmail"].forEach(id=>document.getElementById(id).value="");
+closeCandidateModal();toast("Candidata criada na demo.");render();
+}
+function openUserModal(){document.getElementById("userModal").classList.add("show");}
+function closeUserModal(){document.getElementById("userModal").classList.remove("show");}
+function addUser(){
+const login=document.getElementById("uLogin").value.trim();
+const email=document.getElementById("uEmail").value.trim();
+if(!login||!email)return toast("Preencha login e e-mail.");
+users.push({login,email,role:document.getElementById("uRole").value,active:true});
+["uLogin","uEmail"].forEach(id=>document.getElementById(id).value="");
+closeUserModal();toast("Usuario demo criado.");renderUsers();
+}
+
+render();
+</script>
+</body>
+</html>
