@@ -128,6 +128,11 @@ font-size:13px;padding:10px 14px;cursor:pointer;background:var(--card);color:var
 .badge{display:inline-block;padding:3px 7px;border-radius:3px;background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:11px;}
 .badge.admin{background:var(--purple-soft);color:var(--purple);}
 .badge.active{background:var(--green-soft);color:var(--green);}
+.badge.inactive{background:var(--red-soft);color:var(--red);}
+.user-actions{display:flex;justify-content:flex-end;gap:6px;white-space:nowrap;}
+.user-action{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:3px;padding:5px 8px;font-size:11px;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;}
+.user-action.red{border-color:var(--red);color:var(--red);}
+.user-action:hover{background:var(--grey-soft);}
 
 .overlay{position:fixed;inset:0;background:rgba(27,39,51,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
 .overlay.show{display:flex;}
@@ -209,7 +214,7 @@ body{padding:20px 16px 44px;}
 <button class="new-btn" onclick="openUserModal()">+ Novo usuario</button>
 </div>
 <table class="user-table">
-<thead><tr><th>Login</th><th>E-mail</th><th>Perfil</th><th>Status</th></tr></thead>
+<thead><tr><th>Login</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>
 <tbody id="usersTable"></tbody>
 </table>
 </section>
@@ -230,11 +235,13 @@ body{padding:20px 16px 44px;}
 
 <div class="overlay" id="userModal">
 <div class="modal">
-<h2>Novo usuario demo</h2>
+<h2 id="userModalTitle">Novo usuario demo</h2>
 <label>Login</label><input id="uLogin" placeholder="rh-demo">
 <label>E-mail</label><input id="uEmail" type="email" placeholder="usuario@empresa.com.br">
 <label>Perfil</label><select id="uRole"><option>Usuario</option><option>Admin</option></select>
-<div class="modal-actions"><button class="secondary" onclick="closeUserModal()">Cancelar</button><button class="primary" onclick="addUser()">Adicionar</button></div>
+<label>Status</label><select id="uActive"><option value="true">Ativo</option><option value="false">Inativo</option></select>
+<label>Redefinir senha</label><input id="uPassword" type="password" maxlength="6" inputmode="numeric" placeholder="Senha de 6 digitos">
+<div class="modal-actions"><button class="secondary" onclick="closeUserModal()">Cancelar</button><button class="primary" id="userSaveBtn" onclick="saveUser()">Adicionar</button></div>
 </div>
 </div>
 
@@ -266,10 +273,11 @@ let candidates = [
 ];
 
 let users = [
-{login:"demo-admin",email:"admin.demo@portfolio.com",role:"Admin",active:true},
-{login:"rh-demo",email:"rh.demo@portfolio.com",role:"Usuario",active:true},
-{login:"gestao-demo",email:"gestao.demo@portfolio.com",role:"Usuario",active:false}
+{login:"demo-admin",email:"admin.demo@portfolio.com",role:"Admin",active:true,password:"123456"},
+{login:"rh-demo",email:"rh.demo@portfolio.com",role:"Usuario",active:true,password:"654321"},
+{login:"gestao-demo",email:"gestao.demo@portfolio.com",role:"Usuario",active:false,password:"112233"}
 ];
+let editingUserIndex = null;
 
 function days(ts){return Math.max(0,Math.floor((Date.now()-ts)/86400000));}
 function fmt(ts){return ts ? new Date(ts).toLocaleDateString("pt-BR") : "-";}
@@ -395,7 +403,7 @@ document.getElementById("finalList").innerHTML=list.length?list.map(c=>`<div cla
 }
 
 function renderUsers(){
-document.getElementById("usersTable").innerHTML=users.map(u=>`<tr><td><b>${esc(u.login)}</b></td><td>${esc(u.email)}</td><td><span class="badge ${u.role==="Admin"?"admin":""}">${esc(u.role)}</span></td><td><span class="badge active">${u.active?"Ativo":"Inativo"}</span></td></tr>`).join("");
+document.getElementById("usersTable").innerHTML=users.map((u,i)=>`<tr><td><b>${esc(u.login)}</b></td><td>${esc(u.email)}</td><td><span class="badge ${u.role==="Admin"?"admin":""}">${esc(u.role)}</span></td><td><span class="badge ${u.active?"active":"inactive"}">${u.active?"Ativo":"Inativo"}</span></td><td><div class="user-actions"><button class="user-action" onclick="openUserModal(${i})">Editar</button><button class="user-action" onclick="toggleUser(${i})">${u.active?"Inativar":"Ativar"}</button><button class="user-action red" onclick="removeUser(${i})">Remover</button></div></td></tr>`).join("");
 }
 function openCandidateModal(){document.getElementById("candidateModal").classList.add("show");}
 function closeCandidateModal(){document.getElementById("candidateModal").classList.remove("show");}
@@ -407,15 +415,55 @@ candidates.push({id:"c"+Date.now(),nome,loja,horario:document.getElementById("fH
 ["fNome","fLoja","fHorario","fGestora","fEmail"].forEach(id=>document.getElementById(id).value="");
 closeCandidateModal();toast("Candidata criada na demo.");render();
 }
-function openUserModal(){document.getElementById("userModal").classList.add("show");}
-function closeUserModal(){document.getElementById("userModal").classList.remove("show");}
-function addUser(){
+function openUserModal(index=null){
+editingUserIndex = index;
+const editing = index !== null;
+const user = editing ? users[index] : {login:"",email:"",role:"Usuario",active:true};
+document.getElementById("userModalTitle").textContent = editing ? "Editar usuario demo" : "Novo usuario demo";
+document.getElementById("userSaveBtn").textContent = editing ? "Salvar alteracoes" : "Adicionar";
+document.getElementById("uLogin").value = user.login;
+document.getElementById("uEmail").value = user.email;
+document.getElementById("uRole").value = user.role;
+document.getElementById("uActive").value = String(user.active);
+document.getElementById("uPassword").value = "";
+document.getElementById("userModal").classList.add("show");
+}
+function closeUserModal(){editingUserIndex=null;document.getElementById("userModal").classList.remove("show");}
+function isLastActiveAdmin(index){
+const user=users[index];
+return user?.role==="Admin"&&user.active&&users.filter(u=>u.role==="Admin"&&u.active).length===1;
+}
+function saveUser(){
 const login=document.getElementById("uLogin").value.trim();
 const email=document.getElementById("uEmail").value.trim();
+const password=document.getElementById("uPassword").value.trim();
 if(!login||!email)return toast("Preencha login e e-mail.");
-users.push({login,email,role:document.getElementById("uRole").value,active:true});
-["uLogin","uEmail"].forEach(id=>document.getElementById(id).value="");
-closeUserModal();toast("Usuario demo criado.");renderUsers();
+if(password && !/^\d{6}$/.test(password))return toast("A senha demo precisa ter 6 digitos.");
+if(users.some((u,i)=>i!==editingUserIndex&&u.login.toLowerCase()===login.toLowerCase()))return toast("Este login ja existe na demo.");
+const next={login,email,role:document.getElementById("uRole").value,active:document.getElementById("uActive").value==="true"};
+if(editingUserIndex!==null){
+if(isLastActiveAdmin(editingUserIndex)&&(next.role!=="Admin"||!next.active))return toast("Mantenha ao menos um admin ativo.");
+users[editingUserIndex]={...users[editingUserIndex],...next};
+if(password)users[editingUserIndex].password=password;
+toast(password?"Usuario e senha atualizados na demo.":"Usuario atualizado na demo.");
+}else{
+users.push({...next,password:password||"123456"});
+toast("Usuario demo criado.");
+}
+closeUserModal();renderUsers();
+}
+function toggleUser(index){
+if(isLastActiveAdmin(index))return toast("Mantenha ao menos um admin ativo.");
+users[index].active=!users[index].active;
+toast(users[index].active?"Usuario ativado na demo.":"Usuario inativado na demo.");
+renderUsers();
+}
+function removeUser(index){
+if(isLastActiveAdmin(index))return toast("Mantenha ao menos um admin ativo.");
+if(!confirm("Remover este usuario demo?"))return;
+users.splice(index,1);
+toast("Usuario removido da demo.");
+renderUsers();
 }
 
 render();
