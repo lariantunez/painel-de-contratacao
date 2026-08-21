@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel de ContrataÃ§Ã£o</title>
+<title>Painel de Contratação</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
@@ -447,7 +447,7 @@ text-align:left;
 <div class="auth-page" id="authShell">
 <div class="auth-panel" id="loginPanel">
 <h1>Acesso ao painel</h1>
-<p>Entre com seu login e senha para visualizar o histÃ³rico de candidaturas.</p>
+<p>Entre com seu login e senha para visualizar o histórico de candidaturas.</p>
 <label>Login</label>
 <input id="loginUsuario" autocomplete="username" placeholder="adm">
 <label>Senha</label>
@@ -486,8 +486,8 @@ text-align:left;
 <div class="header-top">
 <div class="title-block">
 <div class="title-row">
-<button class="title-tab active" id="dashboardTab" onclick="mostrarPagina('painel')">Painel de ContrataÃ§Ã£o</button>
-<button class="nav-tab hidden" id="adminUsersBtn" onclick="mostrarPagina('usuarios')">Controle de usuÃ¡rios</button>
+<button class="title-tab active" id="dashboardTab" onclick="mostrarPagina('painel')">Painel de Contratação</button>
+<button class="nav-tab hidden" id="adminUsersBtn" onclick="mostrarPagina('usuarios')">Controle de usuários</button>
 </div>
 </div>
 <div class="header-actions" id="dashboardActions">
@@ -512,11 +512,11 @@ text-align:left;
 <option value="todos">Selecione um filtro</option>
 <option value="roteiro-prazo">Aguardando roteiro no prazo</option>
 <option value="roteiro-fora">Aguardando roteiro fora do prazo</option>
-<option value="roteiro-critico">Aguardando roteiro crÃ­tico</option>
+<option value="roteiro-critico">Aguardando roteiro crítico</option>
 <option value="gestor">Por nome gestor</option>
 <option value="loja">Por loja</option>
-<option value="com-cobranca">Com cobranÃ§a de roteiro</option>
-<option value="sem-cobranca">Sem cobranÃ§a de roteiro</option>
+<option value="com-cobranca">Com cobrança de roteiro</option>
+<option value="sem-cobranca">Sem cobrança de roteiro</option>
 </select>
 </div>
 <div class="quick-filter-value" id="filtroValorWrap">
@@ -525,28 +525,28 @@ text-align:left;
 </div>
 
 <div class="trilho-box">
-<p class="trilho-title">Funil de contrataÃ§Ã£o</p>
+<p class="trilho-title">Funil de contratação</p>
 <div class="trilho" id="trilho"></div>
 </div>
 
 <div id="atividadesDiarias"></div>
 
 <div class="pend-box">
-<h3>Painel de cobranÃ§as</h3>
-<p class="sub">Candidatas aguardando roteiro, agrupadas por gestora para cobranÃ§a individual ou consolidada.</p>
+<h3>Painel de cobranças</h3>
+<p class="sub">Candidatas aguardando roteiro, agrupadas por gestora para cobrança individual ou consolidada.</p>
 <div id="pendGestora"></div>
 </div>
 
 <div class="controls">
 <div class="semaforo-legend" aria-label="Legenda do semaforo de roteiro">
 <strong>Semaforo do roteiro</strong>
-<span class="semaforo-item"><span class="semaforo-emoji">ðŸŸ¢</span>0 a 2 dias: dentro do prazo</span>
-<span class="semaforo-item"><span class="semaforo-emoji">âš ï¸</span>3 a 4 dias: atencao</span>
-<span class="semaforo-item"><span class="semaforo-emoji">ðŸ”´</span>5 dias ou mais: atrasada</span>
-<span class="semaforo-item"><span class="semaforo-emoji">ðŸš¨</span>Critica: inicio proximo sem roteiro</span>
+<span class="semaforo-item"><span class="semaforo-emoji">🟢</span>0 a 2 dias: dentro do prazo</span>
+<span class="semaforo-item"><span class="semaforo-emoji">⚠️</span>3 a 4 dias: atencao</span>
+<span class="semaforo-item"><span class="semaforo-emoji">🔴</span>5 dias ou mais: atrasada</span>
+<span class="semaforo-item"><span class="semaforo-emoji">🚨</span>Critica: inicio proximo sem roteiro</span>
 </div>
 <div class="threshold">
-Cobrar gestora apÃ³s
+Cobrar gestora após
 <input type="number" id="thresholdInput" min="1" value="3">
 dias parada em "Aguardando roteiro"
 </div>
@@ -557,7 +557,7 @@ dias parada em "Aguardando roteiro"
 <div id="rankingPromotores"></div>
 
 <div class="fin-box">
-<h2 class="fin-title">HistÃ³rico de candidaturas</h2>
+<h2 class="fin-title">Histórico de candidaturas</h2>
 <div class="fin-tabs" id="finTabs"></div>
 <div id="finList"></div>
 </div>
@@ -567,11 +567,11 @@ dias parada em "Aguardando roteiro"
 <main id="usersPage" class="hidden">
 <section class="page-panel">
 <div class="page-head">
-<h2>Controle de usuÃ¡rios</h2>
-<button class="new-btn hidden" id="novoUsuarioBtn" onclick="abrirModalUsuario()">+ Novo usuÃ¡rio</button>
+<h2>Controle de usuários</h2>
+<button class="new-btn hidden" id="novoUsuarioBtn" onclick="abrirModalUsuario()">+ Novo usuário</button>
 </div>
 <div id="adminUnlock">
-<p class="desc">Entre com um acesso de administrador para gerenciar usuÃ¡rios.</p>
+<p class="desc">Entre com um acesso de administrador para gerenciar usuários.</p>
 <div class="admin-login-grid">
 <div>
 <label>Login administrador</label>
@@ -605,10 +605,10 @@ dias parada em "Aguardando roteiro"
 <input id="fNome" placeholder="Nome da candidata">
 <label>Loja (opcional)</label>
 <input id="fLoja" placeholder="Ex: Loja Shopping Center">
-<label>HorÃ¡rio de trabalho pretendido (opcional)</label>
+<label>Horário de trabalho pretendido (opcional)</label>
 <div class="time-row">
 <div class="time-field">
-<span>Hora de inÃ­cio</span>
+<span>Hora de início</span>
 <input id="fHoraInicio" type="time">
 </div>
 <div class="time-field">
@@ -616,7 +616,7 @@ dias parada em "Aguardando roteiro"
 <input id="fHoraFim" type="time">
 </div>
 </div>
-<label>Gestora responsÃ¡vel</label>
+<label>Gestora responsável</label>
 <input id="fGestora" placeholder="Nome da gestora">
 <label>E-mail da gestora</label>
 <input id="fEmail" type="email" placeholder="gestora@empresa.com.br">
@@ -635,12 +635,12 @@ dias parada em "Aguardando roteiro"
 <select id="eMotivo">
 <option>Reprovada pelo RH (perfil/feedback)</option>
 <option>Reprovada no exame admissional</option>
-<option>DesistÃªncia da candidata</option>
+<option>Desistência da candidata</option>
 <option>Vaga cancelada pela loja</option>
 <option>Outro</option>
 </select>
-<label>Detalhe (obrigatÃ³rio)</label>
-<textarea id="eDetalhe" placeholder="Descreva brevemente o motivo, para ficar registrado no histÃ³rico."></textarea>
+<label>Detalhe (obrigatório)</label>
+<textarea id="eDetalhe" placeholder="Descreva brevemente o motivo, para ficar registrado no histórico."></textarea>
 <div class="modal-actions">
 <button class="btn-secondary" onclick="fecharModalEnc()">Cancelar</button>
 <button class="btn-danger" onclick="confirmarEncerramento()">Confirmar encerramento</button>
@@ -651,7 +651,7 @@ dias parada em "Aguardando roteiro"
 <!-- modal historico -->
 <div class="overlay" id="overlayHist">
 <div class="modal">
-<h2 id="histNome">HistÃ³rico</h2>
+<h2 id="histNome">Histórico</h2>
 <ul class="timeline" id="histLista"></ul>
 <div class="modal-actions">
 <button class="btn-secondary" onclick="fecharModalHist()">Fechar</button>
@@ -675,12 +675,12 @@ dias parada em "Aguardando roteiro"
 <div class="overlay" id="overlayFeedback">
 <div class="modal">
 <h2>Aguardando roteiro</h2>
-<p class="desc">Informe a data prevista de inÃ­cio antes de avanÃ§ar a candidata para aguardando roteiro.</p>
-<label>Data prevista de inÃ­cio</label>
+<p class="desc">Informe a data prevista de início antes de avançar a candidata para aguardando roteiro.</p>
+<label>Data prevista de início</label>
 <input id="feedbackDataInicio" type="date">
 <div class="modal-actions">
 <button class="btn-secondary" onclick="fecharModalInicioPrevisto()">Cancelar</button>
-<button class="btn-primary" onclick="confirmarInicioPrevisto()">Salvar inÃ­cio previsto</button>
+<button class="btn-primary" onclick="confirmarInicioPrevisto()">Salvar início previsto</button>
 </div>
 </div>
 </div>
@@ -734,14 +734,14 @@ dias parada em "Aguardando roteiro"
 <!-- modal usuario -->
 <div class="overlay" id="overlayUsuario">
 <div class="modal">
-<h2 id="usuarioModalTitulo">Novo usuÃ¡rio</h2>
+<h2 id="usuarioModalTitulo">Novo usuário</h2>
 <label>Login</label>
 <input id="uLogin" placeholder="Ex: rh01">
 <label>E-mail para redefinir senha</label>
 <input id="uEmail" type="email" placeholder="usuario@empresa.com.br">
 <label>Perfil</label>
 <select id="uRole">
-<option value="usuario">UsuÃ¡rio</option>
+<option value="usuario">Usuário</option>
 <option value="admin">Administrador</option>
 </select>
 <label>Status</label>
@@ -750,11 +750,11 @@ dias parada em "Aguardando roteiro"
 <option value="false">Inativo</option>
 </select>
 <label>Senha</label>
-<input id="uPassword" type="password" placeholder="Senha de 6 dÃ­gitos">
+<input id="uPassword" type="password" placeholder="Senha de 6 dígitos">
 <div class="admin-msg" id="usuarioModalMsg"></div>
 <div class="modal-actions">
 <button class="btn-secondary" onclick="fecharModalUsuario()">Cancelar</button>
-<button class="btn-primary" onclick="salvarUsuario()">Salvar usuÃ¡rio</button>
+<button class="btn-primary" onclick="salvarUsuario()">Salvar usuário</button>
 </div>
 </div>
 </div>
@@ -762,7 +762,7 @@ dias parada em "Aguardando roteiro"
 <!-- modal disparo cobrancas -->
 <div class="overlay" id="overlayDisparo">
 <div class="modal">
-<h2>Envio de cobranÃ§as</h2>
+<h2>Envio de cobranças</h2>
 <p class="desc" id="disparoResumo"></p>
 <div class="progress-wrap"><div class="progress-bar" id="disparoProgress"></div></div>
 <p class="desc" id="disparoStatus"></p>
@@ -778,14 +778,14 @@ dias parada em "Aguardando roteiro"
 
 <script>
 const ETAPAS = [
-"CurrÃ­culo recebido",
+"Currículo recebido",
 "Entrevista agendada",
 "Entrevista realizada",
 "Feedback realizado",
 "Aguardando roteiro",
 "Roteiro recebido",
 "Exame admissional agendado",
-"ContrataÃ§Ã£o concluÃ­da"
+"Contratação concluída"
 ];
 const ENTREVISTA_IDX = 1;
 const BOTTLENECK_IDX = 4;
@@ -850,17 +850,17 @@ const now = Date.now();
 const h = 3600000;
 const d = 86400000;
 return [
-{id:'demo-c1',nome:'Aline Souza',loja:'Shopping Jardim',horario:'08:00h Ã s 17:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:0,entrouEm:now-2*h,encerrada:false,historico:[{etapa:ETAPAS[0],data:now-2*h,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c2',nome:'Bianca Lima',loja:'Loja Centro',horario:'10:00h Ã s 19:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:1,entrouEm:now-26*h,entrevistaData:demoDataIso(now+d),entrevistaHora:'10:30',entrevistaAgendadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'larissa',obs:''},{etapa:ETAPAS[1],data:now-26*h,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c3',nome:'Camila Rocha',loja:'Quiosque Norte',horario:'12:00h Ã s 21:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-6*h,entrevistaData:demoDataIso(now),entrevistaHora:'09:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-5*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-6*h,usuario:'rh1',obs:''}],cobrancas:[]},
-{id:'demo-c4',nome:'Daniela Martins',loja:'Shopping Sul',horario:'09:00h Ã s 18:00h',gestora:'Jaqueline',emailGestora:'jaqueline.gestora@empresa.com.br',etapa:3,entrouEm:now-4*h,entrevistaData:demoDataIso(now-d),entrevistaHora:'15:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-6*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c5',nome:'Elisa Pereira',loja:'Loja Centro',horario:'08:00h Ã s 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:4,entrouEm:now-6*d,dataPrevista:demoDataIso(now+d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-10*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d-2*h,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'kelly.gestora@empresa.com.br',gestora:'Kelly'}]},
-{id:'demo-c6',nome:'Fernanda Alves',loja:'Shopping Jardim',horario:'13:00h Ã s 22:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:4,entrouEm:now-3*d,dataPrevista:demoDataIso(now+5*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-8*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-7*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-3*d,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c7',nome:'Giovana Melo',loja:'Loja Praia',horario:'09:00h Ã s 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:4,entrouEm:now-8*h,dataPrevista:demoDataIso(now+8*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'rh3',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh3',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh3',obs:''},{etapa:ETAPAS[3],data:now-12*h,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-8*h,usuario:'rh3',obs:''}],cobrancas:[]},
-{id:'demo-c8',nome:'Helena Castro',loja:'Shopping Sul',horario:'10:00h Ã s 19:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:5,entrouEm:now-2*h,dataPrevista:demoDataIso(now+7*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-2*h,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'larissa.gestora@empresa.com.br',gestora:'Larissa'}]},
-{id:'demo-c9',nome:'Isabela Nunes',loja:'Loja Centro',horario:'08:00h Ã s 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:6,entrouEm:now-4*h,dataPrevista:demoDataIso(now+4*d),exameData:demoDataIso(now),exameHora:'14:30',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-12*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-2*d,usuario:'rh2',obs:''},{etapa:ETAPAS[6],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c10',nome:'Juliana Gomes',loja:'Shopping Jardim',horario:'09:00h Ã s 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:7,entrouEm:now-d,contratadaEm:now-d,contratadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-15*d,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-9*d,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-7*d,usuario:'rh3',obs:''},{etapa:ETAPAS[7],data:now-d,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c11',nome:'Karina Lopes',loja:'Loja Praia',horario:'11:00h Ã s 20:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-4*d,encerrada:true,encerradaEm:now-2*d,encerradaNaEtapa:ETAPAS[2],encerradaPor:'rh2',motivo:'Reprovada pelo RH (perfil/feedback)',detalhe:'Disponibilidade diferente da vaga.',historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh2',obs:''},{etapa:'Processo encerrado - Reprovada pelo RH (perfil/feedback)',data:now-2*d,usuario:'rh2',obs:'Disponibilidade diferente da vaga.'}],cobrancas:[]}
+{id:'demo-c1',nome:'Aline Souza',loja:'Shopping Jardim',horario:'08:00h às 17:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:0,entrouEm:now-2*h,encerrada:false,historico:[{etapa:ETAPAS[0],data:now-2*h,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c2',nome:'Bianca Lima',loja:'Loja Centro',horario:'10:00h às 19:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:1,entrouEm:now-26*h,entrevistaData:demoDataIso(now+d),entrevistaHora:'10:30',entrevistaAgendadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'larissa',obs:''},{etapa:ETAPAS[1],data:now-26*h,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c3',nome:'Camila Rocha',loja:'Quiosque Norte',horario:'12:00h às 21:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-6*h,entrevistaData:demoDataIso(now),entrevistaHora:'09:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-5*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-6*h,usuario:'rh1',obs:''}],cobrancas:[]},
+{id:'demo-c4',nome:'Daniela Martins',loja:'Shopping Sul',horario:'09:00h às 18:00h',gestora:'Jaqueline',emailGestora:'jaqueline.gestora@empresa.com.br',etapa:3,entrouEm:now-4*h,entrevistaData:demoDataIso(now-d),entrevistaHora:'15:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-6*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c5',nome:'Elisa Pereira',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:4,entrouEm:now-6*d,dataPrevista:demoDataIso(now+d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-10*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d-2*h,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'kelly.gestora@empresa.com.br',gestora:'Kelly'}]},
+{id:'demo-c6',nome:'Fernanda Alves',loja:'Shopping Jardim',horario:'13:00h às 22:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:4,entrouEm:now-3*d,dataPrevista:demoDataIso(now+5*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-8*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-7*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-3*d,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c7',nome:'Giovana Melo',loja:'Loja Praia',horario:'09:00h às 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:4,entrouEm:now-8*h,dataPrevista:demoDataIso(now+8*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'rh3',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh3',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh3',obs:''},{etapa:ETAPAS[3],data:now-12*h,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-8*h,usuario:'rh3',obs:''}],cobrancas:[]},
+{id:'demo-c8',nome:'Helena Castro',loja:'Shopping Sul',horario:'10:00h às 19:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:5,entrouEm:now-2*h,dataPrevista:demoDataIso(now+7*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-2*h,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'larissa.gestora@empresa.com.br',gestora:'Larissa'}]},
+{id:'demo-c9',nome:'Isabela Nunes',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:6,entrouEm:now-4*h,dataPrevista:demoDataIso(now+4*d),exameData:demoDataIso(now),exameHora:'14:30',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-12*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-2*d,usuario:'rh2',obs:''},{etapa:ETAPAS[6],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c10',nome:'Juliana Gomes',loja:'Shopping Jardim',horario:'09:00h às 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:7,entrouEm:now-d,contratadaEm:now-d,contratadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-15*d,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-9*d,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-7*d,usuario:'rh3',obs:''},{etapa:ETAPAS[7],data:now-d,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c11',nome:'Karina Lopes',loja:'Loja Praia',horario:'11:00h às 20:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-4*d,encerrada:true,encerradaEm:now-2*d,encerradaNaEtapa:ETAPAS[2],encerradaPor:'rh2',motivo:'Reprovada pelo RH (perfil/feedback)',detalhe:'Disponibilidade diferente da vaga.',historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh2',obs:''},{etapa:'Processo encerrado - Reprovada pelo RH (perfil/feedback)',data:now-2*d,usuario:'rh2',obs:'Disponibilidade diferente da vaga.'}],cobrancas:[]}
 ];
 }
 function demoUsuariosIniciais(){
@@ -889,11 +889,11 @@ return Math.ceil((alvo - base.getTime())/86400000);
 function statusRoteiro(c, dias){
 const diasInicio = diasAteData(c.dataPrevista);
 if(diasInicio !== null && diasInicio <= 2){
-return {key:'critica', label:'ðŸš¨ Critica'};
+return {key:'critica', label:'🚨 Critica'};
 }
-if(dias >= 5) return {key:'atrasada', label:'ðŸ”´ Atrasada'};
-if(dias >= 3) return {key:'alerta', label:'âš ï¸ Atencao'};
-return {key:'ok', label:'ðŸŸ¢ No prazo'};
+if(dias >= 5) return {key:'atrasada', label:'🔴 Atrasada'};
+if(dias >= 3) return {key:'alerta', label:'⚠️ Atencao'};
+return {key:'ok', label:'🟢 No prazo'};
 }
 function prioridadeSemaforo(c){
 const ordem = {critica:0, atrasada:1, alerta:2, ok:3};
@@ -919,11 +919,11 @@ const acoes = [
 'Agendar entrevista com a candidata',
 'Realizar entrevista com a candidata',
 'Registrar feedback da entrevista',
-'Solicitar data de inÃ­cio para aguardar liberaÃ§Ã£o de roteiro',
+'Solicitar data de início para aguardar liberação de roteiro',
 'Cobrar roteiro da gestora e acompanhar retorno',
 'Agendar exame admissional',
-'Acompanhar exame admissional e concluir contrataÃ§Ã£o',
-'Processo concluÃ­do'
+'Acompanhar exame admissional e concluir contratação',
+'Processo concluído'
 ];
 return acoes[etapa] || 'Acompanhar andamento da candidatura';
 }
@@ -964,7 +964,7 @@ if(!c || c.etapasMigradasV2) return c;
 const historico = Array.isArray(c.historico) ? c.historico : [];
 const temRoteiroRecebido = historico.some(h=>String(h.etapa || '') === 'Roteiro recebido');
 const temExame = Boolean(c.exameData) || historico.some(h=>['Exame admissional', 'Exame admissional agendado'].includes(String(h.etapa || '')));
-const temContratada = Boolean(c.contratadaEm) || historico.some(h=>['Contratada', 'ContrataÃ§Ã£o concluÃ­da'].includes(String(h.etapa || '')));
+const temContratada = Boolean(c.contratadaEm) || historico.some(h=>['Contratada', 'Contratação concluída'].includes(String(h.etapa || '')));
 if(Number(c.etapa) === 5 && !temRoteiroRecebido && temExame){
 c.etapa = EXAME_IDX;
 }
@@ -1016,7 +1016,7 @@ return new Date(ts).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit
 function fmtDataHoraCurta(ts){
 if(!ts) return '-';
 const d = new Date(ts);
-return `${d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'})} Ã s ${d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})}`;
+return `${d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'})} às ${d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})}`;
 }
 function tempoDecorrido(ts){
 if(!ts) return '-';
@@ -1084,7 +1084,7 @@ return normalizarEspacos(valor).toLocaleUpperCase('pt-BR');
 function padronizarTextoPadrao(valor){
 return normalizarEspacos(valor)
 .toLocaleLowerCase('pt-BR')
-.replace(/(^|[\s\-\/])([a-zÃ¡Ã Ã¢Ã£Ã©ÃªÃ­Ã³Ã´ÃµÃºÃ¼Ã§])/g, (m, sep, letra)=>sep + letra.toLocaleUpperCase('pt-BR'));
+.replace(/(^|[\s\-\/])([a-záàâãéêíóôõúüç])/g, (m, sep, letra)=>sep + letra.toLocaleUpperCase('pt-BR'));
 }
 function nomeCandidata(valor){
 return padronizarNomeCandidata(valor);
@@ -1100,7 +1100,7 @@ t.classList.add('show');
 setTimeout(()=>t.classList.remove('show'),2600);
 }
 
-/* ---------- autenticaÃ§Ã£o ---------- */
+/* ---------- autenticação ---------- */
 
 function nomeUsuarioLock(lock){
 return lock?.userLogin || lock?.userEmail || 'outro usuario';
@@ -1162,7 +1162,7 @@ mostrarAuthPanel('forgotPanel');
 
 function mostrarApp(user){
 usuarioAtual = user;
-document.getElementById('usuarioLogado').textContent = `UsuÃ¡rio : ${user?.login || user?.email || ''}`;
+document.getElementById('usuarioLogado').textContent = `Usuário : ${user?.login || user?.email || ''}`;
 document.getElementById('adminUsersBtn').classList.remove('hidden');
 document.getElementById('authShell').classList.add('hidden');
 document.getElementById('appShell').classList.remove('hidden');
@@ -1222,7 +1222,7 @@ msg.style.color = 'var(--green)';
 msg.textContent = 'Demo sem redefinicao real de senha.';
 }
 
-/* ---------- administraÃ§Ã£o de usuÃ¡rios ---------- */
+/* ---------- administração de usuários ---------- */
 
 function mostrarPagina(pagina){
 const isUsuarios = pagina === 'usuarios';
@@ -1263,7 +1263,7 @@ mostrarPagina('painel');
 function abrirModalUsuario(id=null){
 usuarioEditando = id;
 const u = id ? usuariosAdmin.find(x=>x.id===id) : null;
-document.getElementById('usuarioModalTitulo').textContent = u ? 'Editar usuÃ¡rio' : 'Novo usuÃ¡rio';
+document.getElementById('usuarioModalTitulo').textContent = u ? 'Editar usuário' : 'Novo usuário';
 document.getElementById('uLogin').value = u?.login || '';
 document.getElementById('uEmail').value = u?.email || '';
 document.getElementById('uRole').value = u?.role || 'usuario';
@@ -1322,7 +1322,7 @@ return `
 <div class="user-row">
 <div><b>${esc(u.login || '-')}</b></div>
 <div>${esc(u.email || '-')}</div>
-<div><span class="role-badge ${u.role==='admin'?'admin':''}">${u.role==='admin'?'Admin':'UsuÃ¡rio'}</span></div>
+<div><span class="role-badge ${u.role==='admin'?'admin':''}">${u.role==='admin'?'Admin':'Usuário'}</span></div>
 <div><span class="status-badge ${u.active?'':'off'}">${u.active?'Ativo':'Inativo'}</span></div>
 <div class="mini-actions">
 <button onclick="abrirModalUsuario('${u.id}')">Editar</button>
@@ -1336,7 +1336,7 @@ document.getElementById('adminUsersList').innerHTML = `
 <div class="user-row head">
 <div>Login</div><div>E-mail</div><div>Perfil</div><div>Status</div><div></div>
 </div>
-${rows || '<p class="fin-empty">Nenhum usuÃ¡rio cadastrado.</p>'}
+${rows || '<p class="fin-empty">Nenhum usuário cadastrado.</p>'}
 `;
 }
 
@@ -1363,10 +1363,10 @@ password: document.getElementById('uPassword').value
 try{
 if(usuarioEditando){
 await adminRequest(`/api/admin/users/${encodeURIComponent(usuarioEditando)}`, {method:'PUT', body: payload});
-toast('UsuÃ¡rio atualizado.');
+toast('Usuário atualizado.');
 }else{
 await adminRequest('/api/admin/users', {method:'POST', body: payload});
-toast('UsuÃ¡rio criado.');
+toast('Usuário criado.');
 }
 fecharModalUsuario();
 await carregarUsuariosAdmin();
@@ -1384,7 +1384,7 @@ method:'PUT',
 body:{login:u.login,email:u.email,role:u.role,active:!u.active,password:''}
 });
 await carregarUsuariosAdmin();
-toast(u.active ? 'UsuÃ¡rio inativado.' : 'UsuÃ¡rio ativado.');
+toast(u.active ? 'Usuário inativado.' : 'Usuário ativado.');
 }catch(e){
 document.getElementById('adminUserMsg').textContent = e.message;
 }
@@ -1392,11 +1392,11 @@ document.getElementById('adminUserMsg').textContent = e.message;
 
 async function removerUsuario(id){
 const u = usuariosAdmin.find(x=>x.id===id);
-if(!u || !confirm(`Remover o usuÃ¡rio "${u.login}"?`)) return;
+if(!u || !confirm(`Remover o usuário "${u.login}"?`)) return;
 try{
 await adminRequest(`/api/admin/users/${encodeURIComponent(id)}`, {method:'DELETE'});
 await carregarUsuariosAdmin();
-toast('UsuÃ¡rio removido.');
+toast('Usuário removido.');
 }catch(e){
 document.getElementById('adminUserMsg').textContent = e.message;
 }
@@ -1505,18 +1505,18 @@ reader.onload = (e)=>{
 try{
 const parsed = JSON.parse(e.target.result);
 const novos = Array.isArray(parsed) ? parsed : parsed.candidatos;
-if(!Array.isArray(novos)) throw new Error('formato invÃ¡lido');
+if(!Array.isArray(novos)) throw new Error('formato inválido');
 const valido = novos.every(c => c && typeof c==='object' && typeof c.id==='string' && typeof c.nome==='string');
-if(!valido) throw new Error('formato invÃ¡lido');
+if(!valido) throw new Error('formato inválido');
 pendingImport = novos.map(migrarEtapaLegada);
-document.getElementById('importMsg').textContent = `O arquivo contÃ©m ${novos.length} candidata(s). "Mesclar" mantÃ©m os dados atuais e adiciona/atualiza pelos que vierem do arquivo. "Substituir tudo" apaga os dados atuais deste navegador e usa somente o que estÃ¡ no arquivo.`;
+document.getElementById('importMsg').textContent = `O arquivo contém ${novos.length} candidata(s). "Mesclar" mantém os dados atuais e adiciona/atualiza pelos que vierem do arquivo. "Substituir tudo" apaga os dados atuais deste navegador e usa somente o que está no arquivo.`;
 document.getElementById('overlayImport').classList.add('show');
 }catch(err){
-toast("Arquivo invÃ¡lido. Verifique se Ã© um backup exportado por este painel.");
+toast("Arquivo inválido. Verifique se é um backup exportado por este painel.");
 }
 input.value = '';
 };
-reader.onerror = ()=>{ toast("NÃ£o foi possÃ­vel ler o arquivo."); input.value=''; };
+reader.onerror = ()=>{ toast("Não foi possível ler o arquivo."); input.value=''; };
 reader.readAsText(file);
 }
 
@@ -1538,7 +1538,7 @@ pendingImport = null;
 salvar();
 document.getElementById('overlayImport').classList.remove('show');
 render();
-toast(modo==='substituir' ? "Dados substituÃ­dos pelo backup importado." : "Dados mesclados com sucesso.");
+toast(modo==='substituir' ? "Dados substituídos pelo backup importado." : "Dados mesclados com sucesso.");
 }
 
 /* ---------- CRUD candidatas ---------- */
@@ -1550,9 +1550,9 @@ return valor.replace(':', ':') + 'h';
 function montarHorario(){
 const inicio = document.getElementById('fHoraInicio').value;
 const fim = document.getElementById('fHoraFim').value;
-if(inicio && fim) return `${formatarHoraCampo(inicio)} Ã s ${formatarHoraCampo(fim)}`;
-if(inicio) return `${formatarHoraCampo(inicio)} Ã s -`;
-if(fim) return `- Ã s ${formatarHoraCampo(fim)}`;
+if(inicio && fim) return `${formatarHoraCampo(inicio)} às ${formatarHoraCampo(fim)}`;
+if(inicio) return `${formatarHoraCampo(inicio)} às -`;
+if(fim) return `- às ${formatarHoraCampo(fim)}`;
 return '';
 }
 function extrairHorario(horario){
@@ -1567,12 +1567,12 @@ return {inicio: matches[0] || '', fim: matches[1] || ''};
 function formatarExameAdmissional(c){
 if(!c?.exameData) return '';
 const data = fmtDataLocal(c.exameData);
-return c.exameHora ? `${data} Ã s ${formatarHoraCampo(c.exameHora)}` : data;
+return c.exameHora ? `${data} às ${formatarHoraCampo(c.exameHora)}` : data;
 }
 function formatarEntrevistaAgendada(c){
 if(!c?.entrevistaData) return '';
 const data = fmtDataLocal(c.entrevistaData);
-return c.entrevistaHora ? `${data} Ã s ${formatarHoraCampo(c.entrevistaHora)}` : data;
+return c.entrevistaHora ? `${data} às ${formatarHoraCampo(c.entrevistaHora)}` : data;
 }
 
 function formatarDataHistoricoCard(c, registro){
@@ -1587,7 +1587,7 @@ candidatoCadastroId = id;
 const editando = Boolean(id);
 const c = editando ? candidatos.find(x=>x.id===id) : null;
 document.getElementById('candidateModalTitle').textContent = editando ? 'Editar candidatura' : 'Nova candidata';
-document.getElementById('candidateSaveBtn').textContent = editando ? 'Salvar alteraÃ§Ãµes' : 'Adicionar';
+document.getElementById('candidateSaveBtn').textContent = editando ? 'Salvar alterações' : 'Adicionar';
 const horario = extrairHorario(c?.horario);
 document.getElementById('fNome').value = c ? nomeCandidata(c.nome) : '';
 document.getElementById('fLoja').value = c ? textoPadrao(c.loja) : '';
@@ -1621,7 +1621,7 @@ toast("Preencha nome, gestora e e-mail da gestora.");
 return;
 }
 if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailGestora)){
-toast("Informe um e-mail da gestora vÃ¡lido.");
+toast("Informe um e-mail da gestora válido.");
 return;
 }
 if(candidatoCadastroId){
@@ -1638,7 +1638,7 @@ candidatos.push({
 id: uid(), nome, loja, horario, gestora, emailGestora, dataPrevista: '',
 etapa: 0, entrouEm: hoje(), encerrada: false,
 motivo: "", detalhe: "", encerradaEm: null, encerradaNaEtapa: null,
-historico: [{ etapa: ETAPAS[0], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: "" }]
+historico: [{ etapa: ETAPAS[0], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuário', obs: "" }]
 });
 salvar();
 fecharModal();
@@ -1663,17 +1663,17 @@ function confirmarInicioPrevisto(){
 if(!candidatoInicioPrevistoId) return;
 const dataPrevista = document.getElementById('feedbackDataInicio').value;
 if(!dataPrevista){
-toast('Informe a data prevista de inÃ­cio.');
+toast('Informe a data prevista de início.');
 return;
 }
 const c = candidatos.find(x=>x.id===candidatoInicioPrevistoId);
 if(!c) return;
 c.dataPrevista = dataPrevista;
 c.dataPrevistaRegistradaEm = hoje();
-c.dataPrevistaRegistradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.dataPrevistaRegistradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 aplicarAtualizacaoEtapa(c.id, BOTTLENECK_IDX);
 fecharModalInicioPrevisto();
-toast('InÃ­cio previsto registrado.');
+toast('Início previsto registrado.');
 }
 
 function abrirModalEntrevista(id){
@@ -1704,7 +1704,7 @@ if(!c) return;
 c.entrevistaData = data;
 c.entrevistaHora = hora;
 c.entrevistaAgendadaEm = hoje();
-c.entrevistaAgendadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.entrevistaAgendadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 aplicarAtualizacaoEtapa(c.id, ENTREVISTA_IDX);
 fecharModalEntrevista();
 toast('Entrevista agendada registrada.');
@@ -1738,7 +1738,7 @@ if(!c) return;
 c.exameData = data;
 c.exameHora = hora;
 c.exameAgendadoEm = hoje();
-c.exameAgendadoPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.exameAgendadoPor = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 aplicarAtualizacaoEtapa(c.id, EXAME_IDX);
 fecharModalExame();
 toast('Exame admissional registrado.');
@@ -1750,7 +1750,7 @@ if(!c) return;
 novaEtapa = Number(novaEtapa);
 if(novaEtapa === c.etapa){ render(); return; }
 const ts = hoje();
-const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 c.etapa = novaEtapa;
 c.entrouEm = ts;
 ajustarHistoricoParaEtapa(c, novaEtapa, ts, usuario);
@@ -1782,7 +1782,7 @@ const c = candidatos.find(x=>x.id===id);
 if(!c) return;
 const ts = hoje();
 c.contratadaEm = ts;
-c.contratadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.contratadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 if(c.etapa !== CONTRATADA_IDX){
 c.etapa = CONTRATADA_IDX;
 c.entrouEm = ts;
@@ -1790,7 +1790,7 @@ ajustarHistoricoParaEtapa(c, CONTRATADA_IDX, ts, c.contratadaPor);
 }
 salvar();
 render();
-toast('Candidatura concluÃ­da como contratada.');
+toast('Candidatura concluída como contratada.');
 }
 
 function iniciarArraste(event, id){
@@ -1852,8 +1852,8 @@ c.motivo = motivo;
 c.detalhe = detalhe;
 c.encerradaEm = hoje();
 c.encerradaNaEtapa = ETAPAS[c.etapa];
-c.encerradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
-c.historico.push({ etapa: "Processo encerrado â€” " + motivo, data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: detalhe });
+c.encerradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
+c.historico.push({ etapa: "Processo encerrado - " + motivo, data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuário', obs: detalhe });
 salvar();
 fecharModalEnc();
 render();
@@ -1871,7 +1871,7 @@ c.etapa = CONTRATADA_IDX - 1;
 c.contratadaEm = null;
 c.contratadaPor = "";
 c.encerradaPor = "";
-c.historico.push({ etapa: "Processo reaberto em " + ETAPAS[c.etapa], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: "" });
+c.historico.push({ etapa: "Processo reaberto em " + ETAPAS[c.etapa], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuário', obs: "" });
 salvar();
 render();
 toast("Processo reaberto.");
@@ -1881,7 +1881,7 @@ function confirmarRemover(id){
 const c = candidatos.find(x=>x.id===id);
 if(!c) return;
 idParaRemover = id;
-document.getElementById('confirmMsg').textContent = `Remover definitivamente "${nomeCandidata(c.nome)}" do painel? Essa aÃ§Ã£o nÃ£o pode ser desfeita. Se quiser manter o histÃ³rico, use "Encerrar / reprovar" em vez de remover.`;
+document.getElementById('confirmMsg').textContent = `Remover definitivamente "${nomeCandidata(c.nome)}" do painel? Essa ação não pode ser desfeita. Se quiser manter o histórico, use "Encerrar / reprovar" em vez de remover.`;
 document.getElementById('overlayConfirm').classList.add('show');
 }
 function fecharModalConfirm(){
@@ -1900,11 +1900,11 @@ toast("Candidata removida.");
 function abrirHistorico(id){
 const c = candidatos.find(x=>x.id===id);
 if(!c) return;
-document.getElementById('histNome').textContent = "HistÃ³rico â€” " + nomeCandidata(c.nome);
+document.getElementById('histNome').textContent = "Histórico - " + nomeCandidata(c.nome);
 document.getElementById('histLista').innerHTML = c.historico.map(h=>`
 <li>
 <div class="tl-etapa">${esc(h.etapa)}</div>
-<div class="tl-data">${fmtDataHora(h.data)} Â· ${esc(h.usuario || '-')}</div>
+<div class="tl-data">${fmtDataHora(h.data)} · ${esc(h.usuario || '-')}</div>
 ${h.obs ? `<div class="tl-obs">${esc(h.obs)}</div>` : ''}
 </li>
 `).join('');
@@ -1912,7 +1912,7 @@ document.getElementById('overlayHist').classList.add('show');
 }
 function fecharModalHist(){document.getElementById('overlayHist').classList.remove('show');}
 
-/* ---------- cobranÃ§as ---------- */
+/* ---------- cobranças ---------- */
 
 function cobrarGestora(id){
 const c = candidatos.find(x=>x.id===id);
@@ -1928,7 +1928,7 @@ itens:[{id:c.id,nome:nomeCandidata(c.nome),loja:textoPadrao(c.loja),dias:diasEnt
 };
 abrirEmailCobranca(grupo);
 registrarCobrancaCandidatas([c.id], grupo.email, grupo.gestora);
-toast('E-mail aberto no Outlook e cobranÃ§a registrada.');
+toast('E-mail aberto no Outlook e cobrança registrada.');
 }
 
 function cobrarGestoraConsolidado(idx){
@@ -1945,12 +1945,12 @@ itens:g.itens.map(c=>({id:c.id,nome:nomeCandidata(c.nome),loja:textoPadrao(c.loj
 };
 abrirEmailCobranca(grupo);
 registrarCobrancaCandidatas(g.itens.map(c=>c.id), grupo.email, grupo.gestora);
-toast('E-mail aberto no Outlook e cobranÃ§a registrada.');
+toast('E-mail aberto no Outlook e cobrança registrada.');
 }
 
 function registrarCobrancaCandidatas(ids, email, gestora){
 const ts = hoje();
-const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuário';
 ids.forEach(id=>{
 const c = candidatos.find(x=>x.id===id);
 if(!c) return;
@@ -1984,9 +1984,9 @@ return todas.sort((a,b)=>(b.data||0)-(a.data||0));
 
 function cobrancasHtml(itens){
 const cobrancas = obterCobrancas(itens);
-if(cobrancas.length===0) return `<div class="pend-last">Sem cobranÃ§a registrada</div>`;
+if(cobrancas.length===0) return `<div class="pend-last">Sem cobrança registrada</div>`;
 return `<ul class="pend-history">${cobrancas.map(cb=>`
-<li><b>${fmtDataHora(cb.data)}</b> Â· ${esc(cb.usuario || '-')}</li>
+<li><b>${fmtDataHora(cb.data)}</b> · ${esc(cb.usuario || '-')}</li>
 `).join('')}</ul>`;
 }
 
@@ -2003,9 +2003,9 @@ if(!porEvento.has(chave)) porEvento.set(chave, cb);
 });
 });
 const cobrancas = Array.from(porEvento.values()).sort((a,b)=>(b.data||0)-(a.data||0));
-if(cobrancas.length===0) return `<div class="pend-last">Sem cobranÃ§a registrada</div>`;
+if(cobrancas.length===0) return `<div class="pend-last">Sem cobrança registrada</div>`;
 const ultima = cobrancas[0];
-return `<div class="pend-last"><b>${fmtDataHora(ultima.data)}</b> Â· ${esc(ultima.usuario || '-')}</div>`;
+return `<div class="pend-last"><b>${fmtDataHora(ultima.data)}</b> · ${esc(ultima.usuario || '-')}</div>`;
 }
 
 function toggleGestoraCobranca(idx){
@@ -2044,7 +2044,7 @@ erro:''
 function abrirModalDisparo(){
 disparoEmailsCache = montarDisparosCobranca();
 if(disparoEmailsCache.length===0){
-toast('Nenhum e-mail de gestora cadastrado nas pendÃªncias atuais.');
+toast('Nenhum e-mail de gestora cadastrado nas pendências atuais.');
 return;
 }
 disparoEmAndamento = false;
@@ -2067,10 +2067,10 @@ const enviados = disparoEmailsCache.filter(g=>g.status==='enviado').length;
 const abertos = disparoEmailsCache.filter(g=>g.status==='aberto').length;
 const concluidos = enviados;
 const totalCandidatas = disparoEmailsCache.reduce((sum,g)=>sum+g.itens.length,0);
-document.getElementById('disparoResumo').textContent = `${total} e-mail(s) serÃ£o preparados no Outlook, agrupando ${totalCandidatas} candidata(s) por endereÃ§o.`;
+document.getElementById('disparoResumo').textContent = `${total} e-mail(s) serão preparados no Outlook, agrupando ${totalCandidatas} candidata(s) por endereço.`;
 document.getElementById('disparoStatus').textContent = concluidos===0
-? 'Clique em iniciar para abrir o primeiro e-mail. ApÃ³s enviar no Outlook, volte aqui e avance para o prÃ³ximo.'
-: `${concluidos}/${total} e-mail(s) marcados como enviados. ${abertos} aberto(s) aguardando confirmaÃ§Ã£o.`;
+? 'Clique em iniciar para abrir o primeiro e-mail. Após enviar no Outlook, volte aqui e avance para o próximo.'
+: `${concluidos}/${total} e-mail(s) marcados como enviados. ${abertos} aberto(s) aguardando confirmação.`;
 document.getElementById('disparoProgress').style.width = total ? `${Math.round((concluidos/total)*100)}%` : '0%';
 document.getElementById('disparoLista').innerHTML = disparoEmailsCache.map(g=>`
 <div class="send-row ${g.status==='enviado'?'ok':g.status==='erro'?'err':''}">
@@ -2099,24 +2099,24 @@ const atual = disparoEmailsCache[disparoIndiceAtual];
 if(!atual){
 disparoEmAndamento = false;
 document.getElementById('iniciarDisparoBtn').disabled = true;
-document.getElementById('iniciarDisparoBtn').textContent = 'Envios concluÃ­dos';
+document.getElementById('iniciarDisparoBtn').textContent = 'Envios concluídos';
 document.getElementById('fecharDisparoBtn').disabled = false;
 renderDisparo();
-toast('Fluxo de cobranÃ§a finalizado.');
+toast('Fluxo de cobrança finalizado.');
 return;
 }
 abrirEmailCobranca(atual);
 atual.status = 'aberto';
 document.getElementById('iniciarDisparoBtn').textContent = disparoIndiceAtual === disparoEmailsCache.length - 1
 ? 'Marcar enviado e concluir'
-: 'Marcar enviado e abrir prÃ³ximo';
+: 'Marcar enviado e abrir próximo';
 renderDisparo();
 }
 
 function abrirEmailCobranca(grupo){
-const assunto = `Roteiros pendentes â€” ${grupo.gestora}`;
-const linhas = grupo.itens.map(c=>`- ${c.nome} (${c.loja}) â€” ${c.dias} dia(s) aguardando`).join('\n');
-const corpo = `OlÃ¡ ${grupo.gestora}, tudo bem?\n\nSeguem as candidatas aprovadas pelo RH que ainda estÃ£o aguardando o roteiro (local de trabalho) para seguirmos com a contrataÃ§Ã£o:\n${linhas}\n\nPoderia nos enviar assim que possÃ­vel?\n\nObrigado!`;
+const assunto = `Roteiros pendentes - ${grupo.gestora}`;
+const linhas = grupo.itens.map(c=>`- ${c.nome} (${c.loja}) - ${c.dias} dia(s) aguardando`).join('\n');
+const corpo = `Olá ${grupo.gestora}, tudo bem?\n\nSeguem as candidatas aprovadas pelo RH que ainda estão aguardando o roteiro (local de trabalho) para seguirmos com a contratação:\n${linhas}\n\nPoderia nos enviar assim que possível?\n\nObrigado!`;
 window.location.href = `mailto:${encodeURIComponent(grupo.email)}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
 }
 
@@ -2180,9 +2180,9 @@ const encerradas = candidatos.filter(c=>c.encerrada).length;
 const stats = [
 {num:ativos, lbl:"Em andamento", cls:""},
 {num:aguardando, lbl:"Aguardando roteiro", cls:"warn"},
-{num:atrasadas, lbl:"Travadas â€” cobrar gestora", cls: atrasadas>0 ? "alert":""},
-{num:contratadas, lbl:"ContrataÃ§Ãµes concluÃ­das", cls:"done"},
-{num:encerradas, lbl:"Encerradas sem contrataÃ§Ã£o", cls:"stop"}
+{num:atrasadas, lbl:"Travadas - cobrar gestora", cls: atrasadas>0 ? "alert":""},
+{num:contratadas, lbl:"Contratações concluídas", cls:"done"},
+{num:encerradas, lbl:"Encerradas sem contratação", cls:"stop"}
 ];
 document.getElementById('stats').innerHTML = stats.map(s=>`
 <div class="stat ${s.cls}"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>
@@ -2223,43 +2223,43 @@ const nome = nomeCandidata(c.nome);
 const loja = textoPadrao(c.loja) || '-';
 const gestora = textoPadrao(c.gestora) || '-';
 if(c.etapa===0){
-atividades.push(atividadeCard(c, 'Pendente', `Avaliar candidato para agendar entrevista`, `${nome} Â· ${loja} Â· Gestora: ${gestora}`, 9));
+atividades.push(atividadeCard(c, 'Pendente', `Avaliar candidato para agendar entrevista`, `${nome} · ${loja} · Gestora: ${gestora}`, 9));
 }
 if(c.entrevistaData){
 const diffEntrevista = compararDataLocal(c.entrevistaData, hojeIso);
 if(diffEntrevista === 0 && c.etapa<=ENTREVISTA_IDX){
-atividades.push(atividadeCard(c, 'Hoje', `Realizar entrevista com ${nome}`, `${loja} Â· Gestora: ${gestora} Â· ${formatarEntrevistaAgendada(c)}`, 10));
+atividades.push(atividadeCard(c, 'Hoje', `Realizar entrevista com ${nome}`, `${loja} · Gestora: ${gestora} · ${formatarEntrevistaAgendada(c)}`, 10));
 } else if(diffEntrevista !== null && diffEntrevista < 0 && c.etapa<=ENTREVISTA_IDX){
-atividades.push(atividadeCard(c, 'Atrasada', `Remarcar entrevista com ${nome}`, `${loja} Â· Entrevista prevista para ${formatarEntrevistaAgendada(c)}`, 20));
+atividades.push(atividadeCard(c, 'Atrasada', `Remarcar entrevista com ${nome}`, `${loja} · Entrevista prevista para ${formatarEntrevistaAgendada(c)}`, 20));
 }
 }
 if(c.exameData){
 const diffExame = compararDataLocal(c.exameData, hojeIso);
 if(diffExame === 0 && c.etapa===EXAME_IDX){
-atividades.push(atividadeCard(c, 'Hoje', `Acompanhar exame admissional de ${nome}`, `${loja} Â· Gestora: ${gestora} Â· ${formatarExameAdmissional(c)}`, 11));
+atividades.push(atividadeCard(c, 'Hoje', `Acompanhar exame admissional de ${nome}`, `${loja} · Gestora: ${gestora} · ${formatarExameAdmissional(c)}`, 11));
 } else if(diffExame !== null && diffExame < 0 && c.etapa===EXAME_IDX){
-atividades.push(atividadeCard(c, 'Atrasada', `Verificar exame admissional de ${nome}`, `${loja} Â· Exame previsto para ${formatarExameAdmissional(c)}`, 21));
+atividades.push(atividadeCard(c, 'Atrasada', `Verificar exame admissional de ${nome}`, `${loja} · Exame previsto para ${formatarExameAdmissional(c)}`, 21));
 }
 }
 if(c.etapa===2){
-atividades.push(atividadeCard(c, 'Pendente', `Realizar feedback com ${nome}`, `${loja} Â· Gestora: ${gestora}${c.entrevistaData ? ' Â· Entrevista: ' + formatarEntrevistaAgendada(c) : ''}`, 12));
+atividades.push(atividadeCard(c, 'Pendente', `Realizar feedback com ${nome}`, `${loja} · Gestora: ${gestora}${c.entrevistaData ? ' · Entrevista: ' + formatarEntrevistaAgendada(c) : ''}`, 12));
 }
 if(c.etapa===BOTTLENECK_IDX){
 const dias = diasEntre(c.entrouEm);
 const semaforo = statusRoteiro(c, dias);
 if(semaforo.key==='critica'){
-atividades.push(atividadeCard(c, 'CrÃ­tica', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando Â· InÃ­cio previsto: ${fmtDataLocal(c.dataPrevista)}`, 1));
+atividades.push(atividadeCard(c, 'Crítica', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} · ${loja} · ${dias} dia(s) aguardando · Início previsto: ${fmtDataLocal(c.dataPrevista)}`, 1));
 } else if(semaforo.key==='atrasada'){
-atividades.push(atividadeCard(c, 'Atrasada', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando`, 2));
+atividades.push(atividadeCard(c, 'Atrasada', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} · ${loja} · ${dias} dia(s) aguardando`, 2));
 } else if(semaforo.key==='alerta'){
-atividades.push(atividadeCard(c, 'AtenÃ§Ã£o', `Acompanhar roteiro com ${gestora}`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando`, 30));
+atividades.push(atividadeCard(c, 'Atenção', `Acompanhar roteiro com ${gestora}`, `${nome} · ${loja} · ${dias} dia(s) aguardando`, 30));
 }
 }
 if(c.etapa===3){
-atividades.push(atividadeCard(c, 'Pendente', `Solicitar Ã  gestora a data de inÃ­cio de ${nome}`, `${loja} Â· Gestora: ${gestora}`, 40));
+atividades.push(atividadeCard(c, 'Pendente', `Solicitar à gestora a data de início de ${nome}`, `${loja} · Gestora: ${gestora}`, 40));
 }
 if(c.etapa===ROTEIRO_RECEBIDO_IDX){
-atividades.push(atividadeCard(c, 'Pendente', `Agendar exame admissional de ${nome}`, `${loja} Â· Gestora: ${gestora}`, 45));
+atividades.push(atividadeCard(c, 'Pendente', `Agendar exame admissional de ${nome}`, `${loja} · Gestora: ${gestora}`, 45));
 }
 });
 return atividades.sort((a,b)=>a.prioridade-b.prioridade || (a.c.entrouEm||0)-(b.c.entrouEm||0));
@@ -2286,7 +2286,7 @@ if(!el) return;
 const atividades = montarAtividadesDiarias();
 const dataHoje = new Date().toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'2-digit'});
 const itens = atividades.length ? atividades.map(a=>{
-const tipoClasse = ['CrÃ­tica','Atrasada'].includes(a.tipo) ? 'urgent' : a.tipo === 'Hoje' ? 'today' : '';
+const tipoClasse = ['Crítica','Atrasada'].includes(a.tipo) ? 'urgent' : a.tipo === 'Hoje' ? 'today' : '';
 return `
 <div class="daily-item">
 <div class="daily-kind ${tipoClasse}">${esc(a.tipo)}</div>
@@ -2296,13 +2296,13 @@ return `
 </div>
 <button class="daily-open" onclick="abrirCardAtividade('${a.c.id}')">Abrir card</button>
 </div>`;
-}).join('') : `<div class="daily-empty">Nenhuma atividade prioritÃ¡ria para hoje.</div>`;
+}).join('') : `<div class="daily-empty">Nenhuma atividade prioritária para hoje.</div>`;
 el.innerHTML = `
 <section class="daily-box">
 <div class="daily-head">
 <div>
 <h2>Atividades para hoje</h2>
-<p class="sub">Lista automÃ¡tica do que o RH precisa acompanhar hoje.</p>
+<p class="sub">Lista automática do que o RH precisa acompanhar hoje.</p>
 </div>
 <div class="daily-date">${esc(dataHoje)}</div>
 </div>
@@ -2316,7 +2316,7 @@ const {ativos, aguardandoLista, atencaoLista, criticasLista, mediaHoras, roteiro
 const detalhes = {
 andamento: {
 titulo: 'Candidaturas em andamento',
-nota: 'Lista de candidaturas que ainda nÃ£o foram encerradas nem concluÃ­das.',
+nota: 'Lista de candidaturas que ainda não foram encerradas nem concluídas.',
 html: tabelaResumo(['Candidata','Loja','Gestora','Etapa'], ativos.map(c=>linhaCandidataResumo(c, esc(ETAPAS[c.etapa] || '-'))))
 },
 aguardando: {
@@ -2325,18 +2325,18 @@ nota: 'Lista de candidatas posicionadas na etapa Aguardando roteiro.',
 html: tabelaResumo(['Candidata','Loja','Gestora','Tempo na etapa'], aguardandoLista.map(c=>linhaCandidataResumo(c, `${diasEntre(c.entrouEm)} dia(s) - ${tempoDecorrido(c.entrouEm)}`)))
 },
 atencao: {
-titulo: 'Candidaturas em estado de atenÃ§Ã£o',
-nota: 'Candidatas em Aguardando roteiro hÃ¡ 3 a 4 dias.',
+titulo: 'Candidaturas em estado de atenção',
+nota: 'Candidatas em Aguardando roteiro há 3 a 4 dias.',
 html: tabelaResumo(['Candidata','Loja','Gestora','Tempo na etapa'], atencaoLista.map(c=>linhaCandidataResumo(c, `${diasEntre(c.entrouEm)} dia(s)`)))
 },
 critico: {
-titulo: 'Candidaturas em estado crÃ­tico',
-nota: 'Candidatas com inÃ­cio prÃ³ximo e roteiro ainda nÃ£o recebido.',
-html: tabelaResumo(['Candidata','Loja','Gestora','InÃ­cio previsto'], criticasLista.map(c=>linhaCandidataResumo(c, c.dataPrevista ? fmtDataLocal(c.dataPrevista) : '-')))
+titulo: 'Candidaturas em estado crítico',
+nota: 'Candidatas com início próximo e roteiro ainda não recebido.',
+html: tabelaResumo(['Candidata','Loja','Gestora','Início previsto'], criticasLista.map(c=>linhaCandidataResumo(c, c.dataPrevista ? fmtDataLocal(c.dataPrevista) : '-')))
 },
 media: {
-titulo: 'Tempo mÃ©dio de envio dos roteiros',
-nota: roteirosDetalhe.length ? `Conta: soma dos tempos fechados em Aguardando roteiro (${formatarDuracaoHoras(mediaHoras * roteirosDetalhe.length)}) Ã· ${roteirosDetalhe.length} candidata(s) = ${formatarDuracaoHoras(mediaHoras)}.` : 'Ainda nÃ£o hÃ¡ candidatas que saÃ­ram de Aguardando roteiro para Roteiro recebido.',
+titulo: 'Tempo médio de envio dos roteiros',
+nota: roteirosDetalhe.length ? `Conta: soma dos tempos fechados em Aguardando roteiro (${formatarDuracaoHoras(mediaHoras * roteirosDetalhe.length)}) ÷ ${roteirosDetalhe.length} candidata(s) = ${formatarDuracaoHoras(mediaHoras)}.` : 'Ainda não há candidatas que saíram de Aguardando roteiro para Roteiro recebido.',
 html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Tempo usado na conta'], roteirosDetalhe.map(r=>`
 <tr>
 <td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
@@ -2347,7 +2347,7 @@ html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebid
 },
 prazo: {
 titulo: '% de roteiros recebidos no prazo',
-nota: roteirosDetalhe.length ? `Conta: ${enviadosNoPrazo} roteiro(s) recebidos fora das faixas vermelha/crÃ­tica Ã· ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualNoPrazo}.` : 'Ainda nÃ£o hÃ¡ candidaturas com entrada em Aguardando roteiro e saÃ­da para Roteiro recebido.',
+nota: roteirosDetalhe.length ? `Conta: ${enviadosNoPrazo} roteiro(s) recebidos fora das faixas vermelha/crítica ÷ ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualNoPrazo}.` : 'Ainda não há candidaturas com entrada em Aguardando roteiro e saída para Roteiro recebido.',
 html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Resultado'], roteirosDetalhe.map(r=>`
 <tr>
 <td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
@@ -2358,13 +2358,13 @@ html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebid
 },
 foraPrazo: {
 titulo: '% de roteiros recebidos fora do prazo',
-nota: roteirosDetalhe.length ? `Conta: ${foraDoPrazo} roteiro(s) recebidos em fase vermelha/crÃ­tica Ã· ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualForaPrazo}.` : 'Ainda nÃ£o hÃ¡ candidaturas com entrada em Aguardando roteiro e saÃ­da para Roteiro recebido.',
+nota: roteirosDetalhe.length ? `Conta: ${foraDoPrazo} roteiro(s) recebidos em fase vermelha/crítica ÷ ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualForaPrazo}.` : 'Ainda não há candidaturas com entrada em Aguardando roteiro e saída para Roteiro recebido.',
 html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Motivo'], roteirosDetalhe.filter(r=>r.foraDoPrazo).map(r=>`
 <tr>
 <td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
 <td>${fmtDataHora(r.entrada)}</td>
 <td>${fmtDataHora(r.saida)}</td>
-<td>${r.estavaCritico ? 'CrÃ­tica' : 'Vermelha'} - ${formatarDuracaoHoras(r.horas)}</td>
+<td>${r.estavaCritico ? 'Crítica' : 'Vermelha'} - ${formatarDuracaoHoras(r.horas)}</td>
 </tr>`))
 }
 };
@@ -2394,9 +2394,9 @@ const percentualForaPrazo = roteirosDetalhe.length ? `${Math.round((foraDoPrazo 
 const stats = [
 {id:'andamento', num:ativosLista.length, lbl:"Candidaturas em andamento", cls:""},
 {id:'aguardando', num:aguardandoLista.length, lbl:"Candidaturas aguardando roteiro", cls:"warn"},
-{id:'atencao', num:atencaoLista.length, lbl:"Candidaturas em estado de atenÃ§Ã£o", cls:"attention"},
-{id:'critico', num:criticasLista.length, lbl:"Candidaturas em estado crÃ­tico", cls:"alert"},
-{id:'media', num:formatarDuracaoHorasResumo(mediaHoras), lbl:"Tempo mÃ©dio de envio dos roteiros", cls:""},
+{id:'atencao', num:atencaoLista.length, lbl:"Candidaturas em estado de atenção", cls:"attention"},
+{id:'critico', num:criticasLista.length, lbl:"Candidaturas em estado crítico", cls:"alert"},
+{id:'media', num:formatarDuracaoHorasResumo(mediaHoras), lbl:"Tempo médio de envio dos roteiros", cls:""},
 {id:'prazo', num:percentualNoPrazo, lbl:"% de roteiros recebidos no prazo", cls:"done"},
 {id:'foraPrazo', num:percentualForaPrazo, lbl:"% de roteiros recebidos fora do prazo", cls:"alert"}
 ];
@@ -2480,8 +2480,8 @@ const opcoes = [
 ['desempenho','Melhor desempenho'],
 ['prazo','Mais roteiros no prazo'],
 ['foraPrazo','Mais roteiros fora do prazo'],
-['media','Menor tempo mÃ©dio'],
-['aguardandoAte4','Mais aguardando atÃ© 4 dias'],
+['media','Menor tempo médio'],
+['aguardandoAte4','Mais aguardando até 4 dias'],
 ['aguardandoMais4','Mais aguardando acima de 4 dias']
 ];
 const linhas = ranking.length ? ranking.map((r, i)=>{
@@ -2498,11 +2498,11 @@ return `
 ${totalBarra ? [
 segmento(r.noPrazo, 'ranking-ok', 'Roteiros no prazo'),
 segmento(r.foraPrazo, 'ranking-late', 'Roteiros fora do prazo'),
-segmento(r.aguardandoAte4, 'ranking-wait-ok', 'Aguardando atÃ© 4 dias'),
+segmento(r.aguardandoAte4, 'ranking-wait-ok', 'Aguardando até 4 dias'),
 segmento(r.aguardandoMais4, 'ranking-wait-late', 'Aguardando acima de 4 dias')
 ].join('') : '<span class="ranking-segment" style="width:100%">Sem volume</span>'}
 </div>
-<div class="ranking-time">${formatarDuracaoHoras(r.mediaHoras)}<span>Tempo mÃ©dio de envio dos roteiros</span></div>
+<div class="ranking-time">${formatarDuracaoHoras(r.mediaHoras)}<span>Tempo médio de envio dos roteiros</span></div>
 </div>`;
 }).join('') : `<div class="ranking-empty">Nenhum roteiro recebido ou aguardando para montar o ranking.</div>`;
 el.innerHTML = `
@@ -2510,7 +2510,7 @@ el.innerHTML = `
 <div class="ranking-head">
 <div>
 <h2>Ranking de desempenho por gestor</h2>
-<p class="sub">ClassificaÃ§Ã£o baseada no envio dos roteiros, prazo de recebimento e pendÃªncias atuais por gestor.</p>
+<p class="sub">Classificação baseada no envio dos roteiros, prazo de recebimento e pendências atuais por gestor.</p>
 </div>
 <label class="ranking-controls">Ordenar por
 <select onchange="alterarOrdenacaoRanking(this.value)">
@@ -2521,7 +2521,7 @@ ${opcoes.map(([valor, label])=>`<option value="${valor}" ${rankingOrdenacao===va
 <div class="ranking-legend" aria-label="Legenda do ranking">
 <span><i class="ranking-ok"></i>Roteiros no prazo</span>
 <span><i class="ranking-late"></i>Roteiros fora do prazo</span>
-<span><i class="ranking-wait-ok"></i>Aguardando atÃ© 4 dias</span>
+<span><i class="ranking-wait-ok"></i>Aguardando até 4 dias</span>
 <span><i class="ranking-wait-late"></i>Aguardando acima de 4 dias</span>
 </div>
 <div class="ranking-chart">${linhas}</div>
@@ -2538,7 +2538,7 @@ if(nesta.length>0) cls += " filled";
 if(isBottleneck) cls += " bottleneck";
 if(isBottleneck && atrasadas>0) cls += " late";
 const countCls = (isBottleneck && atrasadas>0) ? "count late" : "count";
-const countTxt = nesta.length>0 ? `${nesta.length}${atrasadas>0?` Â· ${atrasadas} atrasada(s)`:''}` : 'â€”';
+const countTxt = nesta.length>0 ? `${nesta.length}${atrasadas>0?` · ${atrasadas} atrasada(s)`:''}` : '-';
 return `
 <div class="${cls}">
 <div class="dot">${String(idx+1).padStart(2,'0')}</div>
@@ -2553,7 +2553,7 @@ function renderPendencias(){
 const pendentes = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX && c.gestora && passaBusca(c));
 pendGroupsCache = [];
 if(pendentes.length===0){
-document.getElementById('pendGestora').innerHTML = `<p class="pend-empty">Nenhuma pendÃªncia de roteiro no momento.</p>`;
+document.getElementById('pendGestora').innerHTML = `<p class="pend-empty">Nenhuma pendência de roteiro no momento.</p>`;
 return;
 }
 const disparosDisponiveis = montarDisparosCobranca().length;
@@ -2579,7 +2579,7 @@ return `
 <tr class="pend-candidate-row">
 <td>
 <div class="pend-candidate-name">${esc(nomeCandidata(c.nome))}</div>
-<div class="pend-candidate-meta">${esc(textoPadrao(c.loja) || '-')} Â· ${diasEntre(c.entrouEm)} dia(s) aguardando</div>
+<div class="pend-candidate-meta">${esc(textoPadrao(c.loja) || '-')} · ${diasEntre(c.entrouEm)} dia(s) aguardando</div>
 </td>
 <td>${c.emailGestora ? esc(String(c.emailGestora).trim().toLowerCase()) : '<span class="pend-last">Sem e-mail cadastrado</span>'}</td>
 <td>${cobrancasCandidataHtml}</td>
@@ -2592,24 +2592,24 @@ return `
 return `
 <tr class="pend-group-row">
 <td>
-<button class="pend-toggle" onclick="toggleGestoraCobranca(${idx})" title="${aberta?'Ocultar candidatas':'Mostrar candidatas'}">${aberta?'â–²':'â–¼'}</button>
+<button class="pend-toggle" onclick="toggleGestoraCobranca(${idx})" title="${aberta?'Ocultar candidatas':'Mostrar candidatas'}">${aberta?'?':'?'}</button>
 <span class="pend-manager">${esc(textoPadrao(gestora))}</span>
 <span class="pend-count">${pendentesGestora.length} candidata(s) aguardando</span>
 </td>
 <td>${emailRef ? esc(String(emailRef).trim().toLowerCase()) : '<span class="pend-last">Sem e-mail cadastrado</span>'}</td>
 <td>${cobrancasGestoraHtml}</td>
-<td>${pendentesGestora.length ? `<button class="pend-btn ${temAtraso?'':'soft'}" onclick="cobrarGestoraConsolidado(${idx})">Cobrar gestora</button>` : '<span class="pend-last">Sem pendÃªncias</span>'}</td>
+<td>${pendentesGestora.length ? `<button class="pend-btn ${temAtraso?'':'soft'}" onclick="cobrarGestoraConsolidado(${idx})">Cobrar gestora</button>` : '<span class="pend-last">Sem pendências</span>'}</td>
 </tr>
 ${aberta ? linhasCandidatas : ''}`;
 }).join('');
 const batchHtml = disparosDisponiveis>0 ? `
 <div class="pend-actions">
-<div class="hint">${disparosDisponiveis} e-mail(s) prontos para abrir no Outlook, agrupados por endereÃ§o.</div>
+<div class="hint">${disparosDisponiveis} e-mail(s) prontos para abrir no Outlook, agrupados por endereço.</div>
 <button class="pend-btn soft wide" onclick="abrirModalDisparo()">Cobrar todas as gestoras</button>
-</div>` : `<div class="pend-actions"><div class="hint">Nenhuma cobranÃ§a pendente para preparar no Outlook.</div></div>`;
+</div>` : `<div class="pend-actions"><div class="hint">Nenhuma cobrança pendente para preparar no Outlook.</div></div>`;
 document.getElementById('pendGestora').innerHTML = batchHtml + `
 <table class="pend-table">
-<thead><tr><th>Gestora</th><th>E-mail</th><th>HistÃ³rico de cobranÃ§as</th><th></th></tr></thead>
+<thead><tr><th>Gestora</th><th>E-mail</th><th>Histórico de cobranças</th><th></th></tr></thead>
 <tbody>${html}</tbody>
 </table>`;
 }
@@ -2635,7 +2635,7 @@ if(editLock) cardCls += " editing-by-other";
 const historico = compactarHistoricoEtapas(c.historico);
 const historicoHtml = historico.length
 ? `<ul class="card-list">${historico.map(h=>`<li><b>${esc(nomeEtapaHistorico(h))}:</b> ${esc(formatarDataHistoricoCard(c, h))}</li>`).join('')}${isBottleneck ? `<li><b>Tempo aguardando roteiro:</b> ${tempoDecorrido(c.entrouEm)}</li>` : ''}</ul>`
-: `<div class="card-empty">Nenhum histÃ³rico registrado.</div>`;
+: `<div class="card-empty">Nenhum histórico registrado.</div>`;
 const podeCobrar = semaforo && ['atrasada','critica'].includes(semaforo.key);
 const roteiroTopHtml = isBottleneck ? `
 <div class="card-topline">
@@ -2644,9 +2644,9 @@ ${podeCobrar ? `<button class="cobrar-btn" onclick="event.stopPropagation(); cob
 </div>` : '';
 const metaParts = [esc(textoPadrao(c.loja))];
 if(c.horario) metaParts.push(esc(c.horario));
-let metaHtml = metaParts.join(' Â· ');
+let metaHtml = metaParts.join(' · ');
 if(c.entrevistaData) metaHtml += '<br>Data Entrevista: ' + esc(formatarEntrevistaAgendada(c));
-if(c.dataPrevista) metaHtml += '<br>InÃ­cio previsto: ' + fmtDataLocal(c.dataPrevista);
+if(c.dataPrevista) metaHtml += '<br>Início previsto: ' + fmtDataLocal(c.dataPrevista);
 if(c.exameData) metaHtml += '<br>Exame admissional: ' + esc(formatarExameAdmissional(c));
 
 return `
@@ -2658,14 +2658,14 @@ ${roteiroTopHtml}
 <div class="card-people">Gestora: <b>${esc(textoPadrao(c.gestora) || '-')}</b></div>
 ${editLock ? `<span class="editing-pill">Em edicao por ${esc(nomeUsuarioLock(editLock))}</span>` : ''}
 </div>
-<button class="edit-card" type="button" title="Editar candidatura" aria-label="Editar candidatura" onclick="event.stopPropagation(); abrirModal('${c.id}')">âœŽ</button>
-<button class="toggle-card" type="button" aria-label="${cardsAbertos.has(c.id)?'Ocultar detalhes':'Mostrar detalhes'}">${cardsAbertos.has(c.id)?'â–²':'â–¼'}</button>
+<button class="edit-card" type="button" title="Editar candidatura" aria-label="Editar candidatura" onclick="event.stopPropagation(); abrirModal('${c.id}')">✎</button>
+<button class="toggle-card" type="button" aria-label="${cardsAbertos.has(c.id)?'Ocultar detalhes':'Mostrar detalhes'}">${cardsAbertos.has(c.id)?'?':'?'}</button>
 </div>
-<div class="card-action-title">PrÃ³xima aÃ§Ã£o do RH: <span>${esc(proximaAcaoRH(c.etapa))}</span></div>
+<div class="card-action-title">Próxima ação do RH: <span>${esc(proximaAcaoRH(c.etapa))}</span></div>
 <div class="meta">${metaHtml}</div>
 <div class="card-details">
 <div class="card-section">
-<div class="card-section-title">HistÃ³rico da candidatura</div>
+<div class="card-section-title">Histórico da candidatura</div>
 ${historicoHtml}
 </div>
 <div class="card-actions">
@@ -2679,7 +2679,7 @@ ${historicoHtml}
 
 return `
 <div class="col" ondragover="permitirDrop(event)" ondragleave="sairDrop(event)" ondrop="soltarNaEtapa(event, ${idx})">
-<div class="col-head"><b>${String(idx+1).padStart(2,'0')}</b> Â· ${esc(nome)}</div>
+<div class="col-head"><b>${String(idx+1).padStart(2,'0')}</b> · ${esc(nome)}</div>
 ${cardsHtml}
 </div>`;
 }).join('');
@@ -2696,10 +2696,10 @@ return registro?.usuario || '-';
 
 function tabelaHistoricoCandidaturas(lista, tipo){
 if(!lista.length){
-return `<p class="fin-empty">${tipo==='contratadas' ? 'Nenhuma contrataÃ§Ã£o concluÃ­da ainda.' : 'Nenhum processo encerrado sem contrataÃ§Ã£o.'}</p>`;
+return `<p class="fin-empty">${tipo==='contratadas' ? 'Nenhuma contratação concluída ainda.' : 'Nenhum processo encerrado sem contratação.'}</p>`;
 }
-const dataLabel = tipo==='contratadas' ? 'Data de aprovaÃ§Ã£o' : 'Data de encerramento do processo';
-const horaLabel = tipo==='contratadas' ? 'Hora de aprovaÃ§Ã£o' : 'Hora de encerramento';
+const dataLabel = tipo==='contratadas' ? 'Data de aprovação' : 'Data de encerramento do processo';
+const horaLabel = tipo==='contratadas' ? 'Hora de aprovação' : 'Hora de encerramento';
 const linhas = lista.map(c=>{
 const ts = tipo==='contratadas' ? (c.contratadaEm || c.entrouEm) : c.encerradaEm;
 const usuario = tipo==='contratadas' ? (c.contratadaPor || '-') : usuarioEncerramento(c);
@@ -2720,15 +2720,15 @@ ${obsCell}
 const encerramentoHeads = tipo==='contratadas' ? '' : '<th>Motivo</th><th>Obs</th>';
 return `
 <table class="fin-table">
-<thead><tr><th>Nome candidato</th><th>Gestor</th><th>${dataLabel}</th><th>${horaLabel}</th><th>UsuÃ¡rio</th>${encerramentoHeads}<th></th></tr></thead>
+<thead><tr><th>Nome candidato</th><th>Gestor</th><th>${dataLabel}</th><th>${horaLabel}</th><th>Usuário</th>${encerramentoHeads}<th></th></tr></thead>
 <tbody>${linhas}</tbody>
 </table>`;
 }
 
 function renderFinalizados(){
 document.getElementById('finTabs').innerHTML = `
-<button class="${finTab==='reprovadas'?'active':''}" onclick="setFinTab('reprovadas')">Encerradas sem contrataÃ§Ã£o</button>
-<button class="${finTab==='contratadas'?'active':''}" onclick="setFinTab('contratadas')">ContrataÃ§Ãµes concluÃ­das</button>
+<button class="${finTab==='reprovadas'?'active':''}" onclick="setFinTab('reprovadas')">Encerradas sem contratação</button>
+<button class="${finTab==='contratadas'?'active':''}" onclick="setFinTab('contratadas')">Contratações concluídas</button>
 `;
 
 if(finTab==='contratadas'){
