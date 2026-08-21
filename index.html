@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel de Contratacao - Demo</title>
+<title>Painel de ContrataÃ§Ã£o</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 :root{
 --ink:#1B2733;
@@ -17,6 +17,8 @@
 --teal-soft:#E3EEEC;
 --amber:#C97A1E;
 --amber-soft:#FBF0DE;
+--yellow:#D6A900;
+--yellow-soft:#FFF5BF;
 --red:#B23B33;
 --red-soft:#FBE7E4;
 --green:#3F7D57;
@@ -27,221 +29,748 @@
 }
 
 *{box-sizing:border-box;}
+.demo-banner{background:var(--amber-soft);border:1px solid var(--amber);color:var(--amber);font-weight:700;border-radius:4px;padding:9px 12px;margin:0 0 14px;font-size:13px;}
 html,body{margin:0;padding:0;}
-body{background:var(--paper);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;padding:28px 32px 56px;}
-.wrap{max-width:1240px;margin:0 auto;}
-
-header{border-bottom:2px solid var(--ink);padding-bottom:18px;margin-bottom:16px;}
-.header-top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;}
-.tabs{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;}
-.tab{
-background:none;border:0;color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:28px;
-font-weight:700;line-height:1.1;padding:0 0 4px;margin:0;cursor:pointer;text-align:left;
+body{
+background:var(--paper);
+color:var(--ink);
+font-family:'IBM Plex Sans',sans-serif;
+padding:clamp(14px, 1.7vw, 28px) clamp(14px, 2vw, 32px) 60px;
 }
-.tab + .tab{border-left:2px solid var(--ink);padding-left:16px;}
-.tab.active,.tab:hover{color:var(--amber);}
-.user{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:13px;}
-.ghost-btn,.new-btn{
-border:1px solid var(--line);border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-weight:700;
-font-size:13px;padding:10px 14px;cursor:pointer;background:var(--card);color:var(--ink);
-}
-.new-btn{background:var(--ink);border-color:var(--ink);color:#fff;height:44px;padding:0 18px;}
+.wrap{width:100%;max-width:1880px;margin:0 auto;}
 
-.demo-banner{border:1px solid var(--amber);background:var(--amber-soft);color:var(--amber);font-weight:700;border-radius:4px;padding:10px 12px;margin-bottom:16px;font-size:13px;}
-.page{display:none;}
-.page.active{display:block;}
-.statusbar{display:flex;justify-content:space-between;gap:12px;color:var(--ink-soft);font-size:12.5px;margin-bottom:18px;}
+header{
+display:block;
+border-bottom:2px solid var(--ink);
+padding-bottom:18px;margin-bottom:14px;
+}
+.header-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;}
+.title-block{flex:1;min-width:320px;}
+.title-row{
+display:flex;
+align-items:flex-end;
+gap:16px;
+flex-wrap:wrap;
+}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;margin:0 0 4px;letter-spacing:-0.01em;}
+header p{margin:0;color:var(--ink-soft);font-size:15px;max-width:560px;line-height:1.5;}
+.title-tab,.nav-tab{
+background:none;
+border:none;
+color:var(--ink);
+font-family:'Space Grotesk',sans-serif;
+font-weight:700;
+font-size:28px;
+line-height:1.1;
+padding:0 0 4px;
+margin:0;
+letter-spacing:-0.01em;
+cursor:pointer;
+white-space:normal;
+text-align:left;
+}
+.nav-tab{border-left:2px solid var(--ink);padding-left:16px;}
+.title-tab.active,.nav-tab.active{color:var(--amber);text-decoration:none;}
+.title-tab:hover,.nav-tab:hover{color:var(--amber);text-decoration:none;}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.new-btn{
+background:var(--ink);color:#fff;border:none;font-family:'IBM Plex Sans',sans-serif;
+font-weight:600;font-size:14px;padding:12px 18px;border-radius:3px;cursor:pointer;white-space:nowrap;
+}
+.new-btn:hover{background:var(--teal);}
+.ghost-btn{
+background:var(--card);color:var(--ink);border:1px solid var(--line);font-family:'IBM Plex Sans',sans-serif;
+font-weight:600;font-size:14px;padding:11px 14px;border-radius:3px;cursor:pointer;white-space:nowrap;
+}
+.ghost-btn:hover{border-color:var(--ink);}
+
+/* status bar */
+.statusbar{
+display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+margin-bottom:20px;font-size:13.5px;color:var(--ink-soft);
+}
 .save-status{display:flex;align-items:center;gap:6px;}
-.save-dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
-.search-row{display:flex;gap:10px;align-items:center;margin-bottom:20px;}
-.searchbar{flex:1;}
-.searchbar input{width:100%;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;background:var(--card);}
+.save-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.save-status.err .save-dot{background:var(--red);}
+.save-status.err{color:var(--red);font-weight:600;}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:24px;}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px;}
-.num{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;line-height:1;}
-.lbl{font-size:11.5px;color:var(--ink-soft);margin-top:6px;text-transform:uppercase;letter-spacing:.04em;}
-.stat.warn .num{color:var(--amber);}
+.search-row{display:grid;grid-template-columns:minmax(190px,260px) minmax(260px,1fr) minmax(260px,1fr);gap:10px;align-items:center;margin-bottom:20px;}
+.quick-filter select,.quick-filter-value input{width:100%;height:44px;padding:0 12px;border-radius:4px;font-size:14px;font-family:'IBM Plex Sans',sans-serif;}
+.quick-filter select{border:1px solid #2A3A48;background:#2A3A48;color:#fff;}
+.quick-filter-value input{border:1px solid #dfe4e4;background:#dfe4e4;color:var(--ink);}
+.quick-filter select option{background:#fff;color:var(--ink);}
+.quick-filter-value input::placeholder{color:#4B5A66;}
+.quick-filter-value input:disabled{background:#dfe4e4;border-color:#dfe4e4;color:#4B5A66;cursor:not-allowed;opacity:1;}
+.quick-filter-value input:disabled::placeholder{color:#4B5A66;}
+.search-row .new-btn{height:44px;padding:0 18px;width:100%;}
+@media(max-width:980px){
+.search-row{grid-template-columns:1fr;}
+.search-row .new-btn{width:100%;}
+.controls{grid-template-columns:1fr;}
+.semaforo-legend{justify-content:flex-start;}
+}
+
+.stats{margin-bottom:14px;}
+.summary-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;overflow-x:auto;}
+.summary-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;color:var(--ink);}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px;}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:9px 11px;text-align:left;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;width:100%;}
+.stat:hover,.stat.active{border-color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink);}
+.stat .num{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;line-height:1;white-space:nowrap;}
+.stat .num .unit{font-size:13px;font-weight:600;}
+.stat .lbl{font-size:11.5px;color:var(--ink-soft);margin-top:4px;letter-spacing:0;}
 .stat.alert .num{color:var(--red);}
+.stat.warn .num{color:var(--amber);}
+.stat.attention .num{color:var(--yellow);}
+.stat.ok .num{color:var(--teal);}
 .stat.done .num{color:var(--green);}
 .stat.stop .num{color:var(--purple);}
+.summary-detail{border-top:1px solid var(--line);margin-top:14px;padding-top:14px;}
+.summary-detail h3{font-family:'Space Grotesk',sans-serif;font-size:15px;margin:0 0 8px;}
+.summary-note{font-size:13.5px;color:var(--ink-soft);margin:0 0 10px;line-height:1.45;}
+.summary-table{width:100%;min-width:760px;border-collapse:collapse;font-size:13.5px;}
+.summary-table th{font-size:12.5px;letter-spacing:0;color:var(--ink-soft);text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;}
+.summary-table td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top;}
+.summary-table tr:last-child td{border-bottom:none;}
+.summary-empty{font-size:13.5px;color:var(--ink-soft);padding:6px 0;}
 
-.panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;margin-bottom:22px;}
-.panel h2{font-family:'Space Grotesk',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:0 0 4px;}
-.panel .sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px;}
+.daily-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:22px;}
+.daily-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.daily-head h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0;color:var(--ink);}
+.daily-head .sub{font-size:13.5px;color:var(--ink-soft);margin:4px 0 0;line-height:1.4;}
+.daily-date{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);white-space:nowrap;}
+.daily-list{display:grid;gap:8px;}
+.daily-item{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:4px;background:#fff;padding:10px 12px;}
+.daily-kind{font-size:12px;font-weight:700;color:var(--ink-soft);}
+.daily-kind.urgent{color:var(--red);}
+.daily-kind.today{color:var(--green);}
+.daily-title{font-weight:700;color:var(--ink);font-size:14px;}
+.daily-meta{font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.35;}
+.daily-open{background:#fff;border:1px solid var(--line);border-radius:3px;color:var(--ink);font-size:12.5px;font-weight:600;height:30px;padding:0 10px;cursor:pointer;white-space:nowrap;}
+.daily-open:hover{border-color:var(--ink);}
+.daily-empty{font-size:13.5px;color:var(--ink-soft);}
+@media(max-width:820px){
+.daily-item{grid-template-columns:1fr;}
+.daily-open{width:max-content;}
+}
 
-.pipeline{display:flex;align-items:flex-start;min-width:760px;position:relative;padding-top:5px;}
-.pipeline:before{content:'';position:absolute;left:5%;right:5%;top:20px;height:2px;background:var(--line);}
-.node{flex:1;text-align:center;position:relative;z-index:1;}
-.node .dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:#fff;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--ink-soft);}
-.node.filled .dot{background:var(--teal);border-color:var(--teal);color:#fff;}
-.node.warn .dot{background:var(--amber);border-color:var(--amber);color:#fff;}
-.node .name{font-size:11.5px;font-weight:600;line-height:1.25;}
-.node .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:3px;}
+.ranking-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:16px;margin-bottom:22px;overflow-x:auto;}
+.ranking-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+.ranking-head h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0;color:var(--ink);}
+.ranking-head .sub{font-size:13.5px;color:var(--ink-soft);margin:4px 0 0;line-height:1.4;}
+.ranking-controls{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink-soft);}
+.ranking-controls select{border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;height:32px;padding:0 8px;}
+.ranking-legend{display:flex;gap:12px;flex-wrap:wrap;margin:-4px 0 12px;font-size:13px;color:var(--ink-soft);}
+.ranking-legend span{display:flex;align-items:center;gap:5px;}
+.ranking-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;}
+.ranking-chart{display:grid;gap:10px;min-width:760px;}
+.ranking-chart-row{display:grid;grid-template-columns:170px 1fr 100px;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:10px 0;}
+.ranking-chart-row:last-child{border-bottom:none;}
+.ranking-name{font-weight:700;color:var(--amber);font-size:14.5px;}
+.ranking-track{height:28px;background:var(--grey-soft);border-radius:4px;overflow:hidden;display:flex;min-width:160px;}
+.ranking-segment{height:100%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);min-width:0;}
+.ranking-ok{background:var(--green-soft);color:var(--green);}
+.ranking-late{background:var(--red-soft);color:var(--red);}
+.ranking-wait-ok{background:var(--yellow-soft);color:#7A6100;}
+.ranking-wait-late{background:var(--amber-soft);color:var(--amber);}
+.ranking-time{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;color:var(--ink);text-align:right;}
+.ranking-time span{display:block;margin-top:2px;font-family:'IBM Plex Sans',sans-serif;font-size:11.5px;font-weight:500;color:var(--ink-soft);letter-spacing:0;}
+.ranking-empty{font-size:13.5px;color:var(--ink-soft);}
+@media(max-width:900px){
+.ranking-chart-row{grid-template-columns:1fr;}
+.ranking-time{text-align:left;}
+}
 
-.pend-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 12px;}
-.hint{font-size:12px;color:var(--ink-soft);}
-.pend-btn{background:var(--amber);color:#fff;border:0;border-radius:4px;font-size:12px;font-weight:700;padding:9px 12px;cursor:pointer;}
-.pend-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-.pend-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:8px 6px;border-bottom:1px solid var(--line);}
-.pend-table td{padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top;}
+.trilho-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin-bottom:14px;overflow-x:auto;}
+.trilho-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--ink);margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em;}
+.trilho{display:flex;align-items:flex-start;min-width:760px;position:relative;}
+.trilho::before{content:'';position:absolute;top:12px;left:5%;right:5%;height:2px;background:var(--line);z-index:0;}
+.no{flex:1;text-align:center;position:relative;z-index:1;}
+.no .dot{
+width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid var(--line);margin:0 auto 6px;
+display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--ink-soft);
+}
+.no.filled .dot{background:var(--teal);border-color:var(--teal);color:#fff;}
+.no.bottleneck .dot{background:var(--amber);border-color:var(--amber);color:#fff;}
+.no.bottleneck.late .dot{background:var(--red);border-color:var(--red);animation:pulse 1.8s infinite;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(178,59,51,.45);}70%{box-shadow:0 0 0 9px rgba(178,59,51,0);}100%{box-shadow:0 0 0 0 rgba(178,59,51,0);}}
+.no .name{font-size:11.5px;font-weight:500;color:var(--ink);line-height:1.2;padding:0 4px;}
+.no .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.no .count.late{color:var(--red);font-weight:600;}
+
+/* painel de cobrancas */
+.pend-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;margin-bottom:22px;overflow-x:auto;}
+.pend-box h3{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:0 0 4px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);}
+.pend-box .sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 14px;}
+.pend-empty{font-size:14px;color:var(--ink-soft);}
+.pend-row{
+display:flex;justify-content:space-between;align-items:center;gap:12px;
+padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap;
+}
+.pend-row:first-of-type{border-top:none;}
+.pend-info b{font-size:13.5px;}
+.pend-info .d{font-size:13px;color:var(--ink-soft);margin-top:2px;}
+.pend-info .d.late{color:var(--red);font-weight:600;}
+.pend-btn{background:#fff;color:var(--ink);border:1px solid #C9D2CF;font-size:12.5px;font-weight:600;width:164px;height:32px;padding:0 10px;border-radius:3px;cursor:pointer;white-space:nowrap;text-align:center;display:inline-flex;align-items:center;justify-content:center;line-height:1;}
+.pend-btn.wide{width:190px;}
+.pend-btn:hover{background:var(--grey-soft);border-color:var(--ink-soft);}
+.pend-btn.soft{background:#fff;color:var(--ink);border-color:#C9D2CF;}
+.pend-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 12px;padding-right:10px;}
+.pend-actions .hint{font-size:13px;color:var(--ink-soft);}
+.pend-table{width:100%;min-width:860px;border-collapse:collapse;margin-top:10px;font-size:13.5px;border:1px solid var(--line);}
+.pend-table th{text-align:left;font-size:12.5px;letter-spacing:0;color:var(--ink-soft);padding:9px 10px;border-bottom:1px solid var(--line);background:#F7F8F6;}
+.pend-table td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;}
 .pend-table td:last-child{text-align:right;}
-.pend-list{list-style:none;margin:4px 0 0;padding:0;color:var(--ink-soft);line-height:1.5;}
-.last-charge{color:var(--ink-soft);font-size:12px;line-height:1.45;}
-.last-charge b{color:var(--ink);}
+.pend-group-row td{background:var(--card);font-weight:600;color:var(--ink);border-top:4px solid #B8C1BE;}
+.pend-group-row:first-child td{border-top:none;}
+.pend-manager{color:var(--amber);font-weight:700;}
+.pend-toggle{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink-soft);font-size:13px;width:24px;height:24px;line-height:1;cursor:pointer;margin-right:8px;}
+.pend-toggle:hover{border-color:var(--ink);}
+.pend-candidate-row td{background:var(--card);}
+.pend-candidate-row td:first-child{padding-left:20px;}
+.pend-candidate-name{font-weight:700;color:var(--ink);}
+.pend-candidate-meta{font-size:13px;color:var(--ink-soft);margin-top:3px;line-height:1.35;}
+.pend-count{font-size:13px;color:var(--ink-soft);font-weight:500;margin-left:8px;}
+.pend-last{color:var(--ink-soft);font-size:13px;line-height:1.45;}
+.pend-last b{color:var(--ink);}
+.pend-history{list-style:none;margin:0;padding:0;display:grid;gap:4px;color:var(--ink-soft);font-size:13px;line-height:1.35;}
+.pend-history li b{color:var(--ink);}
+.progress-wrap{background:var(--grey-soft);border-radius:3px;height:12px;overflow:hidden;margin:14px 0 8px;}
+.progress-bar{height:100%;width:0;background:var(--teal);transition:width .25s;}
+.send-list{border-top:1px solid var(--line);margin-top:14px;max-height:260px;overflow:auto;}
+.send-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.send-row .status{font-weight:700;color:var(--ink-soft);}
+.send-row.ok .status{color:var(--green);}
+.send-row.err .status{color:var(--red);}
 
-.controls{display:flex;justify-content:flex-end;align-items:center;margin-bottom:12px;color:var(--ink-soft);font-size:13px;}
-.controls input{width:52px;border:1px solid var(--line);border-radius:4px;padding:7px 8px;text-align:center;font-family:'IBM Plex Mono',monospace;}
-.board{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:28px;}
-.col{background:#EFF0EE;border-radius:4px;min-width:160px;flex:1;padding:8px;}
+.controls{display:grid;grid-template-columns:1fr auto;align-items:center;margin-bottom:14px;gap:14px;}
+.threshold{font-size:14px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
+.threshold input{width:44px;font-family:'IBM Plex Mono',monospace;border:1px solid var(--line);border-radius:3px;padding:4px 6px;text-align:center;}
+
+.board{display:grid;grid-template-columns:repeat(7,minmax(136px,1fr));gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:30px;}
+.col{background:#EFF0EE;border-radius:4px;min-width:0;padding:7px;}
 .col.drag-over{outline:2px solid var(--amber);outline-offset:-2px;background:var(--amber-soft);}
-.col-head{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;padding:2px 3px 8px;border-bottom:1px solid var(--line);margin-bottom:8px;}
-.card-item{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:4px;padding:8px 9px;margin-bottom:8px;font-size:13px;cursor:grab;}
-.card-item.dragging{opacity:.55;cursor:grabbing;}
-.card-item.late{border-left-color:var(--red);background:var(--red-soft);}
-.card-summary{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;cursor:pointer;}
-.name-btn{background:none;border:0;padding:0;text-align:left;font-family:'IBM Plex Sans',sans-serif;font-weight:700;font-size:13px;text-decoration:underline;text-decoration-color:var(--line);cursor:pointer;color:var(--ink);}
-.days{font-family:'IBM Plex Mono',monospace;font-size:11px;padding:1px 6px;border-radius:3px;background:var(--grey-soft);color:var(--ink-soft);}
-.late .days{background:var(--red);color:#fff;}
-.toggle-card{border:1px solid var(--line);background:#fff;border-radius:3px;color:var(--ink-soft);width:24px;height:24px;cursor:pointer;}
-.details{display:none;margin-top:8px;color:var(--ink-soft);font-size:11.5px;line-height:1.5;}
-.card-item.open .details{display:block;}
+.col-head{font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin-bottom:8px;overflow-wrap:anywhere;}
+.col-head b{color:var(--ink);}
+
+.card{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:3px;padding:9px 10px;margin-bottom:8px;font-size:13px;}
+.card[draggable="true"]{cursor:grab;}
+.card.dragging{opacity:.55;cursor:grabbing;}
+.card.bottleneck{border-left-color:var(--amber);}
+.card.late{border-left-color:var(--red);background:var(--red-soft);}
+.card.semaforo-ok{border-left-color:var(--green);background:var(--green-soft);}
+.card.semaforo-alerta{border-left-color:var(--yellow);background:var(--yellow-soft);}
+.card.semaforo-atrasada{border-left-color:var(--red);background:var(--red-soft);}
+.card.semaforo-critica{border-left-color:var(--red);background:var(--red-soft);box-shadow:inset 0 0 0 1px var(--red);}
+.card.focus-pulse{animation:cardFocusPulse .85s ease-in-out 0s 4;}
+@keyframes cardFocusPulse{
+0%,100%{transform:translateY(0);box-shadow:0 0 0 0 rgba(201,122,30,0);}
+35%{transform:translateY(-7px);box-shadow:0 8px 20px rgba(201,122,30,.32),0 0 0 3px rgba(201,122,30,.22);}
+}
+.card-summary{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:start;cursor:pointer;}
+.card .nome{font-weight:700;background:none;border:none;padding:0;font-size:13.5px;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);color:var(--ink);text-align:left;line-height:1.25;}
+.card .meta{color:var(--ink-soft);font-size:12px;line-height:1.45;margin:4px 0 8px;}
+.card .dias{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:7px;padding:0;color:var(--ink);white-space:nowrap;line-height:1.35;max-width:100%;}
+.card.late .dias,.card.bottleneck .dias,.card.semaforo-ok .dias,.card.semaforo-alerta .dias,.card.semaforo-atrasada .dias,.card.semaforo-critica .dias{background:transparent;color:var(--ink);}
+.semaforo-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;line-height:1.2;margin-left:0;white-space:nowrap;}
+.toggle-card{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink-soft);font-size:12px;width:24px;height:24px;line-height:1;cursor:pointer;}
+.edit-card{background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink-soft);font-size:12px;width:24px;height:24px;line-height:1;cursor:pointer;}
+.edit-card:hover,.toggle-card:hover{border-color:var(--ink);}
+.card-details{display:none;margin-top:8px;}
+.card.open .card-details{display:block;}
+.card-topline{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.card-main{min-width:0;}
+.card-people{font-size:12px;color:var(--ink-soft);line-height:1.35;margin-top:2px;}
+.card-people b{color:var(--ink);}
+.card-action-title{font-size:12px;color:var(--ink);font-weight:600;margin:8px 0 6px;line-height:1.35;}
+.card-action-title span{color:var(--ink-soft);font-weight:500;}
+.card-section{border-top:1px solid rgba(27,39,51,.12);padding-top:7px;margin-top:7px;}
+.card-section-title{font-size:12px;letter-spacing:0;color:var(--ink-soft);font-weight:700;margin-bottom:4px;}
+.card-list{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:12.5px;color:var(--ink-soft);}
+.card-list li{line-height:1.35;border-bottom:1px solid rgba(27,39,51,.08);padding-bottom:3px;}
+.card-list li:last-child{border-bottom:none;padding-bottom:0;}
+.card-list b{color:var(--ink);}
+.card-empty{font-size:12.5px;color:#8A969D;}
 .card-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-.small-btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:3px;font-size:11px;padding:5px 7px;cursor:pointer;}
-.small-btn.green{background:var(--green-soft);border-color:var(--green);color:var(--green);}
-.small-btn.purple{border-color:var(--purple);color:var(--purple);}
-.small-btn.red{border-color:var(--red);color:var(--red);}
-.empty{color:#AEB6B4;font-size:12px;padding:8px 4px;}
+.cobrar-btn{background:var(--red);color:#fff;border:none;font-size:12px;font-weight:600;padding:4px 7px;border-radius:3px;cursor:pointer;}
+.cobrar-btn:hover{opacity:.88;}
+.enc-btn{background:none;border:1px solid var(--purple);color:var(--purple);font-size:12px;padding:4px 7px;border-radius:3px;cursor:pointer;}
+.done-btn{background:var(--green-soft);border:1px solid var(--green);color:var(--green);font-size:12px;padding:4px 7px;border-radius:3px;cursor:pointer;}
+.del-btn{background:none;border:1px solid var(--line);color:var(--ink-soft);font-size:12px;padding:4px 7px;border-radius:3px;cursor:pointer;}
+.empty-col{color:#AEB6B4;font-size:13px;padding:8px 4px;}
 
-.final-tabs{display:flex;gap:6px;margin-bottom:14px;}
-.final-tabs button{border:1px solid var(--line);background:var(--grey-soft);color:var(--ink-soft);padding:8px 13px;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;cursor:pointer;}
-.final-tabs button.active{background:var(--ink);border-color:var(--ink);color:#fff;}
-.final-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;}
-.final-row b{text-decoration:underline;}
-.final-row .meta{color:var(--ink-soft);font-size:12px;margin-top:3px;}
-.reopen{background:var(--teal-soft);color:var(--teal);border:0;border-radius:3px;padding:7px 10px;font-weight:700;cursor:pointer;}
+.semaforo-legend{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;font-size:13.5px;color:var(--ink-soft);}
+.semaforo-legend strong{color:var(--ink);font-size:12px;text-transform:uppercase;letter-spacing:.04em;}
+.semaforo-item{display:flex;align-items:center;gap:5px;}
+.semaforo-emoji{font-size:14px;line-height:1;}
 
-.users-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;}
-.user-table{width:100%;border-collapse:collapse;font-size:13px;}
-.user-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);padding:8px 6px;border-bottom:1px solid var(--line);}
-.user-table td{padding:10px 6px;border-bottom:1px solid var(--line);}
-.badge{display:inline-block;padding:3px 7px;border-radius:3px;background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:11px;}
-.badge.admin{background:var(--purple-soft);color:var(--purple);}
-.badge.active{background:var(--green-soft);color:var(--green);}
-.badge.inactive{background:var(--red-soft);color:var(--red);}
-.user-actions{display:flex;justify-content:flex-end;gap:6px;white-space:nowrap;}
-.user-action{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:3px;padding:5px 8px;font-size:11px;font-family:'IBM Plex Sans',sans-serif;cursor:pointer;}
-.user-action.red{border-color:var(--red);color:var(--red);}
-.user-action:hover{background:var(--grey-soft);}
+/* finalizados */
+.fin-box{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px 20px;overflow-x:auto;}
+.fin-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin:0 0 14px;color:var(--ink);}
+.fin-tabs{display:flex;gap:6px;margin-bottom:14px;}
+.fin-tabs button{background:var(--grey-soft);border:1px solid var(--line);padding:7px 13px;border-radius:3px;font-size:14px;cursor:pointer;color:var(--ink-soft);font-family:'IBM Plex Sans',sans-serif;}
+.fin-tabs button.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.fin-table{width:100%;min-width:860px;border-collapse:collapse;font-size:14px;}
+.fin-table th{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);text-align:left;border-bottom:1px solid var(--line);padding:9px 10px;}
+.fin-table td{border-bottom:1px solid var(--line);padding:10px;vertical-align:middle;}
+.fin-table tr:last-child td{border-bottom:none;}
+.fin-table-actions{text-align:right;width:150px;}
+.fin-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap;}
+.fin-row:first-of-type{border-top:none;}
+.fin-info b{font-size:13.5px;}
+.fin-info .d{font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.5;}
+.fin-info .motivo{font-size:13px;color:var(--red);margin-top:3px;}
+.reabrir-btn{background:var(--teal-soft);color:var(--teal);border:none;font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:3px;cursor:pointer;white-space:nowrap;}
+.fin-empty{font-size:14px;color:var(--ink-soft);}
+.fin-name-btn{text-decoration:underline;background:none;border:none;cursor:pointer;padding:0;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;color:var(--ink);}
 
+/* modais */
 .overlay{position:fixed;inset:0;background:rgba(27,39,51,.45);display:none;align-items:center;justify-content:center;z-index:50;padding:20px;}
 .overlay.show{display:flex;}
-.modal{background:#fff;border-radius:5px;padding:24px 26px;width:420px;max-width:100%;max-height:86vh;overflow-y:auto;}
-.modal h2{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:0 0 16px;}
-.modal label{display:block;font-size:12px;color:var(--ink-soft);margin:12px 0 4px;font-weight:600;}
-.modal input,.modal select{width:100%;padding:9px;border:1px solid var(--line);border-radius:3px;font-size:13px;font-family:'IBM Plex Sans',sans-serif;}
+.modal{background:#fff;border-radius:5px;padding:24px 26px;width:380px;max-width:100%;max-height:86vh;overflow-y:auto;}
+.modal h2{font-family:'Space Grotesk',sans-serif;font-size:20px;margin:0 0 16px;}
+.modal p.desc{font-size:14px;color:var(--ink-soft);line-height:1.5;margin:0 0 4px;}
+.modal label{display:block;font-size:13px;color:var(--ink-soft);margin:12px 0 4px;font-weight:500;}
+.modal input,.modal select,.modal textarea{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:3px;font-size:14px;font-family:'IBM Plex Sans',sans-serif;}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.time-field span{display:block;font-size:12px;color:var(--ink-soft);margin:0 0 4px;}
+.modal textarea{resize:vertical;min-height:60px;}
 .modal-actions{display:flex;gap:8px;margin-top:20px;}
-.modal-actions button{flex:1;padding:10px;border:0;border-radius:3px;font-weight:700;cursor:pointer;}
-.primary{background:var(--ink);color:#fff;}
-.secondary{background:var(--grey-soft);color:var(--ink);}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:4px;padding:10px 18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:100;}
-.toast.show{opacity:1;}
+.modal-actions button{flex:1;padding:10px;border-radius:3px;border:none;font-weight:600;font-size:14px;cursor:pointer;}
+.btn-primary{background:var(--ink);color:#fff;}
+.btn-danger{background:var(--red);color:#fff;}
+.btn-secondary{background:var(--grey-soft);color:var(--ink);}
+.btn-teal{background:var(--teal);color:#fff;}
+.edit-lock-warning{background:var(--yellow-soft);border:1px solid #E4C34D;color:#5F4B00;border-radius:4px;padding:9px 10px;margin:-6px 0 12px;font-size:13px;font-weight:600;line-height:1.35;}
+.editing-pill{display:inline-flex;align-items:center;margin-top:6px;background:var(--yellow-soft);border:1px solid #E4C34D;color:#5F4B00;border-radius:3px;padding:3px 6px;font-size:11.5px;font-weight:700;}
+.card.editing-by-other{box-shadow:0 0 0 2px rgba(228,195,77,.38);}
 
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);}
+.timeline li{position:relative;padding:0 0 14px 18px;font-size:13.5px;}
+.timeline li::before{content:'';position:absolute;left:-5px;top:3px;width:8px;height:8px;border-radius:50%;background:var(--teal);}
+.timeline li .tl-etapa{font-weight:600;}
+.timeline li .tl-data{color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:12px;}
+.timeline li .tl-obs{color:var(--red);margin-top:2px;}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:4px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:100;max-width:90%;text-align:center;}
+.toast.show{opacity:1;}
+.file-input-hidden{display:none;}
+.hidden{display:none!important;}
+.auth-page{
+min-height:calc(100vh - 56px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:24px 0;
+}
+.auth-panel{
+background:var(--card);
+border:1px solid var(--line);
+border-top:4px solid var(--teal);
+border-radius:5px;
+width:390px;
+max-width:100%;
+padding:26px;
+box-shadow:0 18px 50px rgba(27,39,51,.08);
+}
+.auth-panel h1{font-size:24px;margin-bottom:6px;}
+.auth-panel p{font-size:14px;color:var(--ink-soft);line-height:1.5;margin:0 0 18px;}
+.auth-panel label{display:block;font-size:13px;color:var(--ink-soft);margin:12px 0 4px;font-weight:600;}
+.auth-panel input{
+width:100%;
+padding:10px 11px;
+border:1px solid var(--line);
+border-radius:3px;
+font-size:14px;
+font-family:'IBM Plex Sans',sans-serif;
+background:#fff;
+}
+.auth-panel button{
+width:100%;
+border:none;
+border-radius:3px;
+padding:11px 13px;
+font-weight:700;
+font-size:14px;
+font-family:'IBM Plex Sans',sans-serif;
+cursor:pointer;
+margin-top:14px;
+}
+.auth-primary{background:var(--ink);color:#fff;}
+.auth-secondary{background:var(--grey-soft);color:var(--ink);}
+.auth-link{
+background:none!important;
+color:var(--teal)!important;
+padding:0!important;
+margin-top:12px!important;
+font-weight:600!important;
+text-align:left;
+}
+.auth-error{font-size:13px;color:var(--red);font-weight:600;min-height:18px;margin-top:10px;}
+.user-pill{font-size:14px;color:var(--ink-soft);white-space:nowrap;}
+.admin-modal{width:760px;}
+.page-panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px 24px;margin-bottom:22px;}
+.page-panel h2{font-family:'Space Grotesk',sans-serif;font-size:18px;margin:0 0 8px;}
+.page-panel p.desc{font-size:14px;color:var(--ink-soft);line-height:1.5;margin:0 0 16px;}
+.page-panel label{display:block;font-size:13px;color:var(--ink-soft);margin:12px 0 4px;font-weight:600;}
+.page-panel input,.page-panel select{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:3px;font-size:14px;font-family:'IBM Plex Sans',sans-serif;background:#fff;}
+.page-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.admin-login-grid{display:grid;grid-template-columns:repeat(2,minmax(0,260px));gap:10px 14px;margin-bottom:14px;}
+.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px;}
+.admin-grid .full{grid-column:1/-1;}
+.admin-list{margin-top:18px;border-top:1px solid var(--line);overflow-x:auto;}
+.user-row{display:grid;grid-template-columns:22% 34% 14% 14% 16%;gap:0;align-items:center;min-width:980px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.user-row.head{font-size:12.5px;letter-spacing:0;color:var(--ink-soft);font-weight:700;}
+.user-row > div{padding:0 10px;}
+.user-row > div:nth-child(3),.user-row > div:nth-child(4){justify-self:center;text-align:center;}
+.user-row.head > div:nth-child(3),.user-row.head > div:nth-child(4){justify-self:center;}
+.user-row > div:nth-child(5){justify-self:end;text-align:right;}
+.role-badge{display:inline-block;padding:2px 7px;border-radius:2px;background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:11px;}
+.role-badge.admin{background:var(--purple-soft);color:var(--purple);}
+.status-badge{display:inline-block;padding:2px 7px;border-radius:2px;background:var(--green-soft);color:var(--green);font-weight:700;font-size:11px;}
+.status-badge.off{background:var(--red-soft);color:var(--red);}
+.mini-actions{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap;}
+.mini-actions button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:3px;padding:5px 7px;font-size:11px;cursor:pointer;}
+.mini-actions button:disabled{background:var(--grey-soft);color:var(--ink-soft);cursor:not-allowed;}
+.mini-actions button.danger{border-color:var(--red);color:var(--red);}
+.admin-msg{font-size:13px;color:var(--red);font-weight:600;min-height:16px;margin-top:8px;}
 @media(max-width:760px){
-body{padding:20px 16px 44px;}
-.tab{font-size:24px;}
-.search-row{flex-direction:column;align-items:stretch;}
-.new-btn{width:100%;}
-.pend-table,.user-table{font-size:12px;}
-.final-row{flex-direction:column;}
+.admin-login-grid{grid-template-columns:1fr;}
+.admin-grid{grid-template-columns:1fr;}
+.user-row{grid-template-columns:1fr;gap:4px;}
+.user-row.head{display:none;}
+.mini-actions{justify-content:flex-start;}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="auth-page" id="authShell">
+<div class="auth-panel" id="loginPanel">
+<h1>Acesso ao painel</h1>
+<p>Entre com seu login e senha para visualizar o histÃ³rico de candidaturas.</p>
+<label>Login</label>
+<input id="loginUsuario" autocomplete="username" placeholder="adm">
+<label>Senha</label>
+<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Sua senha">
+<button class="auth-primary" id="loginBtn" onclick="login()">Entrar</button>
+<button class="auth-link" onclick="mostrarRecuperarSenha()">Esqueci minha senha</button>
+<div class="auth-error" id="loginMsg"></div>
+</div>
+
+<div class="auth-panel hidden" id="forgotPanel">
+<h1>Redefinir senha</h1>
+<p>Informe seu login. Se ele existir, enviaremos um link para o e-mail cadastrado.</p>
+<label>Login</label>
+<input id="forgotLogin" autocomplete="username" placeholder="adm">
+<button class="auth-primary" onclick="solicitarResetSenha()">Enviar link</button>
+<button class="auth-secondary" onclick="mostrarLogin()">Voltar</button>
+<div class="auth-error" id="forgotMsg"></div>
+</div>
+
+<div class="auth-panel hidden" id="resetPanel">
+<h1>Nova senha</h1>
+<p>Crie uma senha com pelo menos 6 caracteres.</p>
+<label>Nova senha</label>
+<input id="resetPassword" type="password" autocomplete="new-password" placeholder="Nova senha">
+<label>Confirmar senha</label>
+<input id="resetPasswordConfirm" type="password" autocomplete="new-password" placeholder="Repita a nova senha">
+<button class="auth-primary" onclick="redefinirSenha()">Salvar nova senha</button>
+<button class="auth-secondary" onclick="mostrarLogin()">Voltar</button>
+<div class="auth-error" id="resetMsg"></div>
+</div>
+</div>
+
+<div class="wrap hidden" id="appShell">
+
 <header>
 <div class="header-top">
-<div class="tabs">
-<button class="tab active" id="tabPainel" onclick="showPage('painel')">Painel de Contratacao</button>
-<button class="tab" id="tabUsuarios" onclick="showPage('usuarios')">Controle de usuarios</button>
+<div class="title-block">
+<div class="title-row">
+<button class="title-tab active" id="dashboardTab" onclick="mostrarPagina('painel')">Painel de ContrataÃ§Ã£o</button>
+<button class="nav-tab hidden" id="adminUsersBtn" onclick="mostrarPagina('usuarios')">Controle de usuÃ¡rios</button>
 </div>
-<div class="user"><span>Usuario : demo-admin</span><button class="ghost-btn" onclick="toast('Demo sem logout real.')">Sair</button></div>
+</div>
+<div class="header-actions" id="dashboardActions">
+<span class="user-pill" id="usuarioLogado"></span>
+<button class="ghost-btn" onclick="logout()">Sair</button>
+</div>
 </div>
 </header>
 
-<div class="demo-banner">Versao demo para portfolio: dados ficticios, sem banco de dados e sem servidor.</div>
-
-<main class="page active" id="pagePainel">
+<main id="dashboardPage">
 <div class="statusbar">
-<div class="save-status"><span class="save-dot"></span><span>Demo carregada localmente</span></div>
-<div id="totalLabel"></div>
+<div class="save-status" id="saveStatus"><span class="save-dot"></span><span id="saveStatusText">Carregando...</span></div>
 </div>
-
-<div class="search-row">
-<div class="searchbar"><input id="busca" placeholder="Buscar por candidata, loja ou gestora..." oninput="render()"></div>
-<button class="new-btn" onclick="openCandidateModal()">+ Nova candidata</button>
-</div>
+<div class="demo-banner">Versao demo para portfolio: dados ficticios, sem banco de dados e sem servidor.</div>
 
 <div class="stats" id="stats"></div>
 
-<section class="panel">
-<h2>Funil de contratacao</h2>
-<div class="pipeline" id="pipeline"></div>
-</section>
+<div class="search-row">
+<button class="new-btn" id="novaCandidataBtn" onclick="abrirModal()">+ Nova candidata</button>
+<div class="quick-filter">
+<select id="filtroRapido" onchange="atualizarFiltroRapido()">
+<option value="todos">Selecione um filtro</option>
+<option value="roteiro-prazo">Aguardando roteiro no prazo</option>
+<option value="roteiro-fora">Aguardando roteiro fora do prazo</option>
+<option value="roteiro-critico">Aguardando roteiro crÃ­tico</option>
+<option value="gestor">Por nome gestor</option>
+<option value="loja">Por loja</option>
+<option value="com-cobranca">Com cobranÃ§a de roteiro</option>
+<option value="sem-cobranca">Sem cobranÃ§a de roteiro</option>
+</select>
+</div>
+<div class="quick-filter-value" id="filtroValorWrap">
+<input id="filtroValor" placeholder="Selecione gestor ou loja" oninput="render()" disabled>
+</div>
+</div>
 
-<section class="panel">
-<h2>Pendencias por gestora</h2>
-<p class="sub">Candidatas aprovadas pelo RH aguardando roteiro. Os e-mails abrem no cliente padrao da maquina.</p>
-<div id="pendencias"></div>
-</section>
+<div class="trilho-box">
+<p class="trilho-title">Funil de contrataÃ§Ã£o</p>
+<div class="trilho" id="trilho"></div>
+</div>
 
-<div class="controls">Cobrar gestora apos&nbsp;<input id="threshold" type="number" value="3" min="1" oninput="render()">&nbsp;dias parada em "Aguardando roteiro"</div>
+<div id="atividadesDiarias"></div>
+
+<div class="pend-box">
+<h3>Painel de cobranÃ§as</h3>
+<p class="sub">Candidatas aguardando roteiro, agrupadas por gestora para cobranÃ§a individual ou consolidada.</p>
+<div id="pendGestora"></div>
+</div>
+
+<div class="controls">
+<div class="semaforo-legend" aria-label="Legenda do semaforo de roteiro">
+<strong>Semaforo do roteiro</strong>
+<span class="semaforo-item"><span class="semaforo-emoji">ðŸŸ¢</span>0 a 2 dias: dentro do prazo</span>
+<span class="semaforo-item"><span class="semaforo-emoji">âš ï¸</span>3 a 4 dias: atencao</span>
+<span class="semaforo-item"><span class="semaforo-emoji">ðŸ”´</span>5 dias ou mais: atrasada</span>
+<span class="semaforo-item"><span class="semaforo-emoji">ðŸš¨</span>Critica: inicio proximo sem roteiro</span>
+</div>
+<div class="threshold">
+Cobrar gestora apÃ³s
+<input type="number" id="thresholdInput" min="1" value="3">
+dias parada em "Aguardando roteiro"
+</div>
+</div>
+
 <div class="board" id="board"></div>
 
-<section class="panel">
-<div class="final-tabs">
-<button class="active" id="tabEncerradas" onclick="setFinalTab('encerradas')">Encerradas sem contratacao</button>
-<button id="tabContratadas" onclick="setFinalTab('contratadas')">Contratadas</button>
+<div id="rankingPromotores"></div>
+
+<div class="fin-box">
+<h2 class="fin-title">HistÃ³rico de candidaturas</h2>
+<div class="fin-tabs" id="finTabs"></div>
+<div id="finList"></div>
 </div>
-<div id="finalList"></div>
-</section>
+
 </main>
 
-<main class="page" id="pageUsuarios">
-<section class="panel">
-<div class="users-head">
-<h2>Controle de usuarios</h2>
-<button class="new-btn" onclick="openUserModal()">+ Novo usuario</button>
+<main id="usersPage" class="hidden">
+<section class="page-panel">
+<div class="page-head">
+<h2>Controle de usuÃ¡rios</h2>
+<button class="new-btn hidden" id="novoUsuarioBtn" onclick="abrirModalUsuario()">+ Novo usuÃ¡rio</button>
 </div>
-<table class="user-table">
-<thead><tr><th>Login</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>
-<tbody id="usersTable"></tbody>
-</table>
+<div id="adminUnlock">
+<p class="desc">Entre com um acesso de administrador para gerenciar usuÃ¡rios.</p>
+<div class="admin-login-grid">
+<div>
+<label>Login administrador</label>
+<input id="adminLogin" autocomplete="username" placeholder="adm">
+</div>
+<div>
+<label>Senha administrador</label>
+<input id="adminPassword" type="password" autocomplete="current-password" placeholder="Senha">
+</div>
+</div>
+<div class="modal-actions">
+<button class="btn-primary" onclick="loginComoAdmin()">Entrar como administrador</button>
+</div>
+<div class="admin-msg" id="adminUnlockMsg"></div>
+</div>
+
+<div id="adminPanel" class="hidden">
+<div class="admin-msg" id="adminUserMsg"></div>
+<div class="admin-list" id="adminUsersList"></div>
+</div>
 </section>
 </main>
 </div>
 
-<div class="overlay" id="candidateModal">
+<!-- modal nova candidata -->
+<div class="overlay" id="overlay">
 <div class="modal">
-<h2>Nova candidata</h2>
-<label>Nome</label><input id="fNome" placeholder="Nome ficticio">
-<label>Loja</label><input id="fLoja" placeholder="Loja / unidade">
-<label>Horario</label><input id="fHorario" placeholder="Ex: 09h as 18h">
-<label>Gestora</label><input id="fGestora" placeholder="Nome da gestora">
-<label>E-mail da gestora</label><input id="fEmail" type="email" placeholder="gestora@empresa.com.br">
-<div class="modal-actions"><button class="secondary" onclick="closeCandidateModal()">Cancelar</button><button class="primary" onclick="addCandidate()">Adicionar</button></div>
+<h2 id="candidateModalTitle">Nova candidata</h2>
+<div class="edit-lock-warning hidden" id="candidateEditWarning"></div>
+<label>Nome</label>
+<input id="fNome" placeholder="Nome da candidata">
+<label>Loja (opcional)</label>
+<input id="fLoja" placeholder="Ex: Loja Shopping Center">
+<label>HorÃ¡rio de trabalho pretendido (opcional)</label>
+<div class="time-row">
+<div class="time-field">
+<span>Hora de inÃ­cio</span>
+<input id="fHoraInicio" type="time">
+</div>
+<div class="time-field">
+<span>Hora de fim</span>
+<input id="fHoraFim" type="time">
+</div>
+</div>
+<label>Gestora responsÃ¡vel</label>
+<input id="fGestora" placeholder="Nome da gestora">
+<label>E-mail da gestora</label>
+<input id="fEmail" type="email" placeholder="gestora@empresa.com.br">
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModal()">Cancelar</button>
+<button class="btn-primary" id="candidateSaveBtn" onclick="salvarCandidata()">Adicionar</button>
+</div>
 </div>
 </div>
 
-<div class="overlay" id="userModal">
+<!-- modal encerrar/reprovar -->
+<div class="overlay" id="overlayEnc">
 <div class="modal">
-<h2 id="userModalTitle">Novo usuario demo</h2>
-<label>Login</label><input id="uLogin" placeholder="rh-demo">
-<label>E-mail</label><input id="uEmail" type="email" placeholder="usuario@empresa.com.br">
-<label>Perfil</label><select id="uRole"><option>Usuario</option><option>Admin</option></select>
-<label>Status</label><select id="uActive"><option value="true">Ativo</option><option value="false">Inativo</option></select>
-<label>Redefinir senha</label><input id="uPassword" type="password" maxlength="6" inputmode="numeric" placeholder="Senha de 6 digitos">
-<div class="modal-actions"><button class="secondary" onclick="closeUserModal()">Cancelar</button><button class="primary" id="userSaveBtn" onclick="saveUser()">Adicionar</button></div>
+<h2>Encerrar processo</h2>
+<label>Motivo</label>
+<select id="eMotivo">
+<option>Reprovada pelo RH (perfil/feedback)</option>
+<option>Reprovada no exame admissional</option>
+<option>DesistÃªncia da candidata</option>
+<option>Vaga cancelada pela loja</option>
+<option>Outro</option>
+</select>
+<label>Detalhe (obrigatÃ³rio)</label>
+<textarea id="eDetalhe" placeholder="Descreva brevemente o motivo, para ficar registrado no histÃ³rico."></textarea>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalEnc()">Cancelar</button>
+<button class="btn-danger" onclick="confirmarEncerramento()">Confirmar encerramento</button>
+</div>
+</div>
+</div>
+
+<!-- modal historico -->
+<div class="overlay" id="overlayHist">
+<div class="modal">
+<h2 id="histNome">HistÃ³rico</h2>
+<ul class="timeline" id="histLista"></ul>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalHist()">Fechar</button>
+</div>
+</div>
+</div>
+
+<!-- modal confirmar remocao -->
+<div class="overlay" id="overlayConfirm">
+<div class="modal">
+<h2>Remover candidata</h2>
+<p class="desc" id="confirmMsg"></p>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalConfirm()">Cancelar</button>
+<button class="btn-danger" onclick="executarRemocao()">Remover definitivamente</button>
+</div>
+</div>
+</div>
+
+<!-- modal inicio previsto -->
+<div class="overlay" id="overlayFeedback">
+<div class="modal">
+<h2>Aguardando roteiro</h2>
+<p class="desc">Informe a data prevista de inÃ­cio antes de avanÃ§ar a candidata para aguardando roteiro.</p>
+<label>Data prevista de inÃ­cio</label>
+<input id="feedbackDataInicio" type="date">
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalInicioPrevisto()">Cancelar</button>
+<button class="btn-primary" onclick="confirmarInicioPrevisto()">Salvar inÃ­cio previsto</button>
+</div>
+</div>
+</div>
+
+<!-- modal entrevista -->
+<div class="overlay" id="overlayEntrevista">
+<div class="modal">
+<h2>Entrevista agendada</h2>
+<p class="desc">Informe quando a entrevista foi agendada para acompanhar a candidata nessa etapa.</p>
+<label>Data da entrevista</label>
+<input id="entrevistaData" type="date">
+<label>Hora da entrevista</label>
+<input id="entrevistaHora" type="time">
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalEntrevista()">Cancelar</button>
+<button class="btn-primary" onclick="confirmarEntrevistaAgendada()">Salvar entrevista</button>
+</div>
+</div>
+</div>
+
+<!-- modal exame admissional -->
+<div class="overlay" id="overlayExame">
+<div class="modal">
+<h2>Exame admissional</h2>
+<p class="desc">Informe quando o exame admissional foi agendado para acompanhar a candidata nessa etapa.</p>
+<label>Data do exame</label>
+<input id="exameData" type="date">
+<label>Hora do exame</label>
+<input id="exameHora" type="time">
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalExame()">Cancelar</button>
+<button class="btn-primary" onclick="confirmarExameAdmissional()">Salvar exame</button>
+</div>
+</div>
+</div>
+
+<!-- modal importar -->
+<div class="overlay" id="overlayImport">
+<div class="modal">
+<h2>Importar backup</h2>
+<p class="desc" id="importMsg"></p>
+<label>Como deseja importar?</label>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalImport()">Cancelar</button>
+<button class="btn-teal" onclick="confirmarImport('mesclar')">Mesclar</button>
+<button class="btn-danger" onclick="confirmarImport('substituir')">Substituir tudo</button>
+</div>
+</div>
+</div>
+
+<!-- modal usuario -->
+<div class="overlay" id="overlayUsuario">
+<div class="modal">
+<h2 id="usuarioModalTitulo">Novo usuÃ¡rio</h2>
+<label>Login</label>
+<input id="uLogin" placeholder="Ex: rh01">
+<label>E-mail para redefinir senha</label>
+<input id="uEmail" type="email" placeholder="usuario@empresa.com.br">
+<label>Perfil</label>
+<select id="uRole">
+<option value="usuario">UsuÃ¡rio</option>
+<option value="admin">Administrador</option>
+</select>
+<label>Status</label>
+<select id="uActive">
+<option value="true">Ativo</option>
+<option value="false">Inativo</option>
+</select>
+<label>Senha</label>
+<input id="uPassword" type="password" placeholder="Senha de 6 dÃ­gitos">
+<div class="admin-msg" id="usuarioModalMsg"></div>
+<div class="modal-actions">
+<button class="btn-secondary" onclick="fecharModalUsuario()">Cancelar</button>
+<button class="btn-primary" onclick="salvarUsuario()">Salvar usuÃ¡rio</button>
+</div>
+</div>
+</div>
+
+<!-- modal disparo cobrancas -->
+<div class="overlay" id="overlayDisparo">
+<div class="modal">
+<h2>Envio de cobranÃ§as</h2>
+<p class="desc" id="disparoResumo"></p>
+<div class="progress-wrap"><div class="progress-bar" id="disparoProgress"></div></div>
+<p class="desc" id="disparoStatus"></p>
+<div class="send-list" id="disparoLista"></div>
+<div class="modal-actions">
+<button class="btn-secondary" id="fecharDisparoBtn" onclick="fecharModalDisparo()">Fechar</button>
+<button class="btn-primary" id="iniciarDisparoBtn" onclick="iniciarDisparoCobrancas()">Iniciar envio</button>
+</div>
 </div>
 </div>
 
@@ -249,224 +778,1975 @@ body{padding:20px 16px 44px;}
 
 <script>
 const ETAPAS = [
-"Curriculo recebido",
+"CurrÃ­culo recebido",
 "Entrevista agendada",
-"Feedback dado",
-"Aprovada pelo RH",
-"Aguardando roteiro (gestora)",
-"Exame admissional",
-"Contratada"
+"Entrevista realizada",
+"Feedback realizado",
+"Aguardando roteiro",
+"Roteiro recebido",
+"Exame admissional agendado",
+"ContrataÃ§Ã£o concluÃ­da"
 ];
-const BOTTLENECK = 4;
-const DONE = 6;
+const ENTREVISTA_IDX = 1;
+const BOTTLENECK_IDX = 4;
+const ROTEIRO_RECEBIDO_IDX = 5;
+const EXAME_IDX = 6;
+const CONTRATADA_IDX = 7;
+const AUTO_REFRESH_MS = 8000;
+const resetToken = new URLSearchParams(window.location.search).get("resetToken");
+
+let candidatos = [];
+let threshold = 3;
+let finTab = "reprovadas";
+let candidatoEmEdicao = null;
+let candidatoCadastroId = null;
+let candidatoInicioPrevistoId = null;
+let candidatoEntrevistaId = null;
+let candidatoExameId = null;
+let idParaRemover = null;
+let pendGroupsCache = [];
+let disparoEmailsCache = [];
+let disparoEmAndamento = false;
+let disparoIndiceAtual = 0;
+let pendingImport = null;
+let importMode = null;
+let ultimoSalvoEm = null;
+let usuarioAtual = null;
+let usuariosAdmin = [];
+let usuarioEditando = null;
+let loginEmAndamento = false;
+let cardsAbertos = new Set();
+let gestorasCobrancaAbertas = new Set();
+let resumoAberto = null;
+let rankingOrdenacao = 'desempenho';
+let editLocks = {};
+let editLockTimer = null;
+let editLocksRefreshTimer = null;
+let candidatosRefreshTimer = null;
+let carregandoCandidatosEmSegundoPlano = false;
+let salvandoCandidatos = false;
+let candidatosSnapshot = '';
+const DEMO_USER = {login:'larissa', email:'portfolio@demo.com', role:'admin'};
+const DEMO_CANDIDATOS_KEY = 'painelPortfolioDemoCandidatosV2';
+const DEMO_USUARIOS_KEY = 'painelPortfolioDemoUsuariosV2';
+let editClientId = sessionStorage.getItem('painelEditClientId');
+if(!editClientId){
+editClientId = window.crypto && crypto.randomUUID ? `edit_${crypto.randomUUID()}` : `edit_${Date.now()}_${Math.floor(Math.random()*100000)}`;
+sessionStorage.setItem('painelEditClientId', editClientId);
+}
+
+function uid(){
+if(window.crypto && crypto.randomUUID) return 'c_'+crypto.randomUUID();
+return 'c'+Date.now()+'_'+Math.floor(Math.random()*100000);
+}
+function hoje(){return Date.now();}
+function diasEntre(ts){return Math.floor((hoje()-ts)/86400000);}
+function demoDataIso(ts){
+const d = new Date(ts);
+return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function demoCandidatosIniciais(){
 const now = Date.now();
-let finalTab = "encerradas";
-let openCards = new Set();
-let dragId = null;
-
-let candidates = [
-{id:"c1",nome:"Marina Costa",loja:"Shopping Jardim",horario:"10h as 19h",gestora:"Larissa",emailGestora:"larissa.gestora@empresa.com.br",etapa:4,entrouEm:now-5*86400000,historico:[{etapa:"Aprovada pelo RH",data:now-7*86400000,obs:"Perfil aderente"}],cobrancas:[{data:now-2*86400000,usuario:"demo-admin",email:"larissa.gestora@empresa.com.br",gestora:"Larissa"}]},
-{id:"c2",nome:"Bianca Alves",loja:"Loja Centro",horario:"08h as 17h",gestora:"Larissa",emailGestora:"larissa.gestora@empresa.com.br",etapa:4,entrouEm:now-1*86400000,historico:[{etapa:"Aprovada pelo RH",data:now-2*86400000,obs:"Aguardando roteiro"}],cobrancas:[]},
-{id:"c3",nome:"Camila Souza",loja:"Outlet Norte",horario:"13h as 22h",gestora:"Jaqueline",emailGestora:"jaque.gestora@empresa.com.br",etapa:5,entrouEm:now-2*86400000,historico:[{etapa:"Exame admissional",data:now-2*86400000,obs:"Encaminhada"}],cobrancas:[]},
-{id:"c4",nome:"Renata Lima",loja:"Shopping Sul",horario:"09h as 18h",gestora:"Patricia",emailGestora:"patricia.gestora@empresa.com.br",etapa:6,entrouEm:now-3*86400000,contratadaEm:now-3*86400000,contratadaPor:"demo-admin",historico:[{etapa:"Contratada",data:now-3*86400000,obs:"Aprovada por demo-admin"}],cobrancas:[]},
-{id:"c5",nome:"Juliana Reis",loja:"Loja Leste",horario:"12h as 21h",gestora:"Marcia",emailGestora:"marcia.gestora@empresa.com.br",etapa:2,entrouEm:now-1*86400000,encerrada:true,motivo:"Desistencia da candidata",detalhe:"Aceitou outra proposta",encerradaEm:now-1*86400000,encerradaNaEtapa:"Feedback dado",historico:[{etapa:"Processo encerrado",data:now-1*86400000,obs:"Aceitou outra proposta"}],cobrancas:[]}
+const h = 3600000;
+const d = 86400000;
+return [
+{id:'demo-c1',nome:'Aline Souza',loja:'Shopping Jardim',horario:'08:00h Ã s 17:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:0,entrouEm:now-2*h,encerrada:false,historico:[{etapa:ETAPAS[0],data:now-2*h,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c2',nome:'Bianca Lima',loja:'Loja Centro',horario:'10:00h Ã s 19:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:1,entrouEm:now-26*h,entrevistaData:demoDataIso(now+d),entrevistaHora:'10:30',entrevistaAgendadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'larissa',obs:''},{etapa:ETAPAS[1],data:now-26*h,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c3',nome:'Camila Rocha',loja:'Quiosque Norte',horario:'12:00h Ã s 21:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-6*h,entrevistaData:demoDataIso(now),entrevistaHora:'09:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-5*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-6*h,usuario:'rh1',obs:''}],cobrancas:[]},
+{id:'demo-c4',nome:'Daniela Martins',loja:'Shopping Sul',horario:'09:00h Ã s 18:00h',gestora:'Jaqueline',emailGestora:'jaqueline.gestora@empresa.com.br',etapa:3,entrouEm:now-4*h,entrevistaData:demoDataIso(now-d),entrevistaHora:'15:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-6*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c5',nome:'Elisa Pereira',loja:'Loja Centro',horario:'08:00h Ã s 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:4,entrouEm:now-6*d,dataPrevista:demoDataIso(now+d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-10*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d-2*h,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'kelly.gestora@empresa.com.br',gestora:'Kelly'}]},
+{id:'demo-c6',nome:'Fernanda Alves',loja:'Shopping Jardim',horario:'13:00h Ã s 22:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:4,entrouEm:now-3*d,dataPrevista:demoDataIso(now+5*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-8*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-7*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-3*d,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c7',nome:'Giovana Melo',loja:'Loja Praia',horario:'09:00h Ã s 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:4,entrouEm:now-8*h,dataPrevista:demoDataIso(now+8*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'rh3',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh3',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh3',obs:''},{etapa:ETAPAS[3],data:now-12*h,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-8*h,usuario:'rh3',obs:''}],cobrancas:[]},
+{id:'demo-c8',nome:'Helena Castro',loja:'Shopping Sul',horario:'10:00h Ã s 19:00h',gestora:'Larissa',emailGestora:'larissa.gestora@empresa.com.br',etapa:5,entrouEm:now-2*h,dataPrevista:demoDataIso(now+7*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-2*h,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'larissa.gestora@empresa.com.br',gestora:'Larissa'}]},
+{id:'demo-c9',nome:'Isabela Nunes',loja:'Loja Centro',horario:'08:00h Ã s 17:00h',gestora:'Kelly',emailGestora:'kelly.gestora@empresa.com.br',etapa:6,entrouEm:now-4*h,dataPrevista:demoDataIso(now+4*d),exameData:demoDataIso(now),exameHora:'14:30',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-12*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-2*d,usuario:'rh2',obs:''},{etapa:ETAPAS[6],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c10',nome:'Juliana Gomes',loja:'Shopping Jardim',horario:'09:00h Ã s 18:00h',gestora:'Patricia',emailGestora:'patricia.gestora@empresa.com.br',etapa:7,entrouEm:now-d,contratadaEm:now-d,contratadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-15*d,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-9*d,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-7*d,usuario:'rh3',obs:''},{etapa:ETAPAS[7],data:now-d,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c11',nome:'Karina Lopes',loja:'Loja Praia',horario:'11:00h Ã s 20:00h',gestora:'Igor',emailGestora:'igor.gestor@empresa.com.br',etapa:2,entrouEm:now-4*d,encerrada:true,encerradaEm:now-2*d,encerradaNaEtapa:ETAPAS[2],encerradaPor:'rh2',motivo:'Reprovada pelo RH (perfil/feedback)',detalhe:'Disponibilidade diferente da vaga.',historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh2',obs:''},{etapa:'Processo encerrado - Reprovada pelo RH (perfil/feedback)',data:now-2*d,usuario:'rh2',obs:'Disponibilidade diferente da vaga.'}],cobrancas:[]}
 ];
-
-let users = [
-{login:"demo-admin",email:"admin.demo@portfolio.com",role:"Admin",active:true,password:"123456"},
-{login:"rh-demo",email:"rh.demo@portfolio.com",role:"Usuario",active:true,password:"654321"},
-{login:"gestao-demo",email:"gestao.demo@portfolio.com",role:"Usuario",active:false,password:"112233"}
+}
+function demoUsuariosIniciais(){
+return [
+{id:'u-demo-root',login:'larissa',email:'analytics@chercom.com.br',role:'admin',active:true},
+{id:'u-demo-rh1',login:'rh1',email:'rh1@empresa.com.br',role:'admin',active:true},
+{id:'u-demo-rh2',login:'rh2',email:'rh2@empresa.com.br',role:'usuario',active:true},
+{id:'u-demo-rh3',login:'rh3',email:'rh3@empresa.com.br',role:'usuario',active:true}
 ];
-let editingUserIndex = null;
+}
+function diasAteData(data){
+if(!data) return null;
+const alvo = new Date(data + 'T00:00:00');
+if(Number.isNaN(alvo.getTime())) return null;
+const base = new Date();
+base.setHours(0,0,0,0);
+return Math.ceil((alvo.getTime()-base.getTime())/86400000);
+}
+function diasAteDataEm(data, referenciaTs){
+const alvo = timestampDataLocal(data);
+if(!alvo || !referenciaTs) return null;
+const base = new Date(referenciaTs);
+base.setHours(0,0,0,0);
+return Math.ceil((alvo - base.getTime())/86400000);
+}
+function statusRoteiro(c, dias){
+const diasInicio = diasAteData(c.dataPrevista);
+if(diasInicio !== null && diasInicio <= 2){
+return {key:'critica', label:'ðŸš¨ Critica'};
+}
+if(dias >= 5) return {key:'atrasada', label:'ðŸ”´ Atrasada'};
+if(dias >= 3) return {key:'alerta', label:'âš ï¸ Atencao'};
+return {key:'ok', label:'ðŸŸ¢ No prazo'};
+}
+function prioridadeSemaforo(c){
+const ordem = {critica:0, atrasada:1, alerta:2, ok:3};
+const status = statusRoteiro(c, diasEntre(c.entrouEm));
+return ordem[status.key] ?? 9;
+}
+function dataAberturaCard(c){
+const historico = Array.isArray(c.historico) ? c.historico : [];
+return historico[0]?.data || c.entrouEm || 0;
+}
+function ordenarCardsDaEtapa(itens, etapa){
+return [...itens].sort((a,b)=>{
+if(etapa === BOTTLENECK_IDX){
+const prioridade = prioridadeSemaforo(a) - prioridadeSemaforo(b);
+if(prioridade !== 0) return prioridade;
+return (a.entrouEm || 0) - (b.entrouEm || 0);
+}
+return dataAberturaCard(a) - dataAberturaCard(b);
+});
+}
+function proximaAcaoRH(etapa){
+const acoes = [
+'Agendar entrevista com a candidata',
+'Realizar entrevista com a candidata',
+'Registrar feedback da entrevista',
+'Solicitar data de inÃ­cio para aguardar liberaÃ§Ã£o de roteiro',
+'Cobrar roteiro da gestora e acompanhar retorno',
+'Agendar exame admissional',
+'Acompanhar exame admissional e concluir contrataÃ§Ã£o',
+'Processo concluÃ­do'
+];
+return acoes[etapa] || 'Acompanhar andamento da candidatura';
+}
+function compactarHistoricoEtapas(historico){
+const filtrado = (Array.isArray(historico) ? historico : []).filter(h=>!String(h.etapa || '').toLowerCase().includes('cobran'));
+return filtrado.filter((h, i, arr)=>i===0 || indiceEtapaHistorico(h) !== indiceEtapaHistorico(arr[i-1]));
+}
+function indiceEtapaHistorico(registro){
+const nome = String(registro?.etapa || '').replace(/^Processo reaberto em /, '');
+const aliases = {
+'Feedback dado': 2,
+'Aprovada pelo RH': 3,
+'Aguardando roteiro (gestora)': 4,
+'Exame admissional': EXAME_IDX,
+'Contratada': CONTRATADA_IDX
+};
+return aliases[nome] ?? ETAPAS.indexOf(nome);
+}
+function nomeEtapaHistorico(registro){
+const idx = indiceEtapaHistorico(registro);
+return idx >= 0 ? ETAPAS[idx] : String(registro?.etapa || '-');
+}
+function ajustarHistoricoParaEtapa(c, novaEtapa, ts, usuario){
+const historico = compactarHistoricoEtapas(c.historico);
+const existenteIdx = historico.findIndex(h=>indiceEtapaHistorico(h)===novaEtapa);
+if(existenteIdx >= 0){
+c.historico = historico.slice(0, existenteIdx + 1);
+return;
+}
+c.historico = historico.filter(h=>{
+const idx = indiceEtapaHistorico(h);
+return idx === -1 || idx < novaEtapa;
+});
+c.historico.push({ etapa: ETAPAS[novaEtapa], data: ts, usuario, obs: "" });
+}
+function migrarEtapaLegada(c){
+if(!c || c.etapasMigradasV2) return c;
+const historico = Array.isArray(c.historico) ? c.historico : [];
+const temRoteiroRecebido = historico.some(h=>String(h.etapa || '') === 'Roteiro recebido');
+const temExame = Boolean(c.exameData) || historico.some(h=>['Exame admissional', 'Exame admissional agendado'].includes(String(h.etapa || '')));
+const temContratada = Boolean(c.contratadaEm) || historico.some(h=>['Contratada', 'ContrataÃ§Ã£o concluÃ­da'].includes(String(h.etapa || '')));
+if(Number(c.etapa) === 5 && !temRoteiroRecebido && temExame){
+c.etapa = EXAME_IDX;
+}
+if(Number(c.etapa) === 6 && temContratada){
+c.etapa = CONTRATADA_IDX;
+}
+c.etapasMigradasV2 = true;
+return c;
+}
+function fmtData(ts){
+if(!ts) return '-';
+const d = new Date(ts);
+return d.toLocaleDateString('pt-BR');
+}
+function timestampDataLocal(data){
+if(!data) return null;
+const [ano, mes, dia] = String(data).split('-').map(Number);
+if(!ano || !mes || !dia) return null;
+return new Date(ano, mes - 1, dia).getTime();
+}
+function fmtDataLocal(data){
+if(!data) return '-';
+const [ano, mes, dia] = String(data).split('-');
+if(!ano || !mes || !dia) return '-';
+return `${dia.padStart(2, '0')}/${mes.padStart(2, '0')}/${ano}`;
+}
+function dataIsoLocal(ts=Date.now()){
+const d = new Date(ts);
+const ano = d.getFullYear();
+const mes = String(d.getMonth() + 1).padStart(2, '0');
+const dia = String(d.getDate()).padStart(2, '0');
+return `${ano}-${mes}-${dia}`;
+}
+function compararDataLocal(data, referencia=dataIsoLocal()){
+const alvo = timestampDataLocal(data);
+const base = timestampDataLocal(referencia);
+if(!alvo || !base) return null;
+return Math.round((alvo - base) / 86400000);
+}
+function fmtDataHora(ts){
+if(!ts) return '-';
+const d = new Date(ts);
+return d.toLocaleString('pt-BR', {dateStyle:'short', timeStyle:'short'});
+}
+function fmtHora(ts){
+if(!ts) return '-';
+return new Date(ts).toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+}
+function fmtDataHoraCurta(ts){
+if(!ts) return '-';
+const d = new Date(ts);
+return `${d.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'})} Ã s ${d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})}`;
+}
+function tempoDecorrido(ts){
+if(!ts) return '-';
+const totalHoras = Math.max(0, Math.floor((hoje() - ts) / 3600000));
+const dias = Math.floor(totalHoras / 24);
+const horas = totalHoras % 24;
+if(dias && horas) return `${dias} dia${dias===1?'':'s'} e ${horas} hora${horas===1?'':'s'}`;
+if(dias) return `${dias} dia${dias===1?'':'s'}`;
+return `${horas} hora${horas===1?'':'s'}`;
+}
+function formatarDuracaoHoras(totalHoras){
+if(!Number.isFinite(totalHoras)) return '-';
+const horasArredondadas = Math.max(0, Math.round(totalHoras));
+const dias = Math.floor(horasArredondadas / 24);
+const horas = horasArredondadas % 24;
+return `${dias} dia${dias===1?'':'s'} e ${horas}h`;
+}
+function formatarDuracaoHorasResumo(totalHoras){
+if(!Number.isFinite(totalHoras)) return '-';
+const horasArredondadas = Math.max(0, Math.round(totalHoras));
+const dias = Math.floor(horasArredondadas / 24);
+const horas = horasArredondadas % 24;
+return `${dias} <span class="unit">dia${dias===1?'':'s'} e</span> ${horas}<span class="unit">h</span>`;
+}
+function roteiroEnviadoNoPrazo(c){
+const dados = dadosRoteiroEnviado(c);
+return dados ? dados.noPrazo : null;
+}
+function dadosRoteiroEnviado(c){
+const historico = compactarHistoricoEtapas(c.historico);
+const entradaIdx = historico.findIndex(h=>indiceEtapaHistorico(h)===BOTTLENECK_IDX);
+if(entradaIdx < 0) return null;
+const entrada = Number(historico[entradaIdx]?.data);
+const saida = historico.slice(entradaIdx + 1).find(h=>indiceEtapaHistorico(h)===ROTEIRO_RECEBIDO_IDX);
+const saidaData = Number(saida?.data);
+if(!Number.isFinite(entrada) || !Number.isFinite(saidaData)) return null;
+const horas = Math.max(0, (saidaData - entrada) / 3600000);
+const dias = Math.floor((saidaData - entrada) / 86400000);
+const estavaVermelho = dias >= 5;
+const diasInicioNoRecebimento = diasAteDataEm(c.dataPrevista, saidaData);
+const estavaCritico = diasInicioNoRecebimento !== null && diasInicioNoRecebimento <= 2;
+const foraDoPrazo = estavaVermelho || estavaCritico;
+return {
+candidata: c,
+entrada,
+saida: saidaData,
+horas,
+dias,
+estavaVermelho,
+estavaCritico,
+foraDoPrazo,
+noPrazo: !foraDoPrazo
+};
+}
+function esc(str){
+if(str===null || str===undefined) return '';
+return String(str).replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function normalizarEspacos(valor){
+return String(valor || '').trim().replace(/\s+/g, ' ');
+}
+function padronizarNomeCandidata(valor){
+return normalizarEspacos(valor).toLocaleUpperCase('pt-BR');
+}
+function padronizarTextoPadrao(valor){
+return normalizarEspacos(valor)
+.toLocaleLowerCase('pt-BR')
+.replace(/(^|[\s\-\/])([a-zÃ¡Ã Ã¢Ã£Ã©ÃªÃ­Ã³Ã´ÃµÃºÃ¼Ã§])/g, (m, sep, letra)=>sep + letra.toLocaleUpperCase('pt-BR'));
+}
+function nomeCandidata(valor){
+return padronizarNomeCandidata(valor);
+}
+function textoPadrao(valor){
+return padronizarTextoPadrao(valor);
+}
 
-function days(ts){return Math.max(0,Math.floor((Date.now()-ts)/86400000));}
-function fmt(ts){return ts ? new Date(ts).toLocaleDateString("pt-BR") : "-";}
-function esc(v){return String(v ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
-function norm(v){return String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400);}
+function toast(msg){
+const t=document.getElementById('toast');
+t.textContent=msg;
+t.classList.add('show');
+setTimeout(()=>t.classList.remove('show'),2600);
+}
 
-function showPage(page){
-document.getElementById("pagePainel").classList.toggle("active",page==="painel");
-document.getElementById("pageUsuarios").classList.toggle("active",page==="usuarios");
-document.getElementById("tabPainel").classList.toggle("active",page==="painel");
-document.getElementById("tabUsuarios").classList.toggle("active",page==="usuarios");
+/* ---------- autenticaÃ§Ã£o ---------- */
+
+function nomeUsuarioLock(lock){
+return lock?.userLogin || lock?.userEmail || 'outro usuario';
+}
+
+function lockDeOutroUsuario(candidateId){
+const lock = editLocks[candidateId];
+if(!lock || lock.ownerClientId === editClientId || Number(lock.expiresAt) <= hoje()) return null;
+return lock;
+}
+
+function atualizarAvisoEdicao(candidateId){
+const box = document.getElementById('candidateEditWarning');
+if(!box) return;
+const lock = candidateId ? lockDeOutroUsuario(candidateId) : null;
+if(lock){
+box.textContent = `${nomeUsuarioLock(lock)} esta realizando uma edicao nesta candidatura. Confira antes de salvar para nao sobrescrever alteracoes.`;
+box.classList.remove('hidden');
+} else {
+box.textContent = '';
+box.classList.add('hidden');
+}
+}
+
+async function carregarBloqueiosEdicao(atualizarTela=false){
+editLocks = {};
+atualizarAvisoEdicao(candidatoCadastroId);
+if(atualizarTela) render();
+}
+
+async function registrarBloqueioEdicao(candidateId){
+atualizarAvisoEdicao(candidateId);
+clearInterval(editLockTimer);
+editLockTimer = setInterval(()=>registrarBloqueioEdicao(candidateId), AUTO_REFRESH_MS);
+}
+
+async function liberarBloqueioEdicao(candidateId){
+if(!candidateId) return;
+clearInterval(editLockTimer);
+editLockTimer = null;
+delete editLocks[candidateId];
+atualizarAvisoEdicao(null);
+}
+
+function mostrarAuthPanel(panelId){
+['loginPanel','forgotPanel','resetPanel'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+document.getElementById(panelId).classList.remove('hidden');
+}
+
+function mostrarLogin(){
+mostrarAuthPanel('loginPanel');
+['loginMsg','forgotMsg','resetMsg'].forEach(id=>document.getElementById(id).textContent='');
+}
+
+function mostrarRecuperarSenha(){
+document.getElementById('forgotLogin').value = document.getElementById('loginUsuario').value.trim();
+mostrarAuthPanel('forgotPanel');
+}
+
+function mostrarApp(user){
+usuarioAtual = user;
+document.getElementById('usuarioLogado').textContent = `UsuÃ¡rio : ${user?.login || user?.email || ''}`;
+document.getElementById('adminUsersBtn').classList.remove('hidden');
+document.getElementById('authShell').classList.add('hidden');
+document.getElementById('appShell').classList.remove('hidden');
+carregarBloqueiosEdicao(true);
+clearInterval(editLocksRefreshTimer);
+editLocksRefreshTimer = setInterval(()=>carregarBloqueiosEdicao(true), 15000);
+iniciarAtualizacaoAutomatica();
+mostrarPagina('painel');
+}
+
+function mostrarAcesso(){
+usuarioAtual = null;
+candidatos = [];
+clearInterval(editLocksRefreshTimer);
+clearInterval(editLockTimer);
+clearInterval(candidatosRefreshTimer);
+editLocksRefreshTimer = null;
+editLockTimer = null;
+candidatosRefreshTimer = null;
+editLocks = {};
+candidatosSnapshot = '';
+document.getElementById('appShell').classList.add('hidden');
+document.getElementById('authShell').classList.remove('hidden');
+if(resetToken) mostrarAuthPanel('resetPanel');
+else mostrarAuthPanel('loginPanel');
+}
+
+async function verificarSessao(){
+mostrarApp(DEMO_USER);
+carregar();
+}
+
+async function login(){
+mostrarApp(DEMO_USER);
+carregar();
+toast('Demo acessada.');
+}
+
+function aquecerServidor(){
+toast('Versao demo sem servidor.');
+}
+
+async function logout(){
+if(candidatoCadastroId) await liberarBloqueioEdicao(candidatoCadastroId);
+toast('Versao demo: sem logout real.');
+}
+
+async function solicitarResetSenha(){
+const msg = document.getElementById('forgotMsg');
+msg.style.color = 'var(--green)';
+msg.textContent = 'Demo sem envio real de e-mail. Use o painel diretamente.';
+}
+
+async function redefinirSenha(){
+const msg = document.getElementById('resetMsg');
+msg.style.color = 'var(--green)';
+msg.textContent = 'Demo sem redefinicao real de senha.';
+}
+
+/* ---------- administraÃ§Ã£o de usuÃ¡rios ---------- */
+
+function mostrarPagina(pagina){
+const isUsuarios = pagina === 'usuarios';
+if(isUsuarios && usuarioAtual?.role !== 'admin'){
+document.getElementById('adminUsersBtn').classList.remove('hidden');
+}
+document.getElementById('dashboardPage').classList.toggle('hidden', isUsuarios);
+document.getElementById('usersPage').classList.toggle('hidden', !isUsuarios);
+document.getElementById('dashboardTab').classList.toggle('active', !isUsuarios);
+document.getElementById('adminUsersBtn').classList.toggle('active', isUsuarios);
+if(isUsuarios) abrirUsuarios();
+}
+
+function abrirUsuarios(){
+document.getElementById('adminUnlockMsg').textContent = '';
+document.getElementById('adminUserMsg').textContent = '';
+if(usuarioAtual?.role === 'admin'){
+document.getElementById('adminUnlock').classList.add('hidden');
+document.getElementById('adminPanel').classList.remove('hidden');
+document.getElementById('novoUsuarioBtn').classList.remove('hidden');
+carregarUsuariosAdmin();
+}
+else {
+document.getElementById('adminUnlock').classList.remove('hidden');
+document.getElementById('adminPanel').classList.add('hidden');
+document.getElementById('novoUsuarioBtn').classList.add('hidden');
+document.getElementById('adminLogin').value = '';
+document.getElementById('adminPassword').value = '';
+}
+}
+
+function fecharUsuarios(){
+document.getElementById('adminPassword').value = '';
+limparFormUsuario();
+mostrarPagina('painel');
+}
+
+function abrirModalUsuario(id=null){
+usuarioEditando = id;
+const u = id ? usuariosAdmin.find(x=>x.id===id) : null;
+document.getElementById('usuarioModalTitulo').textContent = u ? 'Editar usuÃ¡rio' : 'Novo usuÃ¡rio';
+document.getElementById('uLogin').value = u?.login || '';
+document.getElementById('uEmail').value = u?.email || '';
+document.getElementById('uRole').value = u?.role || 'usuario';
+document.getElementById('uActive').value = String(u ? u.active !== false : true);
+document.getElementById('uPassword').value = '';
+document.getElementById('usuarioModalMsg').textContent = u ? 'Preencha senha apenas se quiser trocar.' : '';
+document.getElementById('usuarioModalMsg').style.color = 'var(--ink-soft)';
+document.getElementById('overlayUsuario').classList.add('show');
+}
+
+function fecharModalUsuario(){
+document.getElementById('overlayUsuario').classList.remove('show');
+limparFormUsuario();
+}
+
+async function adminRequest(url, options={}){
+const method = options.method || 'POST';
+const body = options.body || {};
+usuariosAdmin = JSON.parse(localStorage.getItem(DEMO_USUARIOS_KEY) || 'null') || demoUsuariosIniciais();
+if(url === '/api/admin/users/list') return {users: usuariosAdmin};
+if(url === '/api/admin/users' && method === 'POST'){
+if(!body.login || !body.email || !body.password || body.password.length < 6) throw new Error('Informe login, e-mail e senha com 6 digitos.');
+if(usuariosAdmin.some(u=>u.login.toLowerCase() === body.login.toLowerCase())) throw new Error('Ja existe usuario com este login.');
+const user = {id:'u-demo-'+Date.now(), login:body.login.trim(), email:body.email.trim(), role:body.role || 'usuario', active:body.active !== false};
+usuariosAdmin.push(user);
+localStorage.setItem(DEMO_USUARIOS_KEY, JSON.stringify(usuariosAdmin));
+return {user};
+}
+const id = decodeURIComponent(String(url).split('/').pop());
+const index = usuariosAdmin.findIndex(u=>u.id === id);
+if(index < 0) throw new Error('Usuario nao encontrado na demo.');
+if(usuariosAdmin[index].login === 'larissa' && (method === 'DELETE' || body.active === false || body.role !== 'admin' || body.login !== 'larissa')) throw new Error('O administrador principal nao pode ser alterado na demo.');
+if(method === 'DELETE'){ usuariosAdmin.splice(index, 1); localStorage.setItem(DEMO_USUARIOS_KEY, JSON.stringify(usuariosAdmin)); return {ok:true}; }
+usuariosAdmin[index] = {...usuariosAdmin[index], login:body.login, email:body.email, role:body.role, active:body.active !== false};
+localStorage.setItem(DEMO_USUARIOS_KEY, JSON.stringify(usuariosAdmin));
+return {user: usuariosAdmin[index]};
+}
+
+async function loginComoAdmin(){
+mostrarApp(DEMO_USER);
+mostrarPagina('usuarios');
+await carregarUsuariosAdmin();
+toast('Acesso administrativo demo liberado.');
+}
+
+async function carregarUsuariosAdmin(){
+const data = await adminRequest('/api/admin/users/list');
+usuariosAdmin = (data.users || []).filter(u=>String(u.login || '').trim().toLowerCase() !== 'adm');
+renderUsuariosAdmin();
+}
+
+function renderUsuariosAdmin(){
+const rows = usuariosAdmin.map(u=>{
+const protegido = String(u.login || '').trim().toLowerCase() === 'larissa';
+return `
+<div class="user-row">
+<div><b>${esc(u.login || '-')}</b></div>
+<div>${esc(u.email || '-')}</div>
+<div><span class="role-badge ${u.role==='admin'?'admin':''}">${u.role==='admin'?'Admin':'UsuÃ¡rio'}</span></div>
+<div><span class="status-badge ${u.active?'':'off'}">${u.active?'Ativo':'Inativo'}</span></div>
+<div class="mini-actions">
+<button onclick="abrirModalUsuario('${u.id}')">Editar</button>
+${protegido ? '<button disabled title="Administrador principal">Adm pai</button>' : `<button onclick="alternarUsuario('${u.id}')">${u.active?'Inativar':'Ativar'}</button>`}
+${protegido ? '' : `<button class="danger" onclick="removerUsuario('${u.id}')">Remover</button>`}
+</div>
+</div>
+`;
+}).join('');
+document.getElementById('adminUsersList').innerHTML = `
+<div class="user-row head">
+<div>Login</div><div>E-mail</div><div>Perfil</div><div>Status</div><div></div>
+</div>
+${rows || '<p class="fin-empty">Nenhum usuÃ¡rio cadastrado.</p>'}
+`;
+}
+
+function limparFormUsuario(){
+usuarioEditando = null;
+['uLogin','uEmail','uPassword'].forEach(id=>document.getElementById(id).value='');
+document.getElementById('uRole').value='usuario';
+document.getElementById('uActive').value='true';
+document.getElementById('adminUserMsg').textContent = '';
+document.getElementById('usuarioModalMsg').textContent = '';
+}
+
+async function salvarUsuario(){
+const msg = document.getElementById('usuarioModalMsg');
+msg.style.color = 'var(--red)';
+msg.textContent = '';
+const payload = {
+login: document.getElementById('uLogin').value.trim(),
+email: document.getElementById('uEmail').value.trim(),
+role: document.getElementById('uRole').value,
+active: document.getElementById('uActive').value === 'true',
+password: document.getElementById('uPassword').value
+};
+try{
+if(usuarioEditando){
+await adminRequest(`/api/admin/users/${encodeURIComponent(usuarioEditando)}`, {method:'PUT', body: payload});
+toast('UsuÃ¡rio atualizado.');
+}else{
+await adminRequest('/api/admin/users', {method:'POST', body: payload});
+toast('UsuÃ¡rio criado.');
+}
+fecharModalUsuario();
+await carregarUsuariosAdmin();
+}catch(e){
+msg.textContent = e.message;
+}
+}
+
+async function alternarUsuario(id){
+const u = usuariosAdmin.find(x=>x.id===id);
+if(!u) return;
+try{
+await adminRequest(`/api/admin/users/${encodeURIComponent(id)}`, {
+method:'PUT',
+body:{login:u.login,email:u.email,role:u.role,active:!u.active,password:''}
+});
+await carregarUsuariosAdmin();
+toast(u.active ? 'UsuÃ¡rio inativado.' : 'UsuÃ¡rio ativado.');
+}catch(e){
+document.getElementById('adminUserMsg').textContent = e.message;
+}
+}
+
+async function removerUsuario(id){
+const u = usuariosAdmin.find(x=>x.id===id);
+if(!u || !confirm(`Remover o usuÃ¡rio "${u.login}"?`)) return;
+try{
+await adminRequest(`/api/admin/users/${encodeURIComponent(id)}`, {method:'DELETE'});
+await carregarUsuariosAdmin();
+toast('UsuÃ¡rio removido.');
+}catch(e){
+document.getElementById('adminUserMsg').textContent = e.message;
+}
+}
+
+/* ---------- persistencia local da demo ---------- */
+
+function snapshotListaCandidatos(lista){
+return JSON.stringify(lista || []);
+}
+
+function iniciarAtualizacaoAutomatica(){
+clearInterval(candidatosRefreshTimer);
+candidatosRefreshTimer = setInterval(()=>carregar(true), AUTO_REFRESH_MS);
+}
+
+async function carregar(silencioso=false){
+if(carregandoCandidatosEmSegundoPlano || salvandoCandidatos) return;
+carregandoCandidatosEmSegundoPlano = true;
+try{
+if(!silencioso) marcarCarregando();
+const salvos = JSON.parse(localStorage.getItem(DEMO_CANDIDATOS_KEY) || 'null');
+const novos = Array.isArray(salvos) ? salvos.map(migrarEtapaLegada) : demoCandidatosIniciais();
+const novoSnapshot = snapshotListaCandidatos(novos);
+const mudou = novoSnapshot !== candidatosSnapshot;
+candidatos = novos;
+candidatosSnapshot = novoSnapshot;
+marcarSalvo(true);
+if(!silencioso || mudou) render();
+}catch(e){
+marcarSalvo(false);
+toast('Nao foi possivel carregar os dados ficticios da demo.');
+}finally{
+carregandoCandidatosEmSegundoPlano = false;
+}
+}
+
+async function salvar(){
+try{
+salvandoCandidatos = true;
+localStorage.setItem(DEMO_CANDIDATOS_KEY, JSON.stringify(candidatos));
+candidatosSnapshot = snapshotListaCandidatos(candidatos);
+marcarSalvo(true);
+}catch(e){
+marcarSalvo(false);
+toast('Nao foi possivel salvar esta alteracao local da demo.');
+}finally{
+salvandoCandidatos = false;
+}
+}
+
+function marcarCarregando(){
+const box = document.getElementById('saveStatus');
+const txt = document.getElementById('saveStatusText');
+if(!box || !txt) return;
+box.classList.remove('err');
+txt.textContent = 'Carregando dados ficticios da demo...';
+}
+
+function marcarSalvo(ok){
+ultimoSalvoEm = ok ? hoje() : null;
+const box = document.getElementById('saveStatus');
+const txt = document.getElementById('saveStatusText');
+if(!box || !txt) return;
+if(ok){
+box.classList.remove('err');
+txt.textContent = 'Salvo localmente na demo';
+} else {
+box.classList.add('err');
+txt.textContent = 'Nao foi possivel salvar localmente';
+}
+}
+
+setInterval(()=>{
+const box = document.getElementById('saveStatus');
+const txt = document.getElementById('saveStatusText');
+if(!box || !txt || box.classList.contains('err') || !ultimoSalvoEm) return;
+const s = Math.floor((hoje()-ultimoSalvoEm)/1000);
+if(s<5) txt.textContent = 'Salvo localmente na demo';
+else if(s<60) txt.textContent = `Salvo localmente ha ${s}s`;
+else txt.textContent = `Salvo localmente ha ${Math.floor(s/60)}min`;
+}, 5000);
+
+function exportarDados(){
+const payload = JSON.stringify({v:1, exportedAt: hoje(), candidatos}, null, 2);
+const blob = new Blob([payload], {type:'application/json'});
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+const d = new Date();
+const stamp = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+a.download = `painel-contratacao-backup-${stamp}.json`;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+toast("Backup exportado. Envie o arquivo .json para quem precisar importar.");
+}
+
+function importarDados(event){
+const input = event.target;
+const file = input.files && input.files[0];
+if(!file) return;
+const reader = new FileReader();
+reader.onload = (e)=>{
+try{
+const parsed = JSON.parse(e.target.result);
+const novos = Array.isArray(parsed) ? parsed : parsed.candidatos;
+if(!Array.isArray(novos)) throw new Error('formato invÃ¡lido');
+const valido = novos.every(c => c && typeof c==='object' && typeof c.id==='string' && typeof c.nome==='string');
+if(!valido) throw new Error('formato invÃ¡lido');
+pendingImport = novos.map(migrarEtapaLegada);
+document.getElementById('importMsg').textContent = `O arquivo contÃ©m ${novos.length} candidata(s). "Mesclar" mantÃ©m os dados atuais e adiciona/atualiza pelos que vierem do arquivo. "Substituir tudo" apaga os dados atuais deste navegador e usa somente o que estÃ¡ no arquivo.`;
+document.getElementById('overlayImport').classList.add('show');
+}catch(err){
+toast("Arquivo invÃ¡lido. Verifique se Ã© um backup exportado por este painel.");
+}
+input.value = '';
+};
+reader.onerror = ()=>{ toast("NÃ£o foi possÃ­vel ler o arquivo."); input.value=''; };
+reader.readAsText(file);
+}
+
+function fecharModalImport(){
+pendingImport = null;
+document.getElementById('overlayImport').classList.remove('show');
+}
+
+function confirmarImport(modo){
+if(!pendingImport) return;
+if(modo==='substituir'){
+candidatos = pendingImport;
+} else {
+const porId = new Map(candidatos.map(c=>[c.id,c]));
+pendingImport.forEach(c=>porId.set(c.id,c));
+candidatos = Array.from(porId.values());
+}
+pendingImport = null;
+salvar();
+document.getElementById('overlayImport').classList.remove('show');
+render();
+toast(modo==='substituir' ? "Dados substituÃ­dos pelo backup importado." : "Dados mesclados com sucesso.");
+}
+
+/* ---------- CRUD candidatas ---------- */
+
+function formatarHoraCampo(valor){
+if(!valor) return '';
+return valor.replace(':', ':') + 'h';
+}
+function montarHorario(){
+const inicio = document.getElementById('fHoraInicio').value;
+const fim = document.getElementById('fHoraFim').value;
+if(inicio && fim) return `${formatarHoraCampo(inicio)} Ã s ${formatarHoraCampo(fim)}`;
+if(inicio) return `${formatarHoraCampo(inicio)} Ã s -`;
+if(fim) return `- Ã s ${formatarHoraCampo(fim)}`;
+return '';
+}
+function extrairHorario(horario){
+const texto = String(horario || '');
+const matches = [...texto.matchAll(/(\d{1,2})(?::?(\d{2}))?\s*h?/gi)].map(m=>{
+const hora = String(m[1]).padStart(2, '0');
+const minuto = String(m[2] || '00').padStart(2, '0');
+return `${hora}:${minuto}`;
+});
+return {inicio: matches[0] || '', fim: matches[1] || ''};
+}
+function formatarExameAdmissional(c){
+if(!c?.exameData) return '';
+const data = fmtDataLocal(c.exameData);
+return c.exameHora ? `${data} Ã s ${formatarHoraCampo(c.exameHora)}` : data;
+}
+function formatarEntrevistaAgendada(c){
+if(!c?.entrevistaData) return '';
+const data = fmtDataLocal(c.entrevistaData);
+return c.entrevistaHora ? `${data} Ã s ${formatarHoraCampo(c.entrevistaHora)}` : data;
+}
+
+function formatarDataHistoricoCard(c, registro){
+const idx = indiceEtapaHistorico(registro);
+if(idx === ENTREVISTA_IDX && c.entrevistaData) return formatarEntrevistaAgendada(c);
+if(idx === EXAME_IDX && c.exameData) return formatarExameAdmissional(c);
+return fmtDataHoraCurta(registro.data);
+}
+
+async function abrirModal(id=null){
+candidatoCadastroId = id;
+const editando = Boolean(id);
+const c = editando ? candidatos.find(x=>x.id===id) : null;
+document.getElementById('candidateModalTitle').textContent = editando ? 'Editar candidatura' : 'Nova candidata';
+document.getElementById('candidateSaveBtn').textContent = editando ? 'Salvar alteraÃ§Ãµes' : 'Adicionar';
+const horario = extrairHorario(c?.horario);
+document.getElementById('fNome').value = c ? nomeCandidata(c.nome) : '';
+document.getElementById('fLoja').value = c ? textoPadrao(c.loja) : '';
+document.getElementById('fHoraInicio').value = horario.inicio;
+document.getElementById('fHoraFim').value = horario.fim;
+document.getElementById('fGestora').value = c ? textoPadrao(c.gestora) : '';
+document.getElementById('fEmail').value = c?.emailGestora || '';
+document.getElementById('overlay').classList.add('show');
+atualizarAvisoEdicao(id);
+if(editando) await registrarBloqueioEdicao(id);
+}
+function fecharModal(){
+const idLiberar = candidatoCadastroId;
+candidatoCadastroId = null;
+document.getElementById('overlay').classList.remove('show');
+['fNome','fLoja','fHoraInicio','fHoraFim','fGestora','fEmail'].forEach(id=>document.getElementById(id).value='');
+document.getElementById('candidateModalTitle').textContent = 'Nova candidata';
+document.getElementById('candidateSaveBtn').textContent = 'Adicionar';
+atualizarAvisoEdicao(null);
+if(idLiberar) liberarBloqueioEdicao(idLiberar);
+}
+
+function salvarCandidata(){
+const nome = padronizarNomeCandidata(document.getElementById('fNome').value);
+const loja = padronizarTextoPadrao(document.getElementById('fLoja').value);
+const horario = montarHorario();
+const gestora = padronizarTextoPadrao(document.getElementById('fGestora').value);
+const emailGestora = document.getElementById('fEmail').value.trim();
+if(!nome || !gestora || !emailGestora){
+toast("Preencha nome, gestora e e-mail da gestora.");
+return;
+}
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailGestora)){
+toast("Informe um e-mail da gestora vÃ¡lido.");
+return;
+}
+if(candidatoCadastroId){
+const c = candidatos.find(x=>x.id===candidatoCadastroId);
+if(!c) return;
+Object.assign(c, {nome, loja, horario, gestora, emailGestora});
+salvar();
+fecharModal();
+render();
+toast("Candidatura atualizada.");
+return;
+}
+candidatos.push({
+id: uid(), nome, loja, horario, gestora, emailGestora, dataPrevista: '',
+etapa: 0, entrouEm: hoje(), encerrada: false,
+motivo: "", detalhe: "", encerradaEm: null, encerradaNaEtapa: null,
+historico: [{ etapa: ETAPAS[0], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: "" }]
+});
+salvar();
+fecharModal();
+render();
+toast("Candidata adicionada.");
+}
+
+function abrirModalInicioPrevisto(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+candidatoInicioPrevistoId = id;
+document.getElementById('feedbackDataInicio').value = c.dataPrevista || '';
+document.getElementById('overlayFeedback').classList.add('show');
+}
+function fecharModalInicioPrevisto(){
+candidatoInicioPrevistoId = null;
+document.getElementById('feedbackDataInicio').value = '';
+document.getElementById('overlayFeedback').classList.remove('show');
+render();
+}
+function confirmarInicioPrevisto(){
+if(!candidatoInicioPrevistoId) return;
+const dataPrevista = document.getElementById('feedbackDataInicio').value;
+if(!dataPrevista){
+toast('Informe a data prevista de inÃ­cio.');
+return;
+}
+const c = candidatos.find(x=>x.id===candidatoInicioPrevistoId);
+if(!c) return;
+c.dataPrevista = dataPrevista;
+c.dataPrevistaRegistradaEm = hoje();
+c.dataPrevistaRegistradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+aplicarAtualizacaoEtapa(c.id, BOTTLENECK_IDX);
+fecharModalInicioPrevisto();
+toast('InÃ­cio previsto registrado.');
+}
+
+function abrirModalEntrevista(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+candidatoEntrevistaId = id;
+document.getElementById('entrevistaData').value = c.entrevistaData || '';
+document.getElementById('entrevistaHora').value = c.entrevistaHora || '';
+document.getElementById('overlayEntrevista').classList.add('show');
+}
+function fecharModalEntrevista(){
+candidatoEntrevistaId = null;
+document.getElementById('entrevistaData').value = '';
+document.getElementById('entrevistaHora').value = '';
+document.getElementById('overlayEntrevista').classList.remove('show');
+render();
+}
+function confirmarEntrevistaAgendada(){
+if(!candidatoEntrevistaId) return;
+const data = document.getElementById('entrevistaData').value;
+const hora = document.getElementById('entrevistaHora').value;
+if(!data || !hora){
+toast('Informe a data e a hora da entrevista.');
+return;
+}
+const c = candidatos.find(x=>x.id===candidatoEntrevistaId);
+if(!c) return;
+c.entrevistaData = data;
+c.entrevistaHora = hora;
+c.entrevistaAgendadaEm = hoje();
+c.entrevistaAgendadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+aplicarAtualizacaoEtapa(c.id, ENTREVISTA_IDX);
+fecharModalEntrevista();
+toast('Entrevista agendada registrada.');
+}
+
+function abrirModalExame(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+candidatoExameId = id;
+document.getElementById('exameData').value = c.exameData || '';
+document.getElementById('exameHora').value = c.exameHora || '';
+document.getElementById('overlayExame').classList.add('show');
+}
+function fecharModalExame(){
+candidatoExameId = null;
+document.getElementById('exameData').value = '';
+document.getElementById('exameHora').value = '';
+document.getElementById('overlayExame').classList.remove('show');
+render();
+}
+function confirmarExameAdmissional(){
+if(!candidatoExameId) return;
+const data = document.getElementById('exameData').value;
+const hora = document.getElementById('exameHora').value;
+if(!data || !hora){
+toast('Informe a data e a hora do exame admissional.');
+return;
+}
+const c = candidatos.find(x=>x.id===candidatoExameId);
+if(!c) return;
+c.exameData = data;
+c.exameHora = hora;
+c.exameAgendadoEm = hoje();
+c.exameAgendadoPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+aplicarAtualizacaoEtapa(c.id, EXAME_IDX);
+fecharModalExame();
+toast('Exame admissional registrado.');
+}
+
+function aplicarAtualizacaoEtapa(id, novaEtapa){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+novaEtapa = Number(novaEtapa);
+if(novaEtapa === c.etapa){ render(); return; }
+const ts = hoje();
+const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.etapa = novaEtapa;
+c.entrouEm = ts;
+ajustarHistoricoParaEtapa(c, novaEtapa, ts, usuario);
+salvar();
 render();
 }
 
-function searchMatch(c){
-const q=norm(document.getElementById("busca").value);
-if(!q)return true;
-return [c.nome,c.loja,c.gestora,c.emailGestora,c.horario,ETAPAS[c.etapa],c.motivo,c.detalhe,c.contratadaPor].map(norm).join(" ").includes(q);
+function atualizarEtapa(id, novaEtapa){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+novaEtapa = Number(novaEtapa);
+if(novaEtapa === BOTTLENECK_IDX && c.etapa !== BOTTLENECK_IDX){
+abrirModalInicioPrevisto(id);
+return;
+}
+if(novaEtapa === ENTREVISTA_IDX && c.etapa !== ENTREVISTA_IDX){
+abrirModalEntrevista(id);
+return;
+}
+if(novaEtapa === EXAME_IDX && c.etapa !== EXAME_IDX){
+abrirModalExame(id);
+return;
+}
+aplicarAtualizacaoEtapa(id, novaEtapa);
+}
+
+function concluirCandidatura(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+const ts = hoje();
+c.contratadaEm = ts;
+c.contratadaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+if(c.etapa !== CONTRATADA_IDX){
+c.etapa = CONTRATADA_IDX;
+c.entrouEm = ts;
+ajustarHistoricoParaEtapa(c, CONTRATADA_IDX, ts, c.contratadaPor);
+}
+salvar();
+render();
+toast('Candidatura concluÃ­da como contratada.');
+}
+
+function iniciarArraste(event, id){
+event.dataTransfer.setData('text/plain', id);
+event.dataTransfer.effectAllowed = 'move';
+event.currentTarget.classList.add('dragging');
+}
+
+function finalizarArraste(event){
+event.currentTarget.classList.remove('dragging');
+document.querySelectorAll('.col.drag-over').forEach(col=>col.classList.remove('drag-over'));
+}
+
+function permitirDrop(event){
+event.preventDefault();
+event.dataTransfer.dropEffect = 'move';
+event.currentTarget.classList.add('drag-over');
+}
+
+function sairDrop(event){
+if(!event.currentTarget.contains(event.relatedTarget)){
+event.currentTarget.classList.remove('drag-over');
+}
+}
+
+function soltarNaEtapa(event, novaEtapa){
+event.preventDefault();
+event.currentTarget.classList.remove('drag-over');
+const id = event.dataTransfer.getData('text/plain');
+if(id) atualizarEtapa(id, novaEtapa);
+}
+
+function alternarCard(id){
+if(cardsAbertos.has(id)) cardsAbertos.delete(id);
+else cardsAbertos.add(id);
+renderBoard();
+}
+
+function abrirModalEnc(id){
+candidatoEmEdicao = id;
+document.getElementById('overlayEnc').classList.add('show');
+}
+function fecharModalEnc(){
+candidatoEmEdicao = null;
+document.getElementById('eDetalhe').value='';
+document.getElementById('overlayEnc').classList.remove('show');
+}
+function confirmarEncerramento(){
+const motivo = document.getElementById('eMotivo').value;
+const detalhe = document.getElementById('eDetalhe').value.trim();
+if(!detalhe){
+toast("Descreva o motivo antes de confirmar.");
+return;
+}
+const c = candidatos.find(x=>x.id===candidatoEmEdicao);
+if(!c) return;
+c.encerrada = true;
+c.motivo = motivo;
+c.detalhe = detalhe;
+c.encerradaEm = hoje();
+c.encerradaNaEtapa = ETAPAS[c.etapa];
+c.encerradaPor = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+c.historico.push({ etapa: "Processo encerrado â€” " + motivo, data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: detalhe });
+salvar();
+fecharModalEnc();
+render();
+toast("Processo encerrado e motivo registrado.");
+}
+
+function reabrir(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+c.encerrada = false;
+c.entrouEm = hoje();
+if(c.etapa === CONTRATADA_IDX){
+c.etapa = CONTRATADA_IDX - 1;
+}
+c.contratadaEm = null;
+c.contratadaPor = "";
+c.encerradaPor = "";
+c.historico.push({ etapa: "Processo reaberto em " + ETAPAS[c.etapa], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio', obs: "" });
+salvar();
+render();
+toast("Processo reaberto.");
+}
+
+function confirmarRemover(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+idParaRemover = id;
+document.getElementById('confirmMsg').textContent = `Remover definitivamente "${nomeCandidata(c.nome)}" do painel? Essa aÃ§Ã£o nÃ£o pode ser desfeita. Se quiser manter o histÃ³rico, use "Encerrar / reprovar" em vez de remover.`;
+document.getElementById('overlayConfirm').classList.add('show');
+}
+function fecharModalConfirm(){
+idParaRemover = null;
+document.getElementById('overlayConfirm').classList.remove('show');
+}
+function executarRemocao(){
+if(!idParaRemover) return;
+candidatos = candidatos.filter(x=>x.id!==idParaRemover);
+salvar();
+fecharModalConfirm();
+render();
+toast("Candidata removida.");
+}
+
+function abrirHistorico(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+document.getElementById('histNome').textContent = "HistÃ³rico â€” " + nomeCandidata(c.nome);
+document.getElementById('histLista').innerHTML = c.historico.map(h=>`
+<li>
+<div class="tl-etapa">${esc(h.etapa)}</div>
+<div class="tl-data">${fmtDataHora(h.data)} Â· ${esc(h.usuario || '-')}</div>
+${h.obs ? `<div class="tl-obs">${esc(h.obs)}</div>` : ''}
+</li>
+`).join('');
+document.getElementById('overlayHist').classList.add('show');
+}
+function fecharModalHist(){document.getElementById('overlayHist').classList.remove('show');}
+
+/* ---------- cobranÃ§as ---------- */
+
+function cobrarGestora(id){
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+if(!c.emailGestora){
+toast('Cadastre o e-mail da gestora nesta candidata antes de cobrar.');
+return;
+}
+const grupo = {
+email:String(c.emailGestora).trim().toLowerCase(),
+gestora:textoPadrao(c.gestora) || 'Gestora',
+itens:[{id:c.id,nome:nomeCandidata(c.nome),loja:textoPadrao(c.loja),dias:diasEntre(c.entrouEm)}]
+};
+abrirEmailCobranca(grupo);
+registrarCobrancaCandidatas([c.id], grupo.email, grupo.gestora);
+toast('E-mail aberto no Outlook e cobranÃ§a registrada.');
+}
+
+function cobrarGestoraConsolidado(idx){
+const g = pendGroupsCache[idx];
+if(!g) return;
+if(!g.emailRef){
+toast('Cadastre o e-mail da gestora nas candidatas antes de cobrar.');
+return;
+}
+const grupo = {
+email:g.emailRef,
+gestora:g.gestora,
+itens:g.itens.map(c=>({id:c.id,nome:nomeCandidata(c.nome),loja:textoPadrao(c.loja),dias:diasEntre(c.entrouEm)}))
+};
+abrirEmailCobranca(grupo);
+registrarCobrancaCandidatas(g.itens.map(c=>c.id), grupo.email, grupo.gestora);
+toast('E-mail aberto no Outlook e cobranÃ§a registrada.');
+}
+
+function registrarCobrancaCandidatas(ids, email, gestora){
+const ts = hoje();
+const usuario = usuarioAtual?.login || usuarioAtual?.email || 'usuÃ¡rio';
+ids.forEach(id=>{
+const c = candidatos.find(x=>x.id===id);
+if(!c) return;
+if(!Array.isArray(c.cobrancas)) c.cobrancas = [];
+c.cobrancas.push({data:ts, usuario, email, gestora});
+});
+salvar();
+render();
+}
+
+function obterUltimaCobranca(itens){
+const todas = [];
+itens.forEach(c=>{
+if(Array.isArray(c.cobrancas)){
+c.cobrancas.forEach(cb=>todas.push(cb));
+}
+});
+if(todas.length===0) return null;
+return todas.sort((a,b)=>(b.data||0)-(a.data||0))[0];
+}
+
+function obterCobrancas(itens){
+const todas = [];
+itens.forEach(c=>{
+if(Array.isArray(c.cobrancas)){
+c.cobrancas.forEach(cb=>todas.push({...cb, candidata:c.nome}));
+}
+});
+return todas.sort((a,b)=>(b.data||0)-(a.data||0));
+}
+
+function cobrancasHtml(itens){
+const cobrancas = obterCobrancas(itens);
+if(cobrancas.length===0) return `<div class="pend-last">Sem cobranÃ§a registrada</div>`;
+return `<ul class="pend-history">${cobrancas.map(cb=>`
+<li><b>${fmtDataHora(cb.data)}</b> Â· ${esc(cb.usuario || '-')}</li>
+`).join('')}</ul>`;
+}
+
+function ultimaCobrancaGestoraAtualHtml(itens){
+const porEvento = new Map();
+itens.forEach(c=>{
+if(!Array.isArray(c.cobrancas)) return;
+const entrouEm = Number(c.entrouEm || 0);
+c.cobrancas.forEach(cb=>{
+const data = Number(cb.data || 0);
+if(!data || data < entrouEm) return;
+const chave = [data, cb.usuario || '', cb.email || '', cb.gestora || ''].join('|');
+if(!porEvento.has(chave)) porEvento.set(chave, cb);
+});
+});
+const cobrancas = Array.from(porEvento.values()).sort((a,b)=>(b.data||0)-(a.data||0));
+if(cobrancas.length===0) return `<div class="pend-last">Sem cobranÃ§a registrada</div>`;
+const ultima = cobrancas[0];
+return `<div class="pend-last"><b>${fmtDataHora(ultima.data)}</b> Â· ${esc(ultima.usuario || '-')}</div>`;
+}
+
+function toggleGestoraCobranca(idx){
+const g = pendGroupsCache[idx];
+if(!g) return;
+const key = g.gestora;
+if(gestorasCobrancaAbertas.has(key)) gestorasCobrancaAbertas.delete(key);
+else gestorasCobrancaAbertas.add(key);
+renderPendencias();
+}
+
+function montarDisparosCobranca(){
+const pendentes = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX && c.emailGestora && passaBusca(c));
+const porEmail = {};
+pendentes.forEach(c=>{
+const email = String(c.emailGestora || '').trim().toLowerCase();
+if(!email) return;
+if(!porEmail[email]) porEmail[email] = {email, gestoras:new Set(), itens:[]};
+porEmail[email].gestoras.add(textoPadrao(c.gestora) || 'Gestora');
+porEmail[email].itens.push({
+id:c.id,
+nome:nomeCandidata(c.nome),
+loja:textoPadrao(c.loja),
+dias:diasEntre(c.entrouEm)
+});
+});
+return Object.values(porEmail).map(g=>({
+email:g.email,
+gestora:Array.from(g.gestoras).join(' / '),
+itens:g.itens,
+status:'pendente',
+erro:''
+}));
+}
+
+function abrirModalDisparo(){
+disparoEmailsCache = montarDisparosCobranca();
+if(disparoEmailsCache.length===0){
+toast('Nenhum e-mail de gestora cadastrado nas pendÃªncias atuais.');
+return;
+}
+disparoEmAndamento = false;
+disparoIndiceAtual = 0;
+document.getElementById('overlayDisparo').classList.add('show');
+document.getElementById('iniciarDisparoBtn').disabled = false;
+document.getElementById('fecharDisparoBtn').disabled = false;
+document.getElementById('iniciarDisparoBtn').textContent = 'Iniciar envio';
+renderDisparo();
+}
+
+function fecharModalDisparo(){
+disparoEmAndamento = false;
+document.getElementById('overlayDisparo').classList.remove('show');
+}
+
+function renderDisparo(){
+const total = disparoEmailsCache.length;
+const enviados = disparoEmailsCache.filter(g=>g.status==='enviado').length;
+const abertos = disparoEmailsCache.filter(g=>g.status==='aberto').length;
+const concluidos = enviados;
+const totalCandidatas = disparoEmailsCache.reduce((sum,g)=>sum+g.itens.length,0);
+document.getElementById('disparoResumo').textContent = `${total} e-mail(s) serÃ£o preparados no Outlook, agrupando ${totalCandidatas} candidata(s) por endereÃ§o.`;
+document.getElementById('disparoStatus').textContent = concluidos===0
+? 'Clique em iniciar para abrir o primeiro e-mail. ApÃ³s enviar no Outlook, volte aqui e avance para o prÃ³ximo.'
+: `${concluidos}/${total} e-mail(s) marcados como enviados. ${abertos} aberto(s) aguardando confirmaÃ§Ã£o.`;
+document.getElementById('disparoProgress').style.width = total ? `${Math.round((concluidos/total)*100)}%` : '0%';
+document.getElementById('disparoLista').innerHTML = disparoEmailsCache.map(g=>`
+<div class="send-row ${g.status==='enviado'?'ok':g.status==='erro'?'err':''}">
+<div>
+<b>${esc(g.email)}</b>
+<div>${g.itens.length} candidata(s): ${g.itens.map(i=>esc(i.nome)).join(', ')}</div>
+${g.erro ? `<div>${esc(g.erro)}</div>` : ''}
+</div>
+<div class="status">${g.status==='pendente'?'Pendente':g.status==='aberto'?'Aberto no Outlook':g.status==='enviado'?'Enviado':'Erro'}</div>
+</div>
+`).join('');
+}
+
+async function iniciarDisparoCobrancas(){
+if(disparoEmailsCache.length===0) return;
+if(disparoEmAndamento){
+const anterior = disparoEmailsCache[disparoIndiceAtual];
+if(anterior && anterior.status==='aberto'){
+anterior.status = 'enviado';
+registrarCobrancaCandidatas(anterior.itens.map(i=>i.id), anterior.email, anterior.gestora);
+}
+disparoIndiceAtual++;
+}
+disparoEmAndamento = true;
+const atual = disparoEmailsCache[disparoIndiceAtual];
+if(!atual){
+disparoEmAndamento = false;
+document.getElementById('iniciarDisparoBtn').disabled = true;
+document.getElementById('iniciarDisparoBtn').textContent = 'Envios concluÃ­dos';
+document.getElementById('fecharDisparoBtn').disabled = false;
+renderDisparo();
+toast('Fluxo de cobranÃ§a finalizado.');
+return;
+}
+abrirEmailCobranca(atual);
+atual.status = 'aberto';
+document.getElementById('iniciarDisparoBtn').textContent = disparoIndiceAtual === disparoEmailsCache.length - 1
+? 'Marcar enviado e concluir'
+: 'Marcar enviado e abrir prÃ³ximo';
+renderDisparo();
+}
+
+function abrirEmailCobranca(grupo){
+const assunto = `Roteiros pendentes â€” ${grupo.gestora}`;
+const linhas = grupo.itens.map(c=>`- ${c.nome} (${c.loja}) â€” ${c.dias} dia(s) aguardando`).join('\n');
+const corpo = `OlÃ¡ ${grupo.gestora}, tudo bem?\n\nSeguem as candidatas aprovadas pelo RH que ainda estÃ£o aguardando o roteiro (local de trabalho) para seguirmos com a contrataÃ§Ã£o:\n${linhas}\n\nPoderia nos enviar assim que possÃ­vel?\n\nObrigado!`;
+window.location.href = `mailto:${encodeURIComponent(grupo.email)}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+}
+
+/* ---------- render ---------- */
+
+function passaBusca(c){
+const norm = v => String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const filtro = document.getElementById('filtroRapido')?.value || 'todos';
+const filtroValor = norm(document.getElementById('filtroValor')?.value || '');
+let passaFiltro = true;
+if(filtro==='roteiro-prazo'){
+passaFiltro = c.etapa===BOTTLENECK_IDX && statusRoteiro(c, diasEntre(c.entrouEm)).key==='ok';
+} else if(filtro==='roteiro-fora'){
+passaFiltro = c.etapa===BOTTLENECK_IDX && ['atrasada','critica'].includes(statusRoteiro(c, diasEntre(c.entrouEm)).key);
+} else if(filtro==='roteiro-critico'){
+passaFiltro = c.etapa===BOTTLENECK_IDX && statusRoteiro(c, diasEntre(c.entrouEm)).key==='critica';
+} else if(filtro==='gestor'){
+passaFiltro = !filtroValor || norm(c.gestora).includes(filtroValor);
+} else if(filtro==='loja'){
+passaFiltro = !filtroValor || norm(c.loja).includes(filtroValor);
+} else if(filtro==='com-cobranca'){
+passaFiltro = Array.isArray(c.cobrancas) && c.cobrancas.length > 0;
+} else if(filtro==='sem-cobranca'){
+passaFiltro = !Array.isArray(c.cobrancas) || c.cobrancas.length === 0;
+}
+return passaFiltro;
+}
+
+function atualizarFiltroRapido(){
+const filtro = document.getElementById('filtroRapido')?.value || 'todos';
+const wrap = document.getElementById('filtroValorWrap');
+const input = document.getElementById('filtroValor');
+const usaValor = filtro==='gestor' || filtro==='loja';
+if(input){
+input.disabled = !usaValor;
+input.placeholder = usaValor ? (filtro==='loja' ? 'Digite a loja...' : 'Digite o gestor...') : 'Selecione gestor ou loja';
+if(!usaValor) input.value = '';
+}
+render();
 }
 
 function render(){
-const active=candidates.filter(c=>!c.encerrada&&c.etapa<DONE);
-const awaiting=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK);
-const threshold=Number(document.getElementById("threshold")?.value||3);
-const late=awaiting.filter(c=>days(c.entrouEm)>=threshold);
-const done=candidates.filter(c=>!c.encerrada&&c.etapa===DONE);
-const closed=candidates.filter(c=>c.encerrada);
-document.getElementById("stats").innerHTML=[
-{n:active.length,l:"Em andamento",c:""},
-{n:awaiting.length,l:"Aguardando roteiro",c:"warn"},
-{n:late.length,l:"Travadas - cobrar gestora",c:late.length?"alert":""},
-{n:done.length,l:"Contratadas",c:"done"},
-{n:closed.length,l:"Encerradas sem contratacao",c:"stop"}
-].map(s=>`<div class="stat ${s.c}"><div class="num">${s.n}</div><div class="lbl">${s.l}</div></div>`).join("");
-document.getElementById("totalLabel").textContent=`${candidates.length} candidata(s) no total`;
-renderPipeline();
+const thresholdRaw = Number(document.getElementById('thresholdInput').value);
+threshold = Number.isFinite(thresholdRaw) && thresholdRaw >= 0 ? thresholdRaw : 3;
+renderAtividadesDiarias();
+renderStats();
+renderRankingPromotores();
+renderTrilho();
 renderPendencias();
 renderBoard();
-renderFinals();
-renderUsers();
+renderFinalizados();
 }
 
-function renderPipeline(){
-document.getElementById("pipeline").innerHTML=ETAPAS.map((etapa,i)=>{
-const count=candidates.filter(c=>!c.encerrada&&c.etapa===i).length;
-return `<div class="node ${count?"filled":""} ${i===BOTTLENECK?"warn":""}"><div class="dot">${String(i+1).padStart(2,"0")}</div><div class="name">${esc(etapa)}</div><div class="count">${count||"-"}</div></div>`;
-}).join("");
+function renderStatsOld(){
+const ativos = candidatos.filter(c=>!c.encerrada && c.etapa<CONTRATADA_IDX).length;
+const aguardando = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX).length;
+const atrasadas = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX && diasEntre(c.entrouEm)>=threshold).length;
+const contratadas = candidatos.filter(c=>!c.encerrada && c.etapa===CONTRATADA_IDX).length;
+const encerradas = candidatos.filter(c=>c.encerrada).length;
+
+const stats = [
+{num:ativos, lbl:"Em andamento", cls:""},
+{num:aguardando, lbl:"Aguardando roteiro", cls:"warn"},
+{num:atrasadas, lbl:"Travadas â€” cobrar gestora", cls: atrasadas>0 ? "alert":""},
+{num:contratadas, lbl:"ContrataÃ§Ãµes concluÃ­das", cls:"done"},
+{num:encerradas, lbl:"Encerradas sem contrataÃ§Ã£o", cls:"stop"}
+];
+document.getElementById('stats').innerHTML = stats.map(s=>`
+<div class="stat ${s.cls}"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>
+`).join('');
 }
 
-function lastCharge(items){
-const all=items.flatMap(c=>c.cobrancas||[]);
-return all.sort((a,b)=>(b.data||0)-(a.data||0))[0];
+function alternarResumo(tipo){
+resumoAberto = resumoAberto === tipo ? null : tipo;
+renderStats();
+}
+function linhaCandidataResumo(c, extra=''){
+return `
+<tr>
+<td><b>${esc(nomeCandidata(c.nome))}</b></td>
+<td>${esc(textoPadrao(c.loja) || '-')}</td>
+<td>${esc(textoPadrao(c.gestora) || '-')}</td>
+<td>${extra}</td>
+</tr>`;
+}
+function tabelaResumo(headers, linhas){
+if(!linhas.length) return `<div class="summary-empty">Nenhuma candidata encontrada para este indicador.</div>`;
+return `
+<table class="summary-table">
+<thead><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+<tbody>${linhas.join('')}</tbody>
+</table>`;
+}
+
+function atividadeCard(c, tipo, titulo, detalhe, prioridade){
+return {c, tipo, titulo, detalhe, prioridade};
+}
+
+function montarAtividadesDiarias(){
+const hojeIso = dataIsoLocal();
+const atividades = [];
+candidatos.filter(c=>!c.encerrada && c.etapa<CONTRATADA_IDX && passaBusca(c)).forEach(c=>{
+const nome = nomeCandidata(c.nome);
+const loja = textoPadrao(c.loja) || '-';
+const gestora = textoPadrao(c.gestora) || '-';
+if(c.etapa===0){
+atividades.push(atividadeCard(c, 'Pendente', `Avaliar candidato para agendar entrevista`, `${nome} Â· ${loja} Â· Gestora: ${gestora}`, 9));
+}
+if(c.entrevistaData){
+const diffEntrevista = compararDataLocal(c.entrevistaData, hojeIso);
+if(diffEntrevista === 0 && c.etapa<=ENTREVISTA_IDX){
+atividades.push(atividadeCard(c, 'Hoje', `Realizar entrevista com ${nome}`, `${loja} Â· Gestora: ${gestora} Â· ${formatarEntrevistaAgendada(c)}`, 10));
+} else if(diffEntrevista !== null && diffEntrevista < 0 && c.etapa<=ENTREVISTA_IDX){
+atividades.push(atividadeCard(c, 'Atrasada', `Remarcar entrevista com ${nome}`, `${loja} Â· Entrevista prevista para ${formatarEntrevistaAgendada(c)}`, 20));
+}
+}
+if(c.exameData){
+const diffExame = compararDataLocal(c.exameData, hojeIso);
+if(diffExame === 0 && c.etapa===EXAME_IDX){
+atividades.push(atividadeCard(c, 'Hoje', `Acompanhar exame admissional de ${nome}`, `${loja} Â· Gestora: ${gestora} Â· ${formatarExameAdmissional(c)}`, 11));
+} else if(diffExame !== null && diffExame < 0 && c.etapa===EXAME_IDX){
+atividades.push(atividadeCard(c, 'Atrasada', `Verificar exame admissional de ${nome}`, `${loja} Â· Exame previsto para ${formatarExameAdmissional(c)}`, 21));
+}
+}
+if(c.etapa===2){
+atividades.push(atividadeCard(c, 'Pendente', `Realizar feedback com ${nome}`, `${loja} Â· Gestora: ${gestora}${c.entrevistaData ? ' Â· Entrevista: ' + formatarEntrevistaAgendada(c) : ''}`, 12));
+}
+if(c.etapa===BOTTLENECK_IDX){
+const dias = diasEntre(c.entrouEm);
+const semaforo = statusRoteiro(c, dias);
+if(semaforo.key==='critica'){
+atividades.push(atividadeCard(c, 'CrÃ­tica', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando Â· InÃ­cio previsto: ${fmtDataLocal(c.dataPrevista)}`, 1));
+} else if(semaforo.key==='atrasada'){
+atividades.push(atividadeCard(c, 'Atrasada', `Solicitar ao gestor(a) ${gestora} o envio de roteiro`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando`, 2));
+} else if(semaforo.key==='alerta'){
+atividades.push(atividadeCard(c, 'AtenÃ§Ã£o', `Acompanhar roteiro com ${gestora}`, `${nome} Â· ${loja} Â· ${dias} dia(s) aguardando`, 30));
+}
+}
+if(c.etapa===3){
+atividades.push(atividadeCard(c, 'Pendente', `Solicitar Ã  gestora a data de inÃ­cio de ${nome}`, `${loja} Â· Gestora: ${gestora}`, 40));
+}
+if(c.etapa===ROTEIRO_RECEBIDO_IDX){
+atividades.push(atividadeCard(c, 'Pendente', `Agendar exame admissional de ${nome}`, `${loja} Â· Gestora: ${gestora}`, 45));
+}
+});
+return atividades.sort((a,b)=>a.prioridade-b.prioridade || (a.c.entrouEm||0)-(b.c.entrouEm||0));
+}
+
+function abrirCardAtividade(id){
+cardsAbertos.add(id);
+renderBoard();
+setTimeout(()=>{
+const el = document.querySelector(`[data-card-id="${CSS.escape(id)}"]`);
+if(el){
+el.scrollIntoView({behavior:'smooth', block:'center'});
+el.classList.remove('focus-pulse');
+void el.offsetWidth;
+el.classList.add('focus-pulse');
+setTimeout(()=>el.classList.remove('focus-pulse'), 3600);
+}
+}, 0);
+}
+
+function renderAtividadesDiarias(){
+const el = document.getElementById('atividadesDiarias');
+if(!el) return;
+const atividades = montarAtividadesDiarias();
+const dataHoje = new Date().toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'2-digit'});
+const itens = atividades.length ? atividades.map(a=>{
+const tipoClasse = ['CrÃ­tica','Atrasada'].includes(a.tipo) ? 'urgent' : a.tipo === 'Hoje' ? 'today' : '';
+return `
+<div class="daily-item">
+<div class="daily-kind ${tipoClasse}">${esc(a.tipo)}</div>
+<div>
+<div class="daily-title">${esc(a.titulo)}</div>
+<div class="daily-meta">${esc(a.detalhe)}</div>
+</div>
+<button class="daily-open" onclick="abrirCardAtividade('${a.c.id}')">Abrir card</button>
+</div>`;
+}).join('') : `<div class="daily-empty">Nenhuma atividade prioritÃ¡ria para hoje.</div>`;
+el.innerHTML = `
+<section class="daily-box">
+<div class="daily-head">
+<div>
+<h2>Atividades para hoje</h2>
+<p class="sub">Lista automÃ¡tica do que o RH precisa acompanhar hoje.</p>
+</div>
+<div class="daily-date">${esc(dataHoje)}</div>
+</div>
+<div class="daily-list">${itens}</div>
+</section>`;
+}
+
+function renderResumoDetalhe(dados){
+if(!resumoAberto) return '';
+const {ativos, aguardandoLista, atencaoLista, criticasLista, mediaHoras, roteirosDetalhe, enviadosNoPrazo, foraDoPrazo, percentualNoPrazo, percentualForaPrazo} = dados;
+const detalhes = {
+andamento: {
+titulo: 'Candidaturas em andamento',
+nota: 'Lista de candidaturas que ainda nÃ£o foram encerradas nem concluÃ­das.',
+html: tabelaResumo(['Candidata','Loja','Gestora','Etapa'], ativos.map(c=>linhaCandidataResumo(c, esc(ETAPAS[c.etapa] || '-'))))
+},
+aguardando: {
+titulo: 'Candidaturas aguardando roteiro',
+nota: 'Lista de candidatas posicionadas na etapa Aguardando roteiro.',
+html: tabelaResumo(['Candidata','Loja','Gestora','Tempo na etapa'], aguardandoLista.map(c=>linhaCandidataResumo(c, `${diasEntre(c.entrouEm)} dia(s) - ${tempoDecorrido(c.entrouEm)}`)))
+},
+atencao: {
+titulo: 'Candidaturas em estado de atenÃ§Ã£o',
+nota: 'Candidatas em Aguardando roteiro hÃ¡ 3 a 4 dias.',
+html: tabelaResumo(['Candidata','Loja','Gestora','Tempo na etapa'], atencaoLista.map(c=>linhaCandidataResumo(c, `${diasEntre(c.entrouEm)} dia(s)`)))
+},
+critico: {
+titulo: 'Candidaturas em estado crÃ­tico',
+nota: 'Candidatas com inÃ­cio prÃ³ximo e roteiro ainda nÃ£o recebido.',
+html: tabelaResumo(['Candidata','Loja','Gestora','InÃ­cio previsto'], criticasLista.map(c=>linhaCandidataResumo(c, c.dataPrevista ? fmtDataLocal(c.dataPrevista) : '-')))
+},
+media: {
+titulo: 'Tempo mÃ©dio de envio dos roteiros',
+nota: roteirosDetalhe.length ? `Conta: soma dos tempos fechados em Aguardando roteiro (${formatarDuracaoHoras(mediaHoras * roteirosDetalhe.length)}) Ã· ${roteirosDetalhe.length} candidata(s) = ${formatarDuracaoHoras(mediaHoras)}.` : 'Ainda nÃ£o hÃ¡ candidatas que saÃ­ram de Aguardando roteiro para Roteiro recebido.',
+html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Tempo usado na conta'], roteirosDetalhe.map(r=>`
+<tr>
+<td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
+<td>${fmtDataHora(r.entrada)}</td>
+<td>${fmtDataHora(r.saida)}</td>
+<td>${formatarDuracaoHoras(r.horas)}</td>
+</tr>`))
+},
+prazo: {
+titulo: '% de roteiros recebidos no prazo',
+nota: roteirosDetalhe.length ? `Conta: ${enviadosNoPrazo} roteiro(s) recebidos fora das faixas vermelha/crÃ­tica Ã· ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualNoPrazo}.` : 'Ainda nÃ£o hÃ¡ candidaturas com entrada em Aguardando roteiro e saÃ­da para Roteiro recebido.',
+html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Resultado'], roteirosDetalhe.map(r=>`
+<tr>
+<td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
+<td>${fmtDataHora(r.entrada)}</td>
+<td>${fmtDataHora(r.saida)}</td>
+<td>${formatarDuracaoHoras(r.horas)} - ${r.noPrazo ? 'No prazo' : 'Fora do prazo'}</td>
+</tr>`))
+},
+foraPrazo: {
+titulo: '% de roteiros recebidos fora do prazo',
+nota: roteirosDetalhe.length ? `Conta: ${foraDoPrazo} roteiro(s) recebidos em fase vermelha/crÃ­tica Ã· ${roteirosDetalhe.length} roteiro(s) recebido(s) = ${percentualForaPrazo}.` : 'Ainda nÃ£o hÃ¡ candidaturas com entrada em Aguardando roteiro e saÃ­da para Roteiro recebido.',
+html: tabelaResumo(['Candidata','Entrada em aguardando roteiro','Roteiro recebido','Motivo'], roteirosDetalhe.filter(r=>r.foraDoPrazo).map(r=>`
+<tr>
+<td><b>${esc(nomeCandidata(r.candidata.nome))}</b></td>
+<td>${fmtDataHora(r.entrada)}</td>
+<td>${fmtDataHora(r.saida)}</td>
+<td>${r.estavaCritico ? 'CrÃ­tica' : 'Vermelha'} - ${formatarDuracaoHoras(r.horas)}</td>
+</tr>`))
+}
+};
+const d = detalhes[resumoAberto];
+if(!d) return '';
+return `
+<div class="summary-detail">
+<h3>${esc(d.titulo)}</h3>
+<p class="summary-note">${d.nota}</p>
+${d.html}
+</div>`;
+}
+
+function renderStats(){
+const ativosLista = candidatos.filter(c=>!c.encerrada && c.etapa<CONTRATADA_IDX);
+const aguardandoLista = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX);
+const atencaoLista = aguardandoLista.filter(c=>statusRoteiro(c, diasEntre(c.entrouEm)).key==='alerta');
+const criticasLista = aguardandoLista.filter(c=>statusRoteiro(c, diasEntre(c.entrouEm)).key==='critica');
+const roteirosDetalhe = candidatos.map(dadosRoteiroEnviado).filter(Boolean);
+const mediaHoras = roteirosDetalhe.length
+? roteirosDetalhe.reduce((total, r)=>total + r.horas, 0) / roteirosDetalhe.length
+: null;
+const enviadosNoPrazo = roteirosDetalhe.filter(r=>r.noPrazo).length;
+const foraDoPrazo = roteirosDetalhe.filter(r=>r.foraDoPrazo).length;
+const percentualNoPrazo = roteirosDetalhe.length ? `${Math.round((enviadosNoPrazo / roteirosDetalhe.length) * 100)}%` : '-';
+const percentualForaPrazo = roteirosDetalhe.length ? `${Math.round((foraDoPrazo / roteirosDetalhe.length) * 100)}%` : '-';
+const stats = [
+{id:'andamento', num:ativosLista.length, lbl:"Candidaturas em andamento", cls:""},
+{id:'aguardando', num:aguardandoLista.length, lbl:"Candidaturas aguardando roteiro", cls:"warn"},
+{id:'atencao', num:atencaoLista.length, lbl:"Candidaturas em estado de atenÃ§Ã£o", cls:"attention"},
+{id:'critico', num:criticasLista.length, lbl:"Candidaturas em estado crÃ­tico", cls:"alert"},
+{id:'media', num:formatarDuracaoHorasResumo(mediaHoras), lbl:"Tempo mÃ©dio de envio dos roteiros", cls:""},
+{id:'prazo', num:percentualNoPrazo, lbl:"% de roteiros recebidos no prazo", cls:"done"},
+{id:'foraPrazo', num:percentualForaPrazo, lbl:"% de roteiros recebidos fora do prazo", cls:"alert"}
+];
+const detalhes = renderResumoDetalhe({ativos:ativosLista, aguardandoLista, atencaoLista, criticasLista, mediaHoras, roteirosDetalhe, enviadosNoPrazo, foraDoPrazo, percentualNoPrazo, percentualForaPrazo});
+document.getElementById('stats').innerHTML = `
+<section class="summary-box">
+<h2 class="summary-title">Resumo geral das candidaturas</h2>
+<div class="summary-grid">
+${stats.map(s=>`
+<button class="stat ${s.cls} ${resumoAberto===s.id?'active':''}" type="button" onclick="alternarResumo('${s.id}')"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></button>
+`).join('')}
+</div>
+${detalhes}
+</section>`;
+}
+
+function calcularRankingPromotores(){
+const mapa = new Map();
+function grupoPara(c){
+const nome = textoPadrao(c.gestora) || 'Sem gestora';
+if(!mapa.has(nome)){
+mapa.set(nome, {
+nome,
+recebidos:0,
+noPrazo:0,
+foraPrazo:0,
+horasTotal:0,
+aguardandoAte4:0,
+aguardandoMais4:0
+});
+}
+return mapa.get(nome);
+}
+candidatos.forEach(c=>{
+if(!c.gestora || !passaBusca(c)) return;
+const grupo = grupoPara(c);
+const roteiro = dadosRoteiroEnviado(c);
+if(roteiro){
+grupo.recebidos++;
+grupo.horasTotal += roteiro.horas;
+if(roteiro.noPrazo) grupo.noPrazo++;
+if(roteiro.foraDoPrazo) grupo.foraPrazo++;
+}
+if(!c.encerrada && c.etapa===BOTTLENECK_IDX){
+const dias = diasEntre(c.entrouEm);
+if(dias <= 4) grupo.aguardandoAte4++;
+else grupo.aguardandoMais4++;
+}
+});
+return Array.from(mapa.values()).map(g=>{
+const mediaHoras = g.recebidos ? g.horasTotal / g.recebidos : null;
+const percentualPrazo = g.recebidos ? Math.round((g.noPrazo / g.recebidos) * 100) : null;
+const score = (percentualPrazo ?? 0) + (g.noPrazo * 8) - (g.foraPrazo * 12) - (g.aguardandoMais4 * 10) - (mediaHoras !== null ? Math.min(mediaHoras / 6, 20) : 0);
+return {...g, mediaHoras, percentualPrazo, score};
+});
+}
+
+function ordenarRankingPromotores(lista){
+const ordenadores = {
+desempenho: (a,b)=>b.score - a.score,
+prazo: (a,b)=>(b.percentualPrazo ?? -1) - (a.percentualPrazo ?? -1) || b.noPrazo - a.noPrazo,
+foraPrazo: (a,b)=>b.foraPrazo - a.foraPrazo,
+media: (a,b)=>(a.mediaHoras ?? Infinity) - (b.mediaHoras ?? Infinity),
+aguardandoAte4: (a,b)=>b.aguardandoAte4 - a.aguardandoAte4,
+aguardandoMais4: (a,b)=>b.aguardandoMais4 - a.aguardandoMais4
+};
+return [...lista].sort(ordenadores[rankingOrdenacao] || ordenadores.desempenho);
+}
+
+function alterarOrdenacaoRanking(valor){
+rankingOrdenacao = valor;
+renderRankingPromotores();
+}
+
+function renderRankingPromotores(){
+const el = document.getElementById('rankingPromotores');
+if(!el) return;
+const ranking = ordenarRankingPromotores(calcularRankingPromotores());
+const maiorVolume = Math.max(1, ...ranking.map(r=>r.noPrazo + r.foraPrazo + r.aguardandoAte4 + r.aguardandoMais4));
+const opcoes = [
+['desempenho','Melhor desempenho'],
+['prazo','Mais roteiros no prazo'],
+['foraPrazo','Mais roteiros fora do prazo'],
+['media','Menor tempo mÃ©dio'],
+['aguardandoAte4','Mais aguardando atÃ© 4 dias'],
+['aguardandoMais4','Mais aguardando acima de 4 dias']
+];
+const linhas = ranking.length ? ranking.map((r, i)=>{
+const totalBarra = r.noPrazo + r.foraPrazo + r.aguardandoAte4 + r.aguardandoMais4;
+const segmento = (valor, classe, rotulo)=> valor > 0
+? `<span class="ranking-segment ${classe}" style="width:${Math.max(7, Math.round((valor / maiorVolume) * 100))}%" title="${rotulo}: ${valor}">${valor}</span>`
+: '';
+return `
+<div class="ranking-chart-row">
+<div>
+<div class="ranking-name">${i + 1}. ${esc(r.nome)}</div>
+</div>
+<div class="ranking-track" aria-label="Desempenho de ${esc(r.nome)}">
+${totalBarra ? [
+segmento(r.noPrazo, 'ranking-ok', 'Roteiros no prazo'),
+segmento(r.foraPrazo, 'ranking-late', 'Roteiros fora do prazo'),
+segmento(r.aguardandoAte4, 'ranking-wait-ok', 'Aguardando atÃ© 4 dias'),
+segmento(r.aguardandoMais4, 'ranking-wait-late', 'Aguardando acima de 4 dias')
+].join('') : '<span class="ranking-segment" style="width:100%">Sem volume</span>'}
+</div>
+<div class="ranking-time">${formatarDuracaoHoras(r.mediaHoras)}<span>Tempo mÃ©dio de envio dos roteiros</span></div>
+</div>`;
+}).join('') : `<div class="ranking-empty">Nenhum roteiro recebido ou aguardando para montar o ranking.</div>`;
+el.innerHTML = `
+<section class="ranking-box">
+<div class="ranking-head">
+<div>
+<h2>Ranking de desempenho por gestor</h2>
+<p class="sub">ClassificaÃ§Ã£o baseada no envio dos roteiros, prazo de recebimento e pendÃªncias atuais por gestor.</p>
+</div>
+<label class="ranking-controls">Ordenar por
+<select onchange="alterarOrdenacaoRanking(this.value)">
+${opcoes.map(([valor, label])=>`<option value="${valor}" ${rankingOrdenacao===valor?'selected':''}>${label}</option>`).join('')}
+</select>
+</label>
+</div>
+<div class="ranking-legend" aria-label="Legenda do ranking">
+<span><i class="ranking-ok"></i>Roteiros no prazo</span>
+<span><i class="ranking-late"></i>Roteiros fora do prazo</span>
+<span><i class="ranking-wait-ok"></i>Aguardando atÃ© 4 dias</span>
+<span><i class="ranking-wait-late"></i>Aguardando acima de 4 dias</span>
+</div>
+<div class="ranking-chart">${linhas}</div>
+</section>`;
+}
+
+function renderTrilho(){
+const html = ETAPAS.slice(0, CONTRATADA_IDX).map((nome, idx)=>{
+const nesta = candidatos.filter(c=>!c.encerrada && c.etapa===idx);
+const isBottleneck = idx===BOTTLENECK_IDX;
+const atrasadas = isBottleneck ? nesta.filter(c=>diasEntre(c.entrouEm)>=threshold).length : 0;
+let cls = "no";
+if(nesta.length>0) cls += " filled";
+if(isBottleneck) cls += " bottleneck";
+if(isBottleneck && atrasadas>0) cls += " late";
+const countCls = (isBottleneck && atrasadas>0) ? "count late" : "count";
+const countTxt = nesta.length>0 ? `${nesta.length}${atrasadas>0?` Â· ${atrasadas} atrasada(s)`:''}` : 'â€”';
+return `
+<div class="${cls}">
+<div class="dot">${String(idx+1).padStart(2,'0')}</div>
+<div class="name">${esc(nome)}</div>
+<div class="${countCls}">${countTxt}</div>
+</div>`;
+}).join('');
+document.getElementById('trilho').innerHTML = html;
 }
 
 function renderPendencias(){
-const pend=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK&&c.gestora&&searchMatch(c));
-if(!pend.length){document.getElementById("pendencias").innerHTML='<p class="empty">Nenhuma pendencia de roteiro no momento.</p>';return;}
-const groups={};
-pend.forEach(c=>{(groups[c.gestora] ||= []).push(c);});
-const rows=Object.keys(groups).sort().map(g=>{
-const items=groups[g];
-const email=items.find(c=>c.emailGestora)?.emailGestora||"";
-const last=lastCharge(items);
-const list=items.map(c=>`<li>${esc(c.nome)} (${esc(c.loja)}, ${days(c.entrouEm)}d)</li>`).join("");
-return `<tr><td><b>${esc(g)}</b><br>${items.length} candidata(s) aguardando roteiro<ul class="pend-list">${list}</ul></td><td>${esc(email)||'<span class="last-charge">Sem e-mail</span>'}</td><td>${last?`<div class="last-charge"><b>${fmt(last.data)}</b><br>${esc(last.usuario)}</div>`:'<span class="last-charge">Sem cobranca registrada</span>'}</td><td><button class="pend-btn" onclick="chargeGroup('${esc(g)}')">Cobrar gestora</button></td></tr>`;
-}).join("");
-document.getElementById("pendencias").innerHTML=`<div class="pend-actions"><div class="hint">${Object.keys(groups).length} e-mail(s) prontos para abrir no Outlook, agrupados por gestora.</div><button class="pend-btn" onclick="prepareAllEmails()">Preparar e-mails no Outlook</button></div><table class="pend-table"><thead><tr><th>Gestora / candidatas</th><th>E-mail</th><th>Ultima cobranca</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+const pendentes = candidatos.filter(c=>!c.encerrada && c.etapa===BOTTLENECK_IDX && c.gestora && passaBusca(c));
+pendGroupsCache = [];
+if(pendentes.length===0){
+document.getElementById('pendGestora').innerHTML = `<p class="pend-empty">Nenhuma pendÃªncia de roteiro no momento.</p>`;
+return;
+}
+const disparosDisponiveis = montarDisparosCobranca().length;
+const porGestora = {};
+pendentes.forEach(c=>{
+const gestoraKey = textoPadrao(c.gestora);
+if(!porGestora[gestoraKey]) porGestora[gestoraKey]=[];
+porGestora[gestoraKey].push(c);
+});
+const html = Object.keys(porGestora).sort().map(gestora=>{
+const itens = porGestora[gestora];
+const pendentesGestora = itens;
+const idx = pendGroupsCache.length;
+const emailRef = pendentesGestora.find(c=>c.emailGestora)?.emailGestora || itens.find(c=>c.emailGestora)?.emailGestora;
+pendGroupsCache.push({gestora, itens: pendentesGestora, emailRef});
+const maiorAtraso = pendentesGestora.length ? Math.max(...pendentesGestora.map(c=>diasEntre(c.entrouEm))) : 0;
+const temAtraso = maiorAtraso>=threshold;
+const aberta = gestorasCobrancaAbertas.has(gestora);
+const cobrancasGestoraHtml = ultimaCobrancaGestoraAtualHtml(pendentesGestora);
+const linhasCandidatas = pendentesGestora.length ? ordenarCardsDaEtapa(pendentesGestora, BOTTLENECK_IDX).map(c=>{
+const cobrancasCandidataHtml = cobrancasHtml([c]);
+return `
+<tr class="pend-candidate-row">
+<td>
+<div class="pend-candidate-name">${esc(nomeCandidata(c.nome))}</div>
+<div class="pend-candidate-meta">${esc(textoPadrao(c.loja) || '-')} Â· ${diasEntre(c.entrouEm)} dia(s) aguardando</div>
+</td>
+<td>${c.emailGestora ? esc(String(c.emailGestora).trim().toLowerCase()) : '<span class="pend-last">Sem e-mail cadastrado</span>'}</td>
+<td>${cobrancasCandidataHtml}</td>
+<td></td>
+</tr>`;
+}).join('') : `
+<tr class="pend-candidate-row">
+<td colspan="4"><div class="pend-last">Nenhuma candidata pendente para esta gestora.</div></td>
+</tr>`;
+return `
+<tr class="pend-group-row">
+<td>
+<button class="pend-toggle" onclick="toggleGestoraCobranca(${idx})" title="${aberta?'Ocultar candidatas':'Mostrar candidatas'}">${aberta?'â–²':'â–¼'}</button>
+<span class="pend-manager">${esc(textoPadrao(gestora))}</span>
+<span class="pend-count">${pendentesGestora.length} candidata(s) aguardando</span>
+</td>
+<td>${emailRef ? esc(String(emailRef).trim().toLowerCase()) : '<span class="pend-last">Sem e-mail cadastrado</span>'}</td>
+<td>${cobrancasGestoraHtml}</td>
+<td>${pendentesGestora.length ? `<button class="pend-btn ${temAtraso?'':'soft'}" onclick="cobrarGestoraConsolidado(${idx})">Cobrar gestora</button>` : '<span class="pend-last">Sem pendÃªncias</span>'}</td>
+</tr>
+${aberta ? linhasCandidatas : ''}`;
+}).join('');
+const batchHtml = disparosDisponiveis>0 ? `
+<div class="pend-actions">
+<div class="hint">${disparosDisponiveis} e-mail(s) prontos para abrir no Outlook, agrupados por endereÃ§o.</div>
+<button class="pend-btn soft wide" onclick="abrirModalDisparo()">Cobrar todas as gestoras</button>
+</div>` : `<div class="pend-actions"><div class="hint">Nenhuma cobranÃ§a pendente para preparar no Outlook.</div></div>`;
+document.getElementById('pendGestora').innerHTML = batchHtml + `
+<table class="pend-table">
+<thead><tr><th>Gestora</th><th>E-mail</th><th>HistÃ³rico de cobranÃ§as</th><th></th></tr></thead>
+<tbody>${html}</tbody>
+</table>`;
 }
 
 function renderBoard(){
-const list=candidates.filter(c=>!c.encerrada&&c.etapa<DONE&&searchMatch(c));
-document.getElementById("board").innerHTML=ETAPAS.slice(0,DONE).map((etapa,i)=>{
-const items=list.filter(c=>c.etapa===i);
-const cards=items.length?items.map(c=>cardHtml(c,i)).join(""):'<div class="empty">Nenhuma candidata</div>';
-return `<div class="col" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropCard(event,${i})"><div class="col-head">${String(i+1).padStart(2,"0")} - ${esc(etapa)} (${items.length})</div>${cards}</div>`;
-}).join("");
+let lista = candidatos.filter(c=>!c.encerrada && c.etapa<CONTRATADA_IDX && passaBusca(c));
+
+const cols = ETAPAS.slice(0, CONTRATADA_IDX).map((nome, idx)=>{
+const itens = ordenarCardsDaEtapa(lista.filter(c=>c.etapa===idx), idx);
+const cardsHtml = itens.length===0 ? `<div class="empty-col">Nenhuma candidata</div>` :
+itens.map(c=>{
+const dias = diasEntre(c.entrouEm);
+const isBottleneck = idx===BOTTLENECK_IDX;
+const isLate = isBottleneck && dias>=threshold;
+const semaforo = isBottleneck ? statusRoteiro(c, dias) : null;
+let cardCls = "card";
+if(isBottleneck) cardCls += " bottleneck";
+if(isLate) cardCls += " late";
+if(semaforo) cardCls += " semaforo-" + semaforo.key;
+if(cardsAbertos.has(c.id)) cardCls += " open";
+const editLock = lockDeOutroUsuario(c.id);
+if(editLock) cardCls += " editing-by-other";
+const historico = compactarHistoricoEtapas(c.historico);
+const historicoHtml = historico.length
+? `<ul class="card-list">${historico.map(h=>`<li><b>${esc(nomeEtapaHistorico(h))}:</b> ${esc(formatarDataHistoricoCard(c, h))}</li>`).join('')}${isBottleneck ? `<li><b>Tempo aguardando roteiro:</b> ${tempoDecorrido(c.entrouEm)}</li>` : ''}</ul>`
+: `<div class="card-empty">Nenhum histÃ³rico registrado.</div>`;
+const podeCobrar = semaforo && ['atrasada','critica'].includes(semaforo.key);
+const roteiroTopHtml = isBottleneck ? `
+<div class="card-topline">
+<div class="dias">${dias} ${dias===1?'dia':'dias'} aguardando${semaforo ? `<span class="semaforo-tag">${semaforo.label}</span>` : ''}</div>
+${podeCobrar ? `<button class="cobrar-btn" onclick="event.stopPropagation(); cobrarGestora('${c.id}')">Cobrar gestora</button>` : ''}
+</div>` : '';
+const metaParts = [esc(textoPadrao(c.loja))];
+if(c.horario) metaParts.push(esc(c.horario));
+let metaHtml = metaParts.join(' Â· ');
+if(c.entrevistaData) metaHtml += '<br>Data Entrevista: ' + esc(formatarEntrevistaAgendada(c));
+if(c.dataPrevista) metaHtml += '<br>InÃ­cio previsto: ' + fmtDataLocal(c.dataPrevista);
+if(c.exameData) metaHtml += '<br>Exame admissional: ' + esc(formatarExameAdmissional(c));
+
+return `
+<div class="${cardCls}" data-card-id="${esc(c.id)}" draggable="true" ondragstart="iniciarArraste(event,'${c.id}')" ondragend="finalizarArraste(event)">
+<div class="card-summary" onclick="alternarCard('${c.id}')">
+${roteiroTopHtml}
+<div class="card-main">
+<button class="nome" onclick="event.stopPropagation(); abrirHistorico('${c.id}')">${esc(nomeCandidata(c.nome))}</button>
+<div class="card-people">Gestora: <b>${esc(textoPadrao(c.gestora) || '-')}</b></div>
+${editLock ? `<span class="editing-pill">Em edicao por ${esc(nomeUsuarioLock(editLock))}</span>` : ''}
+</div>
+<button class="edit-card" type="button" title="Editar candidatura" aria-label="Editar candidatura" onclick="event.stopPropagation(); abrirModal('${c.id}')">âœŽ</button>
+<button class="toggle-card" type="button" aria-label="${cardsAbertos.has(c.id)?'Ocultar detalhes':'Mostrar detalhes'}">${cardsAbertos.has(c.id)?'â–²':'â–¼'}</button>
+</div>
+<div class="card-action-title">PrÃ³xima aÃ§Ã£o do RH: <span>${esc(proximaAcaoRH(c.etapa))}</span></div>
+<div class="meta">${metaHtml}</div>
+<div class="card-details">
+<div class="card-section">
+<div class="card-section-title">HistÃ³rico da candidatura</div>
+${historicoHtml}
+</div>
+<div class="card-actions">
+<button class="done-btn" onclick="concluirCandidatura('${c.id}')">Concluir candidatura</button>
+<button class="enc-btn" onclick="abrirModalEnc('${c.id}')">Encerrar / reprovar</button>
+<button class="del-btn" onclick="confirmarRemover('${c.id}')">Remover</button>
+</div>
+</div>
+</div>`;
+}).join('');
+
+return `
+<div class="col" ondragover="permitirDrop(event)" ondragleave="sairDrop(event)" ondrop="soltarNaEtapa(event, ${idx})">
+<div class="col-head"><b>${String(idx+1).padStart(2,'0')}</b> Â· ${esc(nome)}</div>
+${cardsHtml}
+</div>`;
+}).join('');
+
+document.getElementById('board').innerHTML = cols;
 }
 
-function cardHtml(c,idx){
-const threshold=Number(document.getElementById("threshold").value||3);
-const late=idx===BOTTLENECK&&days(c.entrouEm)>=threshold;
-const open=openCards.has(c.id);
-return `<div class="card-item ${late?"late":""} ${open?"open":""}" draggable="true" ondragstart="dragCard(event,'${c.id}')" ondragend="endDrag(event)"><div class="card-summary" onclick="toggleCard('${c.id}')"><button class="name-btn" onclick="event.stopPropagation();showHistory('${c.id}')">${esc(c.nome)}</button><div class="days">${days(c.entrouEm)} dia(s)</div><button class="toggle-card">${open?"▲":"▼"}</button></div><div class="details">${esc(c.loja)}${c.horario?" · "+esc(c.horario):""}<br>Gestora: ${esc(c.gestora||"-")}<div class="card-actions">${late?`<button class="small-btn" onclick="chargeOne('${c.id}')">Cobrar gestora</button>`:""}<button class="small-btn green" onclick="finishCandidate('${c.id}')">Concluir candidatura</button><button class="small-btn purple" onclick="closeCandidate('${c.id}')">Encerrar / reprovar</button><button class="small-btn red" onclick="removeCandidate('${c.id}')">Remover</button></div></div></div>`;
+function usuarioEncerramento(c){
+if(c.encerradaPor) return c.encerradaPor;
+const historico = Array.isArray(c.historico) ? [...c.historico].reverse() : [];
+const registro = historico.find(h=>String(h.etapa || '').toLowerCase().includes('processo encerrado'));
+return registro?.usuario || '-';
 }
 
-function toggleCard(id){openCards.has(id)?openCards.delete(id):openCards.add(id);renderBoard();}
-function dragCard(e,id){dragId=id;e.dataTransfer.effectAllowed="move";e.currentTarget.classList.add("dragging");}
-function endDrag(e){e.currentTarget.classList.remove("dragging");document.querySelectorAll(".col.drag-over").forEach(c=>c.classList.remove("drag-over"));}
-function allowDrop(e){e.preventDefault();e.currentTarget.classList.add("drag-over");}
-function leaveDrop(e){if(!e.currentTarget.contains(e.relatedTarget))e.currentTarget.classList.remove("drag-over");}
-function dropCard(e,step){e.preventDefault();const c=candidates.find(x=>x.id===dragId);if(c&&c.etapa!==step){c.etapa=step;c.entrouEm=Date.now();c.historico.push({etapa:ETAPAS[step],data:Date.now(),obs:"Movido na demo"});toast("Etapa atualizada na demo.");render();}}
-
-function chargeText(group){
-const rows=group.items.map(c=>`- ${c.nome} (${c.loja}) - ${days(c.entrouEm)} dia(s) aguardando`).join("\n");
-return `Ola ${group.gestora}, tudo bem?\n\nSeguem as candidatas aprovadas pelo RH que ainda estao aguardando o roteiro para seguirmos com a contratacao:\n${rows}\n\nPoderia nos enviar assim que possivel?\n\nObrigado!`;
+function tabelaHistoricoCandidaturas(lista, tipo){
+if(!lista.length){
+return `<p class="fin-empty">${tipo==='contratadas' ? 'Nenhuma contrataÃ§Ã£o concluÃ­da ainda.' : 'Nenhum processo encerrado sem contrataÃ§Ã£o.'}</p>`;
 }
-function openMail(group){
-if(!group.email){toast("Gestora sem e-mail cadastrado.");return;}
-window.location.href=`mailto:${encodeURIComponent(group.email)}?subject=${encodeURIComponent("Roteiros pendentes - "+group.gestora)}&body=${encodeURIComponent(chargeText(group))}`;
-group.items.forEach(c=>{(c.cobrancas ||= []).push({data:Date.now(),usuario:"demo-admin",email:group.email,gestora:group.gestora});});
-toast("E-mail preparado e cobranca registrada na demo.");
-render();
-}
-function groupByManager(name){
-const items=candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK&&c.gestora===name);
-return {gestora:name,email:items.find(c=>c.emailGestora)?.emailGestora||"",items};
-}
-function chargeGroup(name){openMail(groupByManager(name));}
-function chargeOne(id){const c=candidates.find(x=>x.id===id);if(c)openMail({gestora:c.gestora||"gestora",email:c.emailGestora||"",items:[c]});}
-function prepareAllEmails(){const names=[...new Set(candidates.filter(c=>!c.encerrada&&c.etapa===BOTTLENECK).map(c=>c.gestora))];if(!names.length)return toast("Nenhuma pendencia para preparar.");openMail(groupByManager(names[0]));toast("Demo abre um e-mail por vez no cliente padrao.");}
-
-function finishCandidate(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.etapa=DONE;c.entrouEm=Date.now();c.contratadaEm=Date.now();c.contratadaPor="demo-admin";c.historico.push({etapa:"Contratada",data:Date.now(),obs:"Aprovada por demo-admin"});toast("Candidatura concluida na demo.");render();}
-function closeCandidate(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.encerrada=true;c.encerradaEm=Date.now();c.encerradaNaEtapa=ETAPAS[c.etapa];c.motivo="Encerramento demo";c.detalhe="Registro ficticio";toast("Processo encerrado na demo.");render();}
-function removeCandidate(id){candidates=candidates.filter(c=>c.id!==id);toast("Candidata removida da demo.");render();}
-function reopen(id){const c=candidates.find(x=>x.id===id);if(!c)return;c.encerrada=false;if(c.etapa===DONE)c.etapa=DONE-1;c.contratadaEm=null;c.contratadaPor="";c.entrouEm=Date.now();toast("Processo reaberto na demo.");render();}
-function showHistory(id){const c=candidates.find(x=>x.id===id);if(!c)return;toast(`${c.nome}: ${c.historico.length} evento(s) no historico demo.`);}
-
-function setFinalTab(tab){finalTab=tab;document.getElementById("tabEncerradas").classList.toggle("active",tab==="encerradas");document.getElementById("tabContratadas").classList.toggle("active",tab==="contratadas");renderFinals();}
-function renderFinals(){
-const list=finalTab==="contratadas"?candidates.filter(c=>!c.encerrada&&c.etapa===DONE&&searchMatch(c)):candidates.filter(c=>c.encerrada&&searchMatch(c));
-document.getElementById("finalList").innerHTML=list.length?list.map(c=>`<div class="final-row"><div><b>${esc(c.nome)}</b><div class="meta">${esc(c.loja)}${c.gestora?" · Gestora: "+esc(c.gestora):""}${finalTab==="contratadas"?` · aprovada em: ${fmt(c.contratadaEm||c.entrouEm)} · por: ${esc(c.contratadaPor||"-")}`:` · parou em: ${esc(c.encerradaNaEtapa||"-")} · ${fmt(c.encerradaEm)}`}</div></div><button class="reopen" onclick="reopen('${c.id}')">Reabrir processo</button></div>`).join(""):`<p class="empty">Nenhum registro nesta aba.</p>`;
+const dataLabel = tipo==='contratadas' ? 'Data de aprovaÃ§Ã£o' : 'Data de encerramento do processo';
+const horaLabel = tipo==='contratadas' ? 'Hora de aprovaÃ§Ã£o' : 'Hora de encerramento';
+const linhas = lista.map(c=>{
+const ts = tipo==='contratadas' ? (c.contratadaEm || c.entrouEm) : c.encerradaEm;
+const usuario = tipo==='contratadas' ? (c.contratadaPor || '-') : usuarioEncerramento(c);
+const motivoCell = tipo==='contratadas' ? '' : `<td>${esc(c.motivo || '-')}</td>`;
+const obsCell = tipo==='contratadas' ? '' : `<td>${esc(c.detalhe || '-')}</td>`;
+return `
+<tr>
+<td><button class="fin-name-btn" onclick="abrirHistorico('${c.id}')"><b>${esc(nomeCandidata(c.nome))}</b></button></td>
+<td>${esc(textoPadrao(c.gestora) || '-')}</td>
+<td>${fmtData(ts)}</td>
+<td>${fmtHora(ts)}</td>
+<td>${esc(usuario)}</td>
+${motivoCell}
+${obsCell}
+<td class="fin-table-actions"><button class="reabrir-btn" onclick="reabrir('${c.id}')">Reabrir processo</button></td>
+</tr>`;
+}).join('');
+const encerramentoHeads = tipo==='contratadas' ? '' : '<th>Motivo</th><th>Obs</th>';
+return `
+<table class="fin-table">
+<thead><tr><th>Nome candidato</th><th>Gestor</th><th>${dataLabel}</th><th>${horaLabel}</th><th>UsuÃ¡rio</th>${encerramentoHeads}<th></th></tr></thead>
+<tbody>${linhas}</tbody>
+</table>`;
 }
 
-function renderUsers(){
-document.getElementById("usersTable").innerHTML=users.map((u,i)=>`<tr><td><b>${esc(u.login)}</b></td><td>${esc(u.email)}</td><td><span class="badge ${u.role==="Admin"?"admin":""}">${esc(u.role)}</span></td><td><span class="badge ${u.active?"active":"inactive"}">${u.active?"Ativo":"Inativo"}</span></td><td><div class="user-actions"><button class="user-action" onclick="openUserModal(${i})">Editar</button><button class="user-action" onclick="toggleUser(${i})">${u.active?"Inativar":"Ativar"}</button><button class="user-action red" onclick="removeUser(${i})">Remover</button></div></td></tr>`).join("");
-}
-function openCandidateModal(){document.getElementById("candidateModal").classList.add("show");}
-function closeCandidateModal(){document.getElementById("candidateModal").classList.remove("show");}
-function addCandidate(){
-const nome=document.getElementById("fNome").value.trim();
-const loja=document.getElementById("fLoja").value.trim();
-if(!nome||!loja)return toast("Preencha nome e loja.");
-candidates.push({id:"c"+Date.now(),nome,loja,horario:document.getElementById("fHorario").value.trim(),gestora:document.getElementById("fGestora").value.trim(),emailGestora:document.getElementById("fEmail").value.trim(),etapa:0,entrouEm:Date.now(),historico:[{etapa:ETAPAS[0],data:Date.now(),obs:"Criada na demo"}],cobrancas:[]});
-["fNome","fLoja","fHorario","fGestora","fEmail"].forEach(id=>document.getElementById(id).value="");
-closeCandidateModal();toast("Candidata criada na demo.");render();
-}
-function openUserModal(index=null){
-editingUserIndex = index;
-const editing = index !== null;
-const user = editing ? users[index] : {login:"",email:"",role:"Usuario",active:true};
-document.getElementById("userModalTitle").textContent = editing ? "Editar usuario demo" : "Novo usuario demo";
-document.getElementById("userSaveBtn").textContent = editing ? "Salvar alteracoes" : "Adicionar";
-document.getElementById("uLogin").value = user.login;
-document.getElementById("uEmail").value = user.email;
-document.getElementById("uRole").value = user.role;
-document.getElementById("uActive").value = String(user.active);
-document.getElementById("uPassword").value = "";
-document.getElementById("userModal").classList.add("show");
-}
-function closeUserModal(){editingUserIndex=null;document.getElementById("userModal").classList.remove("show");}
-function isLastActiveAdmin(index){
-const user=users[index];
-return user?.role==="Admin"&&user.active&&users.filter(u=>u.role==="Admin"&&u.active).length===1;
-}
-function saveUser(){
-const login=document.getElementById("uLogin").value.trim();
-const email=document.getElementById("uEmail").value.trim();
-const password=document.getElementById("uPassword").value.trim();
-if(!login||!email)return toast("Preencha login e e-mail.");
-if(password && !/^\d{6}$/.test(password))return toast("A senha demo precisa ter 6 digitos.");
-if(users.some((u,i)=>i!==editingUserIndex&&u.login.toLowerCase()===login.toLowerCase()))return toast("Este login ja existe na demo.");
-const next={login,email,role:document.getElementById("uRole").value,active:document.getElementById("uActive").value==="true"};
-if(editingUserIndex!==null){
-if(isLastActiveAdmin(editingUserIndex)&&(next.role!=="Admin"||!next.active))return toast("Mantenha ao menos um admin ativo.");
-users[editingUserIndex]={...users[editingUserIndex],...next};
-if(password)users[editingUserIndex].password=password;
-toast(password?"Usuario e senha atualizados na demo.":"Usuario atualizado na demo.");
-}else{
-users.push({...next,password:password||"123456"});
-toast("Usuario demo criado.");
-}
-closeUserModal();renderUsers();
-}
-function toggleUser(index){
-if(isLastActiveAdmin(index))return toast("Mantenha ao menos um admin ativo.");
-users[index].active=!users[index].active;
-toast(users[index].active?"Usuario ativado na demo.":"Usuario inativado na demo.");
-renderUsers();
-}
-function removeUser(index){
-if(isLastActiveAdmin(index))return toast("Mantenha ao menos um admin ativo.");
-if(!confirm("Remover este usuario demo?"))return;
-users.splice(index,1);
-toast("Usuario removido da demo.");
-renderUsers();
-}
+function renderFinalizados(){
+document.getElementById('finTabs').innerHTML = `
+<button class="${finTab==='reprovadas'?'active':''}" onclick="setFinTab('reprovadas')">Encerradas sem contrataÃ§Ã£o</button>
+<button class="${finTab==='contratadas'?'active':''}" onclick="setFinTab('contratadas')">ContrataÃ§Ãµes concluÃ­das</button>
+`;
 
-render();
+if(finTab==='contratadas'){
+const lista = candidatos.filter(c=>!c.encerrada && c.etapa===CONTRATADA_IDX && passaBusca(c));
+document.getElementById('finList').innerHTML = tabelaHistoricoCandidaturas(lista, 'contratadas');
+} else {
+const lista = candidatos.filter(c=>c.encerrada && passaBusca(c));
+document.getElementById('finList').innerHTML = tabelaHistoricoCandidaturas(lista, 'reprovadas');
+}
+}
+function setFinTab(tab){finTab=tab;render();}
+
+document.getElementById('thresholdInput').addEventListener('input', render);
+document.getElementById('loginPassword').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+document.getElementById('loginUsuario').addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+document.getElementById('adminPassword').addEventListener('keydown', e=>{ if(e.key==='Enter') loginComoAdmin(); });
+document.getElementById('adminLogin').addEventListener('keydown', e=>{ if(e.key==='Enter') loginComoAdmin(); });
+verificarSessao();
 </script>
 </body>
 </html>
