@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Contratação · Estudo de caso</title>
+  <meta name="description" content="Estudo de caso: painel que acompanha candidatas da triagem do currículo à contratação, com o envio do roteiro pela gestora no centro. Semáforo de prazo, cobranças por e-mail, indicadores e ranking. Demonstração com dados fictícios.">
+  <meta property="og:title" content="Painel de Contratação · do currículo à contratação">
+  <meta property="og:description" content="Oito etapas, um gargalo vigiado de perto: semáforo do roteiro, cobrança das gestoras, indicadores com a conta à vista e ranking por gestor.">
+  <meta property="og:image" content="assets/painel-visao.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/estudo.css">
+  <style>
+    /* Identidade do Painel de Contratação: âmbar das abas ativas e verde-petróleo do funil. */
+    :root { --accent: #e39a4b; --accent-2: #e39a4b; --on-accent: #1b2733; --accent-wash: rgba(227, 154, 75, 0.12); --green: #5bb5a9; --green-wash: rgba(91, 181, 169, 0.12); }
+    :root[data-theme="light"] { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); }
+    @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); } }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="#inicio"><i></i>Painel de Contratação</a>
+      <nav>
+        <a class="opcional" href="https://lariantunez.github.io/Vitrine-de-projetos/">Vitrine</a>
+        <a class="opcional" href="#c00">Estudo de caso</a>
+        <a class="opcional" href="https://github.com/lariantunez/painel-de-contratacao">Código</a>
+        <a href="painel/">Abrir painel</a>
+        <button class="btn-tema" id="tema" type="button" aria-label="Trocar tema">☀</button>
+      </nav>
+      <span class="progresso"></span>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="abertura">
+      <div class="wrap">
+        <span class="selo-topo"><b>●</b> Demonstração estática · dados fictícios</span>
+        <h1>Do currículo à <em>contratação</em>, sem perder o roteiro.</h1>
+        <p class="lead">Um painel para o RH acompanhar cada candidata da triagem do currículo até a contratação concluída. A etapa que mais trava, a espera pelo roteiro da gestora, ganhou semáforo de prazo, cobrança por e-mail, indicadores com a conta à vista e um ranking por gestor.</p>
+        <div class="acoes">
+          <a class="btn primario" href="painel/">Explorar o painel →</a>
+          <a class="btn" href="#c00">Ler o estudo de caso</a>
+        </div>
+        <div class="numeros">
+          <div><strong>8</strong><span>etapas, do currículo à contratação</span></div>
+          <div><strong>7</strong><span>indicadores clicáveis no resumo</span></div>
+          <div><strong>4</strong><span>faixas no semáforo do roteiro</span></div>
+          <div><strong>7</strong><span>filtros rápidos por prazo, gestor e loja</span></div>
+          <div><strong>5</strong><span>motivos de encerramento registrados</span></div>
+        </div>
+        <figure class="vitrine">
+          <div class="barra-janela"><i></i><i></i><i></i><span>painel/ · Painel de Contratação (dados fictícios)</span></div>
+          <img src="assets/painel-visao.jpg" alt="Tela principal: resumo geral com sete indicadores, filtros rápidos, funil de contratação com a etapa Aguardando roteiro em vermelho e a lista de atividades para hoje" width="1440" height="900">
+        </figure>
+      </div>
+    </section>
+
+    <div class="wrap livro">
+      <aside class="indice" aria-label="Capítulos">
+        <p>Capítulos</p>
+        <ol>
+          <li><a href="#c00"><b>00</b>O desafio</a></li>
+          <li><a href="#c01"><b>01</b>Princípios</a></li>
+          <li><a href="#c02"><b>02</b>As oito etapas</a></li>
+          <li><a href="#c03"><b>03</b>Semáforo do roteiro</a></li>
+          <li><a href="#c04"><b>04</b>Indicadores e ranking</a></li>
+          <li><a href="#c05"><b>05</b>Cobrança das gestoras</a></li>
+          <li><a href="#c06"><b>06</b>Dados e regras</a></li>
+          <li><a href="#c07"><b>07</b>Telas e acesso</a></li>
+          <li><a href="#c08"><b>08</b>Demonstração</a></li>
+        </ol>
+      </aside>
+
+      <div class="capitulos">
+        <!-- 00 -->
+        <section class="capitulo" id="c00">
+          <span class="rotulo-cap">00 · O desafio</span>
+          <h2>A contratação para onde ninguém está olhando.</h2>
+          <p>Uma candidata passa por entrevista, feedback, exame admissional e contratação. No meio do caminho, porém, o processo sai das mãos do RH: depois da aprovação, a <strong>gestora da loja precisa enviar o roteiro</strong>, o local de trabalho da nova contratada. Enquanto ele não chega, nada anda, e a data de início se aproxima.</p>
+          <p class="destaque revelar">Quem está parado, há quantos dias, com qual gestora, e quem já foi cobrado? A resposta precisa estar na tela, não na memória de alguém.</p>
+          <div class="grade g3 revelar">
+            <div class="cartao azul"><span class="num">FUNIL</span><h4>Cada candidata no seu lugar</h4><p>Um quadro com uma coluna por etapa, contagem no funil e a próxima ação do RH escrita em cada cartão.</p></div>
+            <div class="cartao vermelho"><span class="num">GARGALO</span><h4>A espera pelo roteiro</h4><p>A etapa Aguardando roteiro tem semáforo próprio, prazo configurável e alerta de início próximo.</p></div>
+            <div class="cartao verde"><span class="num">COBRANÇA</span><h4>Da pendência ao e-mail</h4><p>As pendências viram e-mails prontos para a gestora, e cada cobrança fica registrada com data e usuário.</p></div>
+          </div>
+        </section>
+
+        <!-- 01 -->
+        <section class="capitulo" id="c01">
+          <span class="rotulo-cap">01 · Princípios</span>
+          <h2>O gargalo no centro, o histórico intacto.</h2>
+          <p>Quatro regras guiaram as decisões do painel:</p>
+          <div class="grade g2 revelar">
+            <div class="cartao"><span class="num">01</span><h4>Vigiar a etapa que trava</h4><p>A etapa 05, Aguardando roteiro, é tratada como gargalo no código: tem cor própria no funil, ordenação por urgência, filtros, cobrança e indicadores dedicados.</p></div>
+            <div class="cartao"><span class="num">02</span><h4>Cada etapa pede o dado que a define</h4><p>Arrastar para Entrevista agendada pede data e hora; para Aguardando roteiro, a data prevista de início; para Exame admissional, data e hora do exame. Sem o dado, a candidata não avança.</p></div>
+            <div class="cartao"><span class="num">03</span><h4>Nada some sem registro</h4><p>Encerrar exige motivo e detalhe, que vão para o histórico. Remover é separado, pede confirmação e avisa que não pode ser desfeito. Qualquer processo encerrado pode ser reaberto.</p></div>
+            <div class="cartao"><span class="num">04</span><h4>A próxima ação sempre à vista</h4><p>Cada cartão diz o que o RH precisa fazer agora, e a lista Atividades para hoje reúne entrevistas do dia, exames, feedbacks e roteiros atrasados, por prioridade.</p></div>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="capitulo" id="c02">
+          <span class="rotulo-cap">02 · As oito etapas</span>
+          <h2>Do currículo recebido à contratação concluída.</h2>
+          <p>O quadro tem uma coluna para cada uma das sete primeiras etapas; a oitava, Contratação concluída, vai para o histórico. Em cada cartão aparece a próxima ação do RH:</p>
+          <div class="etapas revelar">
+            <div class="etapa"><div><h4>Currículo recebido</h4><p>agendar entrevista com a candidata</p></div></div>
+            <div class="etapa"><div><h4>Entrevista agendada</h4><p>realizar a entrevista · data e hora obrigatórias ao entrar</p></div></div>
+            <div class="etapa"><div><h4>Entrevista realizada</h4><p>registrar o feedback da entrevista</p></div></div>
+            <div class="etapa"><div><h4>Feedback realizado</h4><p>solicitar a data de início para aguardar a liberação do roteiro</p></div></div>
+            <div class="etapa"><div><h4>Aguardando roteiro</h4><p>cobrar o roteiro da gestora e acompanhar o retorno · data prevista de início obrigatória</p></div></div>
+            <div class="etapa"><div><h4>Roteiro recebido</h4><p>agendar o exame admissional</p></div></div>
+            <div class="etapa"><div><h4>Exame admissional agendado</h4><p>acompanhar o exame e concluir a contratação · data e hora obrigatórias</p></div></div>
+            <div class="etapa"><div><h4>Contratação concluída</h4><p>processo concluído, com data, hora e usuário que aprovou</p></div></div>
+          </div>
+          <div class="grade g2 revelar">
+            <div class="cartao"><h4>Arrastar e soltar</h4><p>Os cartões mudam de etapa por arrastar e soltar entre as colunas. Na coluna do gargalo, os cartões vêm ordenados pelo semáforo (crítica, atrasada, atenção, no prazo); nas demais, pela data de abertura.</p></div>
+            <div class="cartao"><h4>Encerrar com motivo</h4><p>Reprovada pelo RH, reprovada no exame admissional, desistência da candidata, vaga cancelada pela loja ou outro. O detalhe é obrigatório e a etapa em que o processo parou fica gravada.</p></div>
+          </div>
+        </section>
+
+        <!-- 03 -->
+        <section class="capitulo" id="c03">
+          <span class="rotulo-cap">03 · Semáforo do roteiro</span>
+          <h2>Dias parada e início próximo, numa cor só.</h2>
+          <p>Toda candidata em Aguardando roteiro recebe uma faixa, calculada pelos dias desde a entrada na etapa e pela data prevista de início informada ao avançar:</p>
+          <div class="tabela-rolagem revelar">
+            <table class="tabela">
+              <thead><tr><th>Faixa</th><th>Regra</th><th>O que o painel faz</th></tr></thead>
+              <tbody>
+                <tr><td>🟢 No prazo</td><td>0 a 2 dias aguardando</td><td><span class="ok">Acompanha</span> sem alerta</td></tr>
+                <tr><td>⚠️ Atenção</td><td>3 a 4 dias aguardando</td><td>Entra em Atividades para hoje como “acompanhar roteiro”</td></tr>
+                <tr><td>🔴 Atrasada</td><td>5 dias ou mais</td><td><span class="alerta">Botão Cobrar gestora</span> no cartão e atividade prioritária</td></tr>
+                <tr><td>🚨 Crítica</td><td>Início previsto em 2 dias ou menos, qualquer que seja o tempo de espera</td><td>Vai para o topo da coluna e da lista do dia</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>A regra crítica vem primeiro: uma candidata parada há um dia, mas com início depois de amanhã, já é crítica. Separado do semáforo, o campo <strong>Cobrar gestora após N dias</strong> (3 por padrão) define quando o funil marca candidatas como atrasadas e o cartão fica vermelho.</p>
+          <p class="destaque revelar">O roteiro só conta como recebido no prazo se chegou antes de a candidata virar vermelha ou crítica.</p>
+        </section>
+
+        <!-- 04 -->
+        <section class="capitulo" id="c04">
+          <span class="rotulo-cap">04 · Indicadores e ranking</span>
+          <h2>Sete números, cada um com a sua conta.</h2>
+          <p>O resumo geral traz sete indicadores. Clicar em qualquer um abre a lista de candidatas por trás do número e, nos cálculos, a conta escrita por extenso, por exemplo: <em>“3 roteiro(s) recebidos fora das faixas vermelha/crítica ÷ 3 roteiro(s) recebido(s) = 100%”</em>.</p>
+          <div class="grade g4 revelar">
+            <div class="cartao azul"><h4>Em andamento</h4><p>Nem encerradas nem contratadas.</p></div>
+            <div class="cartao ambar"><h4>Aguardando roteiro</h4><p>Na etapa 05, com o tempo na etapa.</p></div>
+            <div class="cartao ambar"><h4>Atenção</h4><p>3 a 4 dias aguardando.</p></div>
+            <div class="cartao vermelho"><h4>Crítico</h4><p>Início próximo sem roteiro.</p></div>
+            <div class="cartao violeta"><h4>Tempo médio</h4><p>Soma das esperas fechadas ÷ roteiros recebidos.</p></div>
+            <div class="cartao verde"><h4>% no prazo</h4><p>Recebidos antes da faixa vermelha ou crítica.</p></div>
+            <div class="cartao vermelho"><h4>% fora do prazo</h4><p>Recebidos já na faixa vermelha ou crítica.</p></div>
+          </div>
+          <h3>Ranking de desempenho por gestor</h3>
+          <p>Cada gestora recebe uma barra empilhada com roteiros no prazo, fora do prazo, aguardando até 4 dias e aguardando acima de 4 dias, além do tempo médio de envio. A ordem padrão usa uma pontuação que premia o prazo e pesa os atrasos:</p>
+          <pre><span class="f">pontuação</span> = % no prazo + <span class="s">8</span> × no prazo − <span class="s">12</span> × fora do prazo
+          − <span class="s">10</span> × aguardando há mais de 4 dias
+          − mín(tempo médio em horas ÷ <span class="s">6</span>, <span class="s">20</span>)</pre>
+          <p>Outras cinco ordenações estão a um clique: mais roteiros no prazo, mais fora do prazo, menor tempo médio, mais aguardando até 4 dias e mais aguardando acima de 4 dias.</p>
+          <div class="galeria revelar">
+            <figure><img src="assets/painel-indicadores.jpg" alt="Resumo geral com o indicador de roteiros no prazo aberto, mostrando a conta e a tabela de candidatas" loading="lazy" width="1440" height="900"><figcaption>Indicador aberto: a conta e as candidatas por trás dele.</figcaption></figure>
+            <figure><img src="assets/painel-ranking.jpg" alt="Ranking de desempenho por gestor com barras empilhadas e tempo médio de envio, seguido do histórico de candidaturas" loading="lazy" width="1440" height="900"><figcaption>Ranking por gestor e histórico de candidaturas encerradas.</figcaption></figure>
+          </div>
+        </section>
+
+        <!-- 05 -->
+        <section class="capitulo" id="c05">
+          <span class="rotulo-cap">05 · Cobrança das gestoras</span>
+          <h2>Da pendência ao e-mail pronto, com registro.</h2>
+          <p>O painel de cobranças agrupa por gestora as candidatas que aguardam roteiro. A cobrança abre um e-mail já escrito no cliente de e-mail (Outlook), com a lista de candidatas, a loja e os dias de espera, e grava quem cobrou e quando.</p>
+          <div class="fluxo revelar" role="img" aria-label="Fluxo: pendências na etapa Aguardando roteiro, agrupamento por gestora ou e-mail, e-mail pronto via mailto e registro da cobrança">
+            <div class="coluna"><b>1 · Pendências</b>
+              <div class="item erp">Aguardando roteiro<small>respeita o filtro rápido</small></div>
+              <div class="item fato">Atrasadas e críticas<small>botão no próprio cartão</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>2 · Agrupamento</b>
+              <div class="item">Por gestora<small>cobrança consolidada</small></div>
+              <div class="item">Por e-mail<small>envio em lote</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>3 · E-mail</b>
+              <div class="item">Link <code>mailto:</code><small>assunto e corpo preenchidos</small></div>
+              <div class="item">Um por vez<small>marcar enviado e abrir o próximo</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>4 · Registro</b>
+              <div class="item dim">Cobrança gravada<small>data, usuário, e-mail, gestora</small></div>
+              <div class="item">Barra de progresso<small>enviados ÷ total</small></div>
+            </div>
+          </div>
+          <div class="grade g3 revelar">
+            <div class="cartao"><h4>Três formas de cobrar</h4><p>Individual, pelo cartão atrasado ou crítico; consolidada, por gestora; ou todas de uma vez, agrupadas por endereço de e-mail.</p></div>
+            <div class="cartao"><h4>Envio guiado</h4><p>No lote, o painel abre um e-mail por vez. Ao voltar, “marcar enviado e abrir próximo” registra a cobrança e segue a fila.</p></div>
+            <div class="cartao"><h4>Última cobrança da etapa atual</h4><p>A linha da gestora mostra só cobranças feitas depois da entrada na etapa atual, para não confundir com cobranças antigas.</p></div>
+          </div>
+          <figure class="revelar"><img src="assets/painel-cobrancas.jpg" alt="Painel de cobranças com gestoras expandidas, e-mails, histórico de cobranças e botões Cobrar gestora e Cobrar todas as gestoras" loading="lazy" width="1440" height="900"><figcaption>Painel de cobranças: gestoras, candidatas pendentes e histórico de cobranças.</figcaption></figure>
+        </section>
+
+        <!-- 06 -->
+        <section class="capitulo" id="c06">
+          <span class="rotulo-cap">06 · Dados e regras</span>
+          <h2>Uma candidatura carrega a própria história.</h2>
+          <p>Cada candidatura é um registro único com a etapa atual, o momento em que entrou nela (<code>entrouEm</code>) e duas listas: o <strong>histórico de etapas</strong> e as <strong>cobranças</strong>. Os indicadores são calculados a partir dessas listas.</p>
+          <figure class="diagrama revelar">
+            <svg viewBox="0 0 960 430" role="img" aria-label="Estrutura: candidatura ao centro, ligada ao histórico de etapas, às cobranças, às datas de agenda e ao encerramento; usuários e bloqueios de edição abaixo">
+              <path class="liga forte" d="M365 120 C 300 120, 310 69, 260 69"/><path class="liga forte" d="M365 160 C 300 160, 310 179, 260 179"/>
+              <path class="liga forte" d="M595 120 C 650 120, 650 69, 700 69"/><path class="liga forte" d="M595 160 C 650 160, 650 179, 700 179"/>
+              <path class="liga" d="M260 320 H 365"/><path class="liga" d="M595 320 H 700"/>
+              <g class="no dim"><rect x="30" y="40" width="230" height="58" rx="10"/><text x="145" y="64" text-anchor="middle">historico[]</text><text class="sub" x="145" y="84" text-anchor="middle">etapa, data, usuário, observação</text></g>
+              <g class="no dim"><rect x="30" y="150" width="230" height="58" rx="10"/><text x="145" y="174" text-anchor="middle">cobrancas[]</text><text class="sub" x="145" y="194" text-anchor="middle">data, usuário, e-mail, gestora</text></g>
+              <g class="no fato"><rect x="365" y="90" width="230" height="100" rx="10"/><text x="480" y="122" text-anchor="middle">candidatura</text><text class="sub" x="480" y="144" text-anchor="middle">nome, loja, horário, gestora</text><text class="sub" x="480" y="164" text-anchor="middle">e-mail da gestora</text><text class="sub" x="480" y="180" text-anchor="middle">etapa · entrouEm · encerrada</text></g>
+              <g class="no apoio"><rect x="700" y="40" width="230" height="58" rx="10"/><text x="815" y="64" text-anchor="middle">agenda</text><text class="sub" x="815" y="84" text-anchor="middle">entrevista, início previsto, exame</text></g>
+              <g class="no apoio"><rect x="700" y="150" width="230" height="58" rx="10"/><text x="815" y="174" text-anchor="middle">encerramento</text><text class="sub" x="815" y="194" text-anchor="middle">motivo, detalhe, etapa, usuário</text></g>
+              <g class="no"><rect x="30" y="291" width="230" height="58" rx="10"/><text x="145" y="315" text-anchor="middle">usuarios</text><text class="sub" x="145" y="335" text-anchor="middle">login, e-mail, perfil, ativo</text></g>
+              <g class="no"><rect x="365" y="291" width="230" height="58" rx="10"/><text x="480" y="315" text-anchor="middle">sessão</text><text class="sub" x="480" y="335" text-anchor="middle">usuário logado em cada ação</text></g>
+              <g class="no"><rect x="700" y="291" width="230" height="58" rx="10"/><text x="815" y="315" text-anchor="middle">bloqueios de edição</text><text class="sub" x="815" y="335" text-anchor="middle">quem está editando cada cartão</text></g>
+            </svg>
+            <figcaption>Vermelho: a candidatura. Verde: listas que crescem a cada ação. Tracejado: dados preenchidos em etapas específicas. Abaixo: acesso e edição.</figcaption>
+          </figure>
+          <h3>Regras que mantêm os números honestos</h3>
+          <div class="revelar">
+            <div class="mudanca"><div class="antes"><b>Problema</b>Voltar uma candidata de etapa deixaria no histórico passagens que não valem mais.</div><div class="seta">→</div><div class="depois"><b>Solução</b>O histórico é recortado: ao voltar para uma etapa já vivida, as passagens posteriores a ela saem; ao avançar, só a nova etapa é acrescentada.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Registros antigos usavam outros nomes de etapa, como “Feedback dado” ou “Contratada”.</div><div class="seta">→</div><div class="depois"><b>Solução</b>Uma tabela de equivalências traduz os nomes antigos, e uma migração ajusta a etapa uma única vez (marca <code>etapasMigradasV2</code>).</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Nomes, lojas e gestoras digitados de formas diferentes quebrariam agrupamentos e filtros.</div><div class="seta">→</div><div class="depois"><b>Solução</b>Nome da candidata em maiúsculas, loja e gestora com iniciais maiúsculas, espaços normalizados e busca sem acentos.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Duas pessoas do RH editando o mesmo cartão poderiam sobrescrever uma à outra.</div><div class="seta">→</div><div class="depois"><b>Solução</b>Bloqueio de edição por cartão, renovado a cada 8 segundos: quem abre um cartão em uso vê “em edição por…”. Na demo, sem servidor, a lista de bloqueios fica vazia.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Uma data AAAA-MM-DD lida como UTC pode cair no dia anterior no horário do Brasil.</div><div class="seta">→</div><div class="depois"><b>Solução</b>Entrevista, exame e início previsto são lidos como data local, e as comparações com hoje são feitas em dias corridos.</div></div>
+          </div>
+        </section>
+
+        <!-- 07 -->
+        <section class="capitulo" id="c07">
+          <span class="rotulo-cap">07 · Telas e acesso</span>
+          <h2>Uma página de trabalho e uma de usuários.</h2>
+          <p>A tela principal reúne, de cima para baixo: resumo geral, filtros rápidos, funil, atividades para hoje, painel de cobranças, quadro por etapa, ranking por gestor e histórico de candidaturas (encerradas sem contratação e contratações concluídas). O nome de cada candidata abre a linha do tempo completa, com data, hora e usuário de cada passo.</p>
+          <div class="galeria revelar">
+            <figure><img src="assets/painel-quadro.jpg" alt="Quadro com sete colunas de etapas, cartões abertos mostrando histórico e ações, e cartão crítico em vermelho na coluna Aguardando roteiro" loading="lazy" width="1440" height="900"><figcaption>Quadro por etapa: semáforo, próxima ação e histórico no cartão.</figcaption></figure>
+            <figure><img src="assets/painel-historico.jpg" alt="Janela de histórico de uma candidata com cada etapa, data, hora e usuário" loading="lazy" width="1440" height="900"><figcaption>Linha do tempo da candidata: etapa, data e usuário.</figcaption></figure>
+          </div>
+          <h3>Perfis de acesso</h3>
+          <div class="grade g3 revelar">
+            <div class="cartao violeta"><span class="num">ADMIN</span><h4>Administrador</h4><p>Acessa o Controle de usuários: cria, edita, ativa, inativa e remove usuários.</p></div>
+            <div class="cartao azul"><span class="num">USUÁRIO</span><h4>Usuário do RH</h4><p>Opera o painel. Para abrir o Controle de usuários, precisa entrar com um acesso de administrador.</p></div>
+            <div class="cartao ambar"><span class="num">PRINCIPAL</span><h4>Administrador principal</h4><p>Não pode ser removido, inativado, rebaixado nem renomeado; aparece como “Adm pai” na lista.</p></div>
+          </div>
+          <p>O cadastro pede login, e-mail para redefinir a senha, perfil, status e senha de no mínimo 6 caracteres. A tela de acesso tem “Esqueci minha senha”, com link de redefinição enviado ao e-mail cadastrado; na demo, nada é enviado.</p>
+          <figure class="revelar"><img src="assets/painel-usuarios.jpg" alt="Controle de usuários com login, e-mail, perfil, status e ações de editar, inativar e remover" loading="lazy" width="1440" height="900"><figcaption>Controle de usuários: o administrador principal fica protegido.</figcaption></figure>
+        </section>
+
+        <!-- 08 -->
+        <section class="capitulo" id="c08">
+          <span class="rotulo-cap">08 · Demonstração</span>
+          <h2>Tudo no navegador, em um arquivo só.</h2>
+          <div class="arquitetura revelar">
+            <div class="caixa"><span class="tag">GitHub Pages</span><b>Um arquivo HTML</b><ul><li>HTML, CSS e JS puro</li><li>sem dependências de build</li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">Navegador</span><b>Lógica do painel</b><ul><li>etapas, semáforo e indicadores</li><li>arrastar e soltar entre colunas</li><li>e-mails via <code>mailto:</code></li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">localStorage</span><b>Dados da demo</b><ul><li>11 candidaturas fictícias</li><li>usuários da demo</li></ul></div>
+          </div>
+          <p>Esta versão não tem servidor, banco de dados nem login real: o acesso é direto, as chamadas de usuários e candidaturas são respondidas no próprio navegador e as alterações ficam salvas no <code>localStorage</code> de quem testa. As datas da demo são geradas em relação ao dia de hoje, então sempre há entrevista do dia, roteiro atrasado e candidata crítica para ver.</p>
+          <h3>Tecnologias</h3>
+          <div class="pilulas">
+            <span>HTML</span><span>CSS</span><span>JavaScript sem framework</span><span>Drag and drop HTML5</span><span>localStorage · sessionStorage</span><span>mailto: (Outlook)</span><span>Intl pt-BR</span><span>Space Grotesk · IBM Plex</span><span>GitHub Pages</span>
+          </div>
+          <div class="encerramento revelar">
+            <span class="rotulo-cap">Experimente</span>
+            <h2>Arraste uma candidata para Aguardando roteiro.</h2>
+            <p class="texto">Sugestão de roteiro: leve um cartão de Feedback realizado para Aguardando roteiro, informe um início para depois de amanhã e veja o cartão virar crítico. Depois, em Painel de cobranças, clique em Cobrar gestora e confira a cobrança registrada.</p>
+            <div class="acoes"><a class="btn primario" href="painel/">Abrir o painel →</a><a class="btn" href="https://github.com/lariantunez/painel-de-contratacao">Ver o código</a></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><strong>Larissa Antunez</strong> · Analytics &amp; Desenvolvimento</span>
+      <span>Demonstração estática · dados fictícios</span>
+    </div>
+  </footer>
+  <script src="assets/estudo.js"></script>
+</body>
+</html>
