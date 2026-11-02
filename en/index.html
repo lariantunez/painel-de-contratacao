@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="../assets/idioma-estudo.js"></script>
+  <link rel="alternate" hreflang="pt-BR" href="https://lariantunez.github.io/painel-de-contratacao/">
+  <link rel="alternate" hreflang="en" href="https://lariantunez.github.io/painel-de-contratacao/en/">
+  <link rel="alternate" hreflang="es" href="https://lariantunez.github.io/painel-de-contratacao/es/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hiring Dashboard · Case study</title>
+  <meta name="description" content="Case study: a dashboard that tracks candidates from résumé screening to hire, with the manager's assignment hand-off at its center. Deadline traffic light, email follow-ups, indicators and a ranking. Demo with fictional data.">
+  <meta property="og:title" content="Hiring Dashboard · from résumé to hire">
+  <meta property="og:description" content="Eight stages, one bottleneck watched closely: an assignment traffic light, manager follow-ups, indicators that show their math and a ranking by manager.">
+  <meta property="og:image" content="../assets/painel-visao.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/estudo.css">
+  <style>
+    /* Identidade do Painel de Contratação: âmbar das abas ativas e verde-petróleo do funil. */
+    :root { --accent: #e39a4b; --accent-2: #e39a4b; --on-accent: #1b2733; --accent-wash: rgba(227, 154, 75, 0.12); --green: #5bb5a9; --green-wash: rgba(91, 181, 169, 0.12); }
+    :root[data-theme="light"] { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); }
+    @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); } }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="#inicio"><i></i>Hiring Dashboard</a>
+      <nav>
+        <a class="opcional" href="https://lariantunez.github.io/Vitrine-de-projetos/?lang=en">Portfolio</a>
+        <a class="opcional" href="#c00">Case study</a>
+        <a class="opcional" href="https://github.com/lariantunez/painel-de-contratacao">Code</a>
+        <a href="../painel/">Open dashboard</a>
+        <div class="idiomas" role="group" aria-label="Language"><a href="../?lang=pt" data-idioma="pt" hreflang="pt-BR">PT</a><a href="./" data-idioma="en" hreflang="en" aria-current="true">EN</a><a href="../es/" data-idioma="es" hreflang="es">ES</a></div>
+        <button class="btn-tema" id="tema" type="button" aria-label="Toggle theme">☀</button>
+      </nav>
+      <span class="progresso"></span>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="abertura">
+      <div class="wrap">
+        <span class="selo-topo"><b>●</b> Static demo · fictional data</span>
+        <h1>From résumé to <em>hire</em>, without losing the assignment.</h1>
+        <p class="lead">A dashboard for HR to follow each candidate from résumé screening to a completed hire. The stage that stalls the most, waiting for the manager's assignment, got a deadline traffic light, email follow-ups, indicators that show their math and a ranking by manager.</p>
+        <div class="acoes">
+          <a class="btn primario" href="../painel/">Explore the dashboard →</a>
+          <a class="btn" href="#c00">Read the case study</a>
+        </div>
+        <div class="numeros">
+          <div><strong>8</strong><span>stages, from résumé to hire</span></div>
+          <div><strong>7</strong><span>clickable indicators in the summary</span></div>
+          <div><strong>4</strong><span>bands in the assignment traffic light</span></div>
+          <div><strong>7</strong><span>quick filters by deadline, manager and store</span></div>
+          <div><strong>5</strong><span>recorded closure reasons</span></div>
+        </div>
+        <figure class="vitrine">
+          <div class="barra-janela"><i></i><i></i><i></i><span>painel/ · Hiring Dashboard (fictional data)</span></div>
+          <img src="../assets/painel-visao.jpg" alt="Main screen: overall summary with seven indicators, quick filters, a hiring funnel with the Awaiting assignment stage in red and the list of activities for today" width="1440" height="900">
+        </figure>
+      </div>
+    </section>
+
+    <div class="wrap livro">
+      <aside class="indice" aria-label="Chapters">
+        <p>Chapters</p>
+        <ol>
+          <li><a href="#c00"><b>00</b>The challenge</a></li>
+          <li><a href="#c01"><b>01</b>Principles</a></li>
+          <li><a href="#c02"><b>02</b>The eight stages</a></li>
+          <li><a href="#c03"><b>03</b>Assignment traffic light</a></li>
+          <li><a href="#c04"><b>04</b>Indicators and ranking</a></li>
+          <li><a href="#c05"><b>05</b>Manager follow-ups</a></li>
+          <li><a href="#c06"><b>06</b>Data and rules</a></li>
+          <li><a href="#c07"><b>07</b>Screens and access</a></li>
+          <li><a href="#c08"><b>08</b>Demo</a></li>
+        </ol>
+      </aside>
+
+      <div class="capitulos">
+        <!-- 00 -->
+        <section class="capitulo" id="c00">
+          <span class="rotulo-cap">00 · The challenge</span>
+          <h2>The hire nobody is watching.</h2>
+          <p>A candidate goes through an interview, feedback, a pre-employment medical exam and the hire itself. Halfway through, though, the process leaves HR's hands: after approval, the <strong>store manager has to send the assignment</strong>, the new hire's work location. Until it arrives, nothing moves, and the start date keeps getting closer.</p>
+          <p class="destaque revelar">Who is stuck, for how many days, with which manager, and who has already been followed up with? The answer needs to be on the screen, not in someone's memory.</p>
+          <div class="grade g3 revelar">
+            <div class="cartao azul"><span class="num">FUNNEL</span><h4>Every candidate in their place</h4><p>A board with one column per stage, counts in the funnel and HR's next action written on each card.</p></div>
+            <div class="cartao vermelho"><span class="num">BOTTLENECK</span><h4>Waiting for the assignment</h4><p>The Awaiting assignment stage has its own traffic light, a configurable deadline and an upcoming-start alert.</p></div>
+            <div class="cartao verde"><span class="num">FOLLOW-UP</span><h4>From pending item to email</h4><p>Pending items become ready-to-send emails to the manager, and each follow-up is logged with date and user.</p></div>
+          </div>
+        </section>
+
+        <!-- 01 -->
+        <section class="capitulo" id="c01">
+          <span class="rotulo-cap">01 · Principles</span>
+          <h2>The bottleneck at the center, the history intact.</h2>
+          <p>Four rules guided the dashboard's decisions:</p>
+          <div class="grade g2 revelar">
+            <div class="cartao"><span class="num">01</span><h4>Watch the stage that stalls</h4><p>Stage 05, Awaiting assignment, is treated as the bottleneck in the code: it has its own color in the funnel, urgency sorting, filters, follow-ups and dedicated indicators.</p></div>
+            <div class="cartao"><span class="num">02</span><h4>Each stage asks for the data that defines it</h4><p>Dragging to Interview scheduled asks for date and time; to Awaiting assignment, the expected start date; to Medical exam, the exam's date and time. Without that data, the candidate doesn't advance.</p></div>
+            <div class="cartao"><span class="num">03</span><h4>Nothing disappears without a record</h4><p>Closing requires a reason and a detail, both saved to the history. Removing is separate, asks for confirmation and warns that it can't be undone. Any closed process can be reopened.</p></div>
+            <div class="cartao"><span class="num">04</span><h4>The next action always in sight</h4><p>Each card says what HR needs to do now, and the Activities for today list brings together the day's interviews, exams, feedback and overdue assignments, by priority.</p></div>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="capitulo" id="c02">
+          <span class="rotulo-cap">02 · The eight stages</span>
+          <h2>From résumé received to hire completed.</h2>
+          <p>The board has one column for each of the first seven stages; the eighth, Hire completed, goes to the history. Each card shows HR's next action:</p>
+          <div class="etapas revelar">
+            <div class="etapa"><div><h4>Résumé received</h4><p>schedule an interview with the candidate</p></div></div>
+            <div class="etapa"><div><h4>Interview scheduled</h4><p>conduct the interview · date and time required on entry</p></div></div>
+            <div class="etapa"><div><h4>Interview completed</h4><p>record the interview feedback</p></div></div>
+            <div class="etapa"><div><h4>Feedback given</h4><p>request the start date to wait for the assignment to be released</p></div></div>
+            <div class="etapa"><div><h4>Awaiting assignment</h4><p>follow up with the manager for the assignment and track the reply · expected start date required</p></div></div>
+            <div class="etapa"><div><h4>Assignment received</h4><p>schedule the pre-employment medical exam</p></div></div>
+            <div class="etapa"><div><h4>Medical exam scheduled</h4><p>track the exam and complete the hire · date and time required</p></div></div>
+            <div class="etapa"><div><h4>Hire completed</h4><p>process completed, with date, time and the user who approved it</p></div></div>
+          </div>
+          <div class="grade g2 revelar">
+            <div class="cartao"><h4>Drag and drop</h4><p>Cards change stage by dragging and dropping between columns. In the bottleneck column, cards are sorted by the traffic light (critical, overdue, attention, on time); in the others, by opening date.</p></div>
+            <div class="cartao"><h4>Close with a reason</h4><p>Rejected by HR, failed the medical exam, candidate withdrew, position canceled by the store, or other. The detail is required, and the stage where the process stopped is saved.</p></div>
+          </div>
+        </section>
+
+        <!-- 03 -->
+        <section class="capitulo" id="c03">
+          <span class="rotulo-cap">03 · Assignment traffic light</span>
+          <h2>Days stuck and an upcoming start, in a single color.</h2>
+          <p>Every candidate in Awaiting assignment gets a band, calculated from the days since entering the stage and the expected start date entered when advancing:</p>
+          <div class="tabela-rolagem revelar">
+            <table class="tabela">
+              <thead><tr><th>Band</th><th>Rule</th><th>What the dashboard does</th></tr></thead>
+              <tbody>
+                <tr><td>🟢 On time</td><td>0 to 2 days waiting</td><td><span class="ok">Tracks it</span> with no alert</td></tr>
+                <tr><td>⚠️ Attention</td><td>3 to 4 days waiting</td><td>Added to Activities for today as “track assignment”</td></tr>
+                <tr><td>🔴 Overdue</td><td>5 days or more</td><td><span class="alerta">Follow up with manager button</span> on the card and a priority activity</td></tr>
+                <tr><td>🚨 Critical</td><td>Expected start in 2 days or less, regardless of how long it has been waiting</td><td>Moves to the top of the column and of the day's list</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>The critical rule comes first: a candidate stuck for one day but starting the day after tomorrow is already critical. Separate from the traffic light, the <strong>Follow up with manager after N days</strong> field (3 by default) sets when the funnel marks candidates as overdue and the card turns red.</p>
+          <p class="destaque revelar">An assignment only counts as received on time if it arrived before the candidate turned red or critical.</p>
+        </section>
+
+        <!-- 04 -->
+        <section class="capitulo" id="c04">
+          <span class="rotulo-cap">04 · Indicators and ranking</span>
+          <h2>Seven numbers, each with its own math.</h2>
+          <p>The overall summary has seven indicators. Clicking any of them opens the list of candidates behind the number and, for calculated ones, the math written out in full, for example: <em>“3 assignment(s) received outside the red/critical bands ÷ 3 assignment(s) received = 100%”</em>.</p>
+          <div class="grade g4 revelar">
+            <div class="cartao azul"><h4>In progress</h4><p>Neither closed nor hired.</p></div>
+            <div class="cartao ambar"><h4>Awaiting assignment</h4><p>In stage 05, with time in the stage.</p></div>
+            <div class="cartao ambar"><h4>Attention</h4><p>3 to 4 days waiting.</p></div>
+            <div class="cartao vermelho"><h4>Critical</h4><p>Upcoming start with no assignment.</p></div>
+            <div class="cartao violeta"><h4>Average time</h4><p>Sum of completed waits ÷ assignments received.</p></div>
+            <div class="cartao verde"><h4>% on time</h4><p>Received before the red or critical band.</p></div>
+            <div class="cartao vermelho"><h4>% late</h4><p>Received already in the red or critical band.</p></div>
+          </div>
+          <h3>Performance ranking by manager</h3>
+          <p>Each manager gets a stacked bar with assignments on time, late, waiting up to 4 days and waiting more than 4 days, plus the average sending time. The default order uses a score that rewards timeliness and penalizes delays:</p>
+          <pre><span class="f">score</span> = % on time + <span class="s">8</span> × on time − <span class="s">12</span> × late
+          − <span class="s">10</span> × waiting more than 4 days
+          − min(average time in hours ÷ <span class="s">6</span>, <span class="s">20</span>)</pre>
+          <p>Five other sort orders are one click away: most assignments on time, most late, lowest average time, most waiting up to 4 days and most waiting more than 4 days.</p>
+          <div class="galeria revelar">
+            <figure><img src="../assets/painel-indicadores.jpg" alt="Overall summary with the on-time assignments indicator open, showing the math and the table of candidates" loading="lazy" width="1440" height="900"><figcaption>Indicator open: the math and the candidates behind it.</figcaption></figure>
+            <figure><img src="../assets/painel-ranking.jpg" alt="Performance ranking by manager with stacked bars and average sending time, followed by the application history" loading="lazy" width="1440" height="900"><figcaption>Ranking by manager and history of closed applications.</figcaption></figure>
+          </div>
+        </section>
+
+        <!-- 05 -->
+        <section class="capitulo" id="c05">
+          <span class="rotulo-cap">05 · Manager follow-ups</span>
+          <h2>From pending item to ready email, with a record.</h2>
+          <p>The follow-up panel groups the candidates awaiting an assignment by manager. A follow-up opens a pre-written email in the email client (Outlook), with the list of candidates, the store and the days waiting, and saves who followed up and when.</p>
+          <div class="fluxo revelar" role="img" aria-label="Flow: pending items in the Awaiting assignment stage, grouping by manager or email, ready email via mailto and follow-up record">
+            <div class="coluna"><b>1 · Pending</b>
+              <div class="item erp">Awaiting assignment<small>respects the quick filter</small></div>
+              <div class="item fato">Overdue and critical<small>button on the card itself</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>2 · Grouping</b>
+              <div class="item">By manager<small>consolidated follow-up</small></div>
+              <div class="item">By email<small>batch sending</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>3 · Email</b>
+              <div class="item"><code>mailto:</code> link<small>subject and body filled in</small></div>
+              <div class="item">One at a time<small>mark as sent and open the next</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>4 · Record</b>
+              <div class="item dim">Follow-up saved<small>date, user, email, manager</small></div>
+              <div class="item">Progress bar<small>sent ÷ total</small></div>
+            </div>
+          </div>
+          <div class="grade g3 revelar">
+            <div class="cartao"><h4>Three ways to follow up</h4><p>Individually, from the overdue or critical card; consolidated, by manager; or all at once, grouped by email address.</p></div>
+            <div class="cartao"><h4>Guided sending</h4><p>In a batch, the dashboard opens one email at a time. When you come back, “mark as sent and open next” logs the follow-up and moves down the queue.</p></div>
+            <div class="cartao"><h4>Latest follow-up for the current stage</h4><p>The manager's row shows only follow-ups made after entering the current stage, so they aren't confused with older ones.</p></div>
+          </div>
+          <figure class="revelar"><img src="../assets/painel-cobrancas.jpg" alt="Follow-up panel with managers expanded, emails, follow-up history and the Follow up with manager and Follow up with all managers buttons" loading="lazy" width="1440" height="900"><figcaption>Follow-up panel: managers, pending candidates and follow-up history.</figcaption></figure>
+        </section>
+
+        <!-- 06 -->
+        <section class="capitulo" id="c06">
+          <span class="rotulo-cap">06 · Data and rules</span>
+          <h2>An application carries its own history.</h2>
+          <p>Each application is a single record with the current stage, the moment it entered it (<code>entrouEm</code>) and two lists: the <strong>stage history</strong> and the <strong>follow-ups</strong>. The indicators are calculated from these lists.</p>
+          <figure class="diagrama revelar">
+            <svg viewBox="0 0 960 430" role="img" aria-label="Structure: the application at the center, linked to the stage history, follow-ups, schedule dates and closure; users and edit locks below">
+              <path class="liga forte" d="M365 120 C 300 120, 310 69, 260 69"/><path class="liga forte" d="M365 160 C 300 160, 310 179, 260 179"/>
+              <path class="liga forte" d="M595 120 C 650 120, 650 69, 700 69"/><path class="liga forte" d="M595 160 C 650 160, 650 179, 700 179"/>
+              <path class="liga" d="M260 320 H 365"/><path class="liga" d="M595 320 H 700"/>
+              <g class="no dim"><rect x="30" y="40" width="230" height="58" rx="10"/><text x="145" y="64" text-anchor="middle">historico[]</text><text class="sub" x="145" y="84" text-anchor="middle">stage, date, user, note</text></g>
+              <g class="no dim"><rect x="30" y="150" width="230" height="58" rx="10"/><text x="145" y="174" text-anchor="middle">cobrancas[]</text><text class="sub" x="145" y="194" text-anchor="middle">date, user, email, manager</text></g>
+              <g class="no fato"><rect x="365" y="90" width="230" height="100" rx="10"/><text x="480" y="122" text-anchor="middle">application</text><text class="sub" x="480" y="144" text-anchor="middle">name, store, shift, manager</text><text class="sub" x="480" y="164" text-anchor="middle">manager's email</text><text class="sub" x="480" y="180" text-anchor="middle">stage · entrouEm · closed</text></g>
+              <g class="no apoio"><rect x="700" y="40" width="230" height="58" rx="10"/><text x="815" y="64" text-anchor="middle">schedule</text><text class="sub" x="815" y="84" text-anchor="middle">interview, expected start, exam</text></g>
+              <g class="no apoio"><rect x="700" y="150" width="230" height="58" rx="10"/><text x="815" y="174" text-anchor="middle">closure</text><text class="sub" x="815" y="194" text-anchor="middle">reason, detail, stage, user</text></g>
+              <g class="no"><rect x="30" y="291" width="230" height="58" rx="10"/><text x="145" y="315" text-anchor="middle">usuarios</text><text class="sub" x="145" y="335" text-anchor="middle">login, email, role, active</text></g>
+              <g class="no"><rect x="365" y="291" width="230" height="58" rx="10"/><text x="480" y="315" text-anchor="middle">session</text><text class="sub" x="480" y="335" text-anchor="middle">logged-in user on every action</text></g>
+              <g class="no"><rect x="700" y="291" width="230" height="58" rx="10"/><text x="815" y="315" text-anchor="middle">edit locks</text><text class="sub" x="815" y="335" text-anchor="middle">who is editing each card</text></g>
+            </svg>
+            <figcaption>Red: the application. Green: lists that grow with every action. Dashed: data filled in at specific stages. Below: access and editing.</figcaption>
+          </figure>
+          <h3>Rules that keep the numbers honest</h3>
+          <div class="revelar">
+            <div class="mudanca"><div class="antes"><b>Problem</b>Moving a candidate back a stage would leave passages in the history that no longer apply.</div><div class="seta">→</div><div class="depois"><b>Solution</b>The history is trimmed: when going back to a stage already visited, the later passages are removed; when advancing, only the new stage is appended.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problem</b>Older records used different stage names, such as “Feedback dado” or “Contratada”.</div><div class="seta">→</div><div class="depois"><b>Solution</b>A mapping table translates the old names, and a migration adjusts the stage only once (flag <code>etapasMigradasV2</code>).</div></div>
+            <div class="mudanca"><div class="antes"><b>Problem</b>Names, stores and managers typed in different ways would break grouping and filters.</div><div class="seta">→</div><div class="depois"><b>Solution</b>Candidate name in uppercase, store and manager in title case, normalized spaces and accent-insensitive search.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problem</b>Two HR people editing the same card could overwrite each other.</div><div class="seta">→</div><div class="depois"><b>Solution</b>A per-card edit lock, renewed every 8 seconds: anyone who opens a card in use sees “being edited by…”. In the demo, with no server, the lock list stays empty.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problem</b>A YYYY-MM-DD date read as UTC can fall on the previous day in Brazil's time zone.</div><div class="seta">→</div><div class="depois"><b>Solution</b>Interview, exam and expected start are read as local dates, and comparisons with today are made in calendar days.</div></div>
+          </div>
+        </section>
+
+        <!-- 07 -->
+        <section class="capitulo" id="c07">
+          <span class="rotulo-cap">07 · Screens and access</span>
+          <h2>One work page and one user page.</h2>
+          <p>The main screen brings together, from top to bottom: overall summary, quick filters, funnel, activities for today, follow-up panel, board by stage, ranking by manager and application history (closed without a hire and completed hires). Each candidate's name opens the full timeline, with the date, time and user of every step.</p>
+          <div class="galeria revelar">
+            <figure><img src="../assets/painel-quadro.jpg" alt="Board with seven stage columns, open cards showing history and actions, and a critical card in red in the Awaiting assignment column" loading="lazy" width="1440" height="900"><figcaption>Board by stage: traffic light, next action and history on the card.</figcaption></figure>
+            <figure><img src="../assets/painel-historico.jpg" alt="History window for a candidate with each stage, date, time and user" loading="lazy" width="1440" height="900"><figcaption>Candidate timeline: stage, date and user.</figcaption></figure>
+          </div>
+          <h3>Access roles</h3>
+          <div class="grade g3 revelar">
+            <div class="cartao violeta"><span class="num">ADMIN</span><h4>Administrator</h4><p>Accesses User management: creates, edits, activates, deactivates and removes users.</p></div>
+            <div class="cartao azul"><span class="num">USER</span><h4>HR user</h4><p>Operates the dashboard. To open User management, they need to sign in with an administrator account.</p></div>
+            <div class="cartao ambar"><span class="num">PRIMARY</span><h4>Primary administrator</h4><p>Can't be removed, deactivated, demoted or renamed; appears as “Adm pai” (parent admin) in the list.</p></div>
+          </div>
+          <p>Registration asks for a login, an email for password resets, a role, a status and a password of at least 6 characters. The sign-in screen has “Forgot my password”, with a reset link sent to the registered email; in the demo, nothing is sent.</p>
+          <figure class="revelar"><img src="../assets/painel-usuarios.jpg" alt="User management with login, email, role, status and edit, deactivate and remove actions" loading="lazy" width="1440" height="900"><figcaption>User management: the primary administrator is protected.</figcaption></figure>
+        </section>
+
+        <!-- 08 -->
+        <section class="capitulo" id="c08">
+          <span class="rotulo-cap">08 · Demo</span>
+          <h2>Everything in the browser, in a single file.</h2>
+          <div class="arquitetura revelar">
+            <div class="caixa"><span class="tag">GitHub Pages</span><b>One HTML file</b><ul><li>plain HTML, CSS and JS</li><li>no build dependencies</li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">Browser</span><b>Dashboard logic</b><ul><li>stages, traffic light and indicators</li><li>drag and drop between columns</li><li>emails via <code>mailto:</code></li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">localStorage</span><b>Demo data</b><ul><li>11 fictional applications</li><li>demo users</li></ul></div>
+          </div>
+          <p>This version has no server, database or real login: access is direct, user and application calls are answered in the browser itself, and changes are saved in the tester's <code>localStorage</code>. The demo dates are generated relative to today, so there is always a same-day interview, an overdue assignment and a critical candidate to see.</p>
+          <h3>Technologies</h3>
+          <div class="pilulas">
+            <span>HTML</span><span>CSS</span><span>Framework-free JavaScript</span><span>HTML5 drag and drop</span><span>localStorage · sessionStorage</span><span>mailto: (Outlook)</span><span>Intl pt-BR</span><span>Space Grotesk · IBM Plex</span><span>GitHub Pages</span>
+          </div>
+          <div class="encerramento revelar">
+            <span class="rotulo-cap">Try it</span>
+            <h2>Drag a candidate to Awaiting assignment.</h2>
+            <p class="texto">A suggested walkthrough: move a card from Feedback given to Awaiting assignment, enter a start date for the day after tomorrow and watch the card turn critical. Then, in the follow-up panel, click Follow up with manager and check the logged follow-up.</p>
+            <div class="acoes"><a class="btn primario" href="../painel/">Open the dashboard →</a><a class="btn" href="https://github.com/lariantunez/painel-de-contratacao">View the code</a></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><strong>Larissa Antunez</strong> · Analytics &amp; Development</span>
+      <span>Static demo · fictional data</span>
+    </div>
+  </footer>
+  <script src="../assets/estudo.js"></script>
+</body>
+</html>

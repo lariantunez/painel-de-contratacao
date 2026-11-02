@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <script src="../assets/idioma-estudo.js"></script>
+  <link rel="alternate" hreflang="pt-BR" href="https://lariantunez.github.io/painel-de-contratacao/">
+  <link rel="alternate" hreflang="en" href="https://lariantunez.github.io/painel-de-contratacao/en/">
+  <link rel="alternate" hreflang="es" href="https://lariantunez.github.io/painel-de-contratacao/es/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de Contratación · Estudio de caso</title>
+  <meta name="description" content="Estudio de caso: un panel que sigue a las candidatas desde la revisión del currículum hasta la contratación, con el envío de la asignación por parte de la gerente en el centro. Semáforo de plazo, recordatorios por correo, indicadores y ranking. Demostración con datos ficticios.">
+  <meta property="og:title" content="Panel de Contratación · del currículum a la contratación">
+  <meta property="og:description" content="Ocho etapas, un cuello de botella vigilado de cerca: semáforo de la asignación, recordatorios a las gerentes, indicadores con el cálculo a la vista y ranking por gerente.">
+  <meta property="og:image" content="../assets/painel-visao.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/estudo.css">
+  <style>
+    /* Identidade do Painel de Contratação: âmbar das abas ativas e verde-petróleo do funil. */
+    :root { --accent: #e39a4b; --accent-2: #e39a4b; --on-accent: #1b2733; --accent-wash: rgba(227, 154, 75, 0.12); --green: #5bb5a9; --green-wash: rgba(91, 181, 169, 0.12); }
+    :root[data-theme="light"] { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); }
+    @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --accent: #9a5b12; --accent-2: #9a5b12; --on-accent: #fff; --accent-wash: rgba(201, 122, 30, 0.1); --green: #2f6e68; --green-wash: rgba(47, 110, 104, 0.09); } }
+  </style>
+</head>
+<body>
+  <header class="topo">
+    <div class="wrap">
+      <a class="marca" href="#inicio"><i></i>Panel de Contratación</a>
+      <nav>
+        <a class="opcional" href="https://lariantunez.github.io/Vitrine-de-projetos/?lang=es">Portafolio</a>
+        <a class="opcional" href="#c00">Estudio de caso</a>
+        <a class="opcional" href="https://github.com/lariantunez/painel-de-contratacao">Código</a>
+        <a href="../painel/">Abrir panel</a>
+        <div class="idiomas" role="group" aria-label="Idioma"><a href="../?lang=pt" data-idioma="pt" hreflang="pt-BR">PT</a><a href="../en/" data-idioma="en" hreflang="en">EN</a><a href="./" data-idioma="es" hreflang="es" aria-current="true">ES</a></div>
+        <button class="btn-tema" id="tema" type="button" aria-label="Cambiar tema">☀</button>
+      </nav>
+      <span class="progresso"></span>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="abertura">
+      <div class="wrap">
+        <span class="selo-topo"><b>●</b> Demostración estática · datos ficticios</span>
+        <h1>Del currículum a la <em>contratación</em>, sin perder la asignación.</h1>
+        <p class="lead">Un panel para que RR. HH. siga a cada candidata desde la revisión del currículum hasta la contratación concluida. La etapa que más se traba, la espera de la asignación de la gerente, recibió un semáforo de plazo, recordatorios por correo, indicadores con el cálculo a la vista y un ranking por gerente.</p>
+        <div class="acoes">
+          <a class="btn primario" href="../painel/">Explorar el panel →</a>
+          <a class="btn" href="#c00">Leer el estudio de caso</a>
+        </div>
+        <div class="numeros">
+          <div><strong>8</strong><span>etapas, del currículum a la contratación</span></div>
+          <div><strong>7</strong><span>indicadores clicables en el resumen</span></div>
+          <div><strong>4</strong><span>franjas en el semáforo de la asignación</span></div>
+          <div><strong>7</strong><span>filtros rápidos por plazo, gerente y tienda</span></div>
+          <div><strong>5</strong><span>motivos de cierre registrados</span></div>
+        </div>
+        <figure class="vitrine">
+          <div class="barra-janela"><i></i><i></i><i></i><span>painel/ · Panel de Contratación (datos ficticios)</span></div>
+          <img src="../assets/painel-visao.jpg" alt="Pantalla principal: resumen general con siete indicadores, filtros rápidos, embudo de contratación con la etapa Esperando asignación en rojo y la lista de actividades para hoy" width="1440" height="900">
+        </figure>
+      </div>
+    </section>
+
+    <div class="wrap livro">
+      <aside class="indice" aria-label="Capítulos">
+        <p>Capítulos</p>
+        <ol>
+          <li><a href="#c00"><b>00</b>El desafío</a></li>
+          <li><a href="#c01"><b>01</b>Principios</a></li>
+          <li><a href="#c02"><b>02</b>Las ocho etapas</a></li>
+          <li><a href="#c03"><b>03</b>Semáforo de la asignación</a></li>
+          <li><a href="#c04"><b>04</b>Indicadores y ranking</a></li>
+          <li><a href="#c05"><b>05</b>Recordatorios a las gerentes</a></li>
+          <li><a href="#c06"><b>06</b>Datos y reglas</a></li>
+          <li><a href="#c07"><b>07</b>Pantallas y acceso</a></li>
+          <li><a href="#c08"><b>08</b>Demostración</a></li>
+        </ol>
+      </aside>
+
+      <div class="capitulos">
+        <!-- 00 -->
+        <section class="capitulo" id="c00">
+          <span class="rotulo-cap">00 · El desafío</span>
+          <h2>La contratación que nadie está mirando.</h2>
+          <p>Una candidata pasa por entrevista, retroalimentación, examen médico de ingreso y contratación. A mitad de camino, sin embargo, el proceso sale de las manos de RR. HH.: después de la aprobación, la <strong>gerente de la tienda tiene que enviar la asignación</strong>, el lugar de trabajo de la nueva contratada. Mientras no llega, nada avanza, y la fecha de inicio se acerca.</p>
+          <p class="destaque revelar">¿Quién está detenida, hace cuántos días, con qué gerente, y a quién ya se le envió un recordatorio? La respuesta tiene que estar en la pantalla, no en la memoria de alguien.</p>
+          <div class="grade g3 revelar">
+            <div class="cartao azul"><span class="num">EMBUDO</span><h4>Cada candidata en su lugar</h4><p>Un tablero con una columna por etapa, el conteo en el embudo y la próxima acción de RR. HH. escrita en cada tarjeta.</p></div>
+            <div class="cartao vermelho"><span class="num">CUELLO DE BOTELLA</span><h4>La espera de la asignación</h4><p>La etapa Esperando asignación tiene semáforo propio, plazo configurable y alerta de inicio próximo.</p></div>
+            <div class="cartao verde"><span class="num">RECORDATORIO</span><h4>De la pendiente al correo</h4><p>Las pendientes se convierten en correos listos para la gerente, y cada recordatorio queda registrado con fecha y usuario.</p></div>
+          </div>
+        </section>
+
+        <!-- 01 -->
+        <section class="capitulo" id="c01">
+          <span class="rotulo-cap">01 · Principios</span>
+          <h2>El cuello de botella en el centro, el historial intacto.</h2>
+          <p>Cuatro reglas guiaron las decisiones del panel:</p>
+          <div class="grade g2 revelar">
+            <div class="cartao"><span class="num">01</span><h4>Vigilar la etapa que se traba</h4><p>La etapa 05, Esperando asignación, se trata como cuello de botella en el código: tiene color propio en el embudo, orden por urgencia, filtros, recordatorios e indicadores dedicados.</p></div>
+            <div class="cartao"><span class="num">02</span><h4>Cada etapa pide el dato que la define</h4><p>Arrastrar a Entrevista agendada pide fecha y hora; a Esperando asignación, la fecha prevista de inicio; a Examen médico de ingreso, la fecha y hora del examen. Sin el dato, la candidata no avanza.</p></div>
+            <div class="cartao"><span class="num">03</span><h4>Nada desaparece sin registro</h4><p>Cerrar exige motivo y detalle, que van al historial. Eliminar es una acción aparte, pide confirmación y avisa que no se puede deshacer. Cualquier proceso cerrado se puede reabrir.</p></div>
+            <div class="cartao"><span class="num">04</span><h4>La próxima acción siempre a la vista</h4><p>Cada tarjeta dice lo que RR. HH. tiene que hacer ahora, y la lista Actividades para hoy reúne las entrevistas del día, exámenes, retroalimentaciones y asignaciones atrasadas, por prioridad.</p></div>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="capitulo" id="c02">
+          <span class="rotulo-cap">02 · Las ocho etapas</span>
+          <h2>Del currículum recibido a la contratación concluida.</h2>
+          <p>El tablero tiene una columna para cada una de las siete primeras etapas; la octava, Contratación concluida, va al historial. En cada tarjeta aparece la próxima acción de RR. HH.:</p>
+          <div class="etapas revelar">
+            <div class="etapa"><div><h4>Currículum recibido</h4><p>agendar una entrevista con la candidata</p></div></div>
+            <div class="etapa"><div><h4>Entrevista agendada</h4><p>realizar la entrevista · fecha y hora obligatorias al entrar</p></div></div>
+            <div class="etapa"><div><h4>Entrevista realizada</h4><p>registrar la retroalimentación de la entrevista</p></div></div>
+            <div class="etapa"><div><h4>Retroalimentación dada</h4><p>solicitar la fecha de inicio para esperar la liberación de la asignación</p></div></div>
+            <div class="etapa"><div><h4>Esperando asignación</h4><p>enviar el recordatorio de la asignación a la gerente y seguir la respuesta · fecha prevista de inicio obligatoria</p></div></div>
+            <div class="etapa"><div><h4>Asignación recibida</h4><p>agendar el examen médico de ingreso</p></div></div>
+            <div class="etapa"><div><h4>Examen médico agendado</h4><p>seguir el examen y concluir la contratación · fecha y hora obligatorias</p></div></div>
+            <div class="etapa"><div><h4>Contratación concluida</h4><p>proceso concluido, con fecha, hora y el usuario que lo aprobó</p></div></div>
+          </div>
+          <div class="grade g2 revelar">
+            <div class="cartao"><h4>Arrastrar y soltar</h4><p>Las tarjetas cambian de etapa al arrastrarlas y soltarlas entre las columnas. En la columna del cuello de botella, las tarjetas se ordenan por el semáforo (crítica, atrasada, atención, en plazo); en las demás, por la fecha de apertura.</p></div>
+            <div class="cartao"><h4>Cerrar con motivo</h4><p>Rechazada por RR. HH., rechazada en el examen médico de ingreso, desistimiento de la candidata, vacante cancelada por la tienda u otro. El detalle es obligatorio y la etapa en la que se detuvo el proceso queda guardada.</p></div>
+          </div>
+        </section>
+
+        <!-- 03 -->
+        <section class="capitulo" id="c03">
+          <span class="rotulo-cap">03 · Semáforo de la asignación</span>
+          <h2>Días detenida e inicio próximo, en un solo color.</h2>
+          <p>Toda candidata en Esperando asignación recibe una franja, calculada por los días desde que entró en la etapa y por la fecha prevista de inicio informada al avanzar:</p>
+          <div class="tabela-rolagem revelar">
+            <table class="tabela">
+              <thead><tr><th>Franja</th><th>Regla</th><th>Qué hace el panel</th></tr></thead>
+              <tbody>
+                <tr><td>🟢 En plazo</td><td>0 a 2 días esperando</td><td><span class="ok">La sigue</span> sin alerta</td></tr>
+                <tr><td>⚠️ Atención</td><td>3 a 4 días esperando</td><td>Entra en Actividades para hoy como “seguir asignación”</td></tr>
+                <tr><td>🔴 Atrasada</td><td>5 días o más</td><td><span class="alerta">Botón Enviar recordatorio a la gerente</span> en la tarjeta y actividad prioritaria</td></tr>
+                <tr><td>🚨 Crítica</td><td>Inicio previsto en 2 días o menos, sin importar el tiempo de espera</td><td>Sube al inicio de la columna y de la lista del día</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>La regla crítica va primero: una candidata detenida hace un día, pero con inicio pasado mañana, ya es crítica. Aparte del semáforo, el campo <strong>Enviar recordatorio a la gerente después de N días</strong> (3 por defecto) define cuándo el embudo marca a las candidatas como atrasadas y la tarjeta se pone roja.</p>
+          <p class="destaque revelar">La asignación solo cuenta como recibida en plazo si llegó antes de que la candidata pasara a roja o crítica.</p>
+        </section>
+
+        <!-- 04 -->
+        <section class="capitulo" id="c04">
+          <span class="rotulo-cap">04 · Indicadores y ranking</span>
+          <h2>Siete números, cada uno con su cálculo.</h2>
+          <p>El resumen general trae siete indicadores. Al hacer clic en cualquiera se abre la lista de candidatas detrás del número y, en los calculados, la cuenta escrita por extenso, por ejemplo: <em>“3 asignación(es) recibida(s) fuera de las franjas roja/crítica ÷ 3 asignación(es) recibida(s) = 100%”</em>.</p>
+          <div class="grade g4 revelar">
+            <div class="cartao azul"><h4>En curso</h4><p>Ni cerradas ni contratadas.</p></div>
+            <div class="cartao ambar"><h4>Esperando asignación</h4><p>En la etapa 05, con el tiempo en la etapa.</p></div>
+            <div class="cartao ambar"><h4>Atención</h4><p>3 a 4 días esperando.</p></div>
+            <div class="cartao vermelho"><h4>Crítico</h4><p>Inicio próximo sin asignación.</p></div>
+            <div class="cartao violeta"><h4>Tiempo promedio</h4><p>Suma de las esperas cerradas ÷ asignaciones recibidas.</p></div>
+            <div class="cartao verde"><h4>% en plazo</h4><p>Recibidas antes de la franja roja o crítica.</p></div>
+            <div class="cartao vermelho"><h4>% fuera de plazo</h4><p>Recibidas ya en la franja roja o crítica.</p></div>
+          </div>
+          <h3>Ranking de desempeño por gerente</h3>
+          <p>Cada gerente recibe una barra apilada con asignaciones en plazo, fuera de plazo, esperando hasta 4 días y esperando más de 4 días, además del tiempo promedio de envío. El orden predeterminado usa una puntuación que premia el plazo y penaliza los atrasos:</p>
+          <pre><span class="f">puntuación</span> = % en plazo + <span class="s">8</span> × en plazo − <span class="s">12</span> × fuera de plazo
+          − <span class="s">10</span> × esperando más de 4 días
+          − mín(tiempo promedio en horas ÷ <span class="s">6</span>, <span class="s">20</span>)</pre>
+          <p>Otros cinco órdenes están a un clic: más asignaciones en plazo, más fuera de plazo, menor tiempo promedio, más esperando hasta 4 días y más esperando más de 4 días.</p>
+          <div class="galeria revelar">
+            <figure><img src="../assets/painel-indicadores.jpg" alt="Resumen general con el indicador de asignaciones en plazo abierto, mostrando el cálculo y la tabla de candidatas" loading="lazy" width="1440" height="900"><figcaption>Indicador abierto: el cálculo y las candidatas detrás de él.</figcaption></figure>
+            <figure><img src="../assets/painel-ranking.jpg" alt="Ranking de desempeño por gerente con barras apiladas y tiempo promedio de envío, seguido del historial de candidaturas" loading="lazy" width="1440" height="900"><figcaption>Ranking por gerente e historial de candidaturas cerradas.</figcaption></figure>
+          </div>
+        </section>
+
+        <!-- 05 -->
+        <section class="capitulo" id="c05">
+          <span class="rotulo-cap">05 · Recordatorios a las gerentes</span>
+          <h2>De la pendiente al correo listo, con registro.</h2>
+          <p>El panel de recordatorios agrupa por gerente a las candidatas que esperan asignación. El recordatorio abre un correo ya redactado en el cliente de correo (Outlook), con la lista de candidatas, la tienda y los días de espera, y guarda quién lo envió y cuándo.</p>
+          <div class="fluxo revelar" role="img" aria-label="Flujo: pendientes en la etapa Esperando asignación, agrupación por gerente o correo, correo listo vía mailto y registro del recordatorio">
+            <div class="coluna"><b>1 · Pendientes</b>
+              <div class="item erp">Esperando asignación<small>respeta el filtro rápido</small></div>
+              <div class="item fato">Atrasadas y críticas<small>botón en la propia tarjeta</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>2 · Agrupación</b>
+              <div class="item">Por gerente<small>recordatorio consolidado</small></div>
+              <div class="item">Por correo<small>envío en lote</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>3 · Correo</b>
+              <div class="item">Enlace <code>mailto:</code><small>asunto y cuerpo completados</small></div>
+              <div class="item">Uno a la vez<small>marcar enviado y abrir el siguiente</small></div>
+            </div>
+            <div class="seta">→</div>
+            <div class="coluna"><b>4 · Registro</b>
+              <div class="item dim">Recordatorio guardado<small>fecha, usuario, correo, gerente</small></div>
+              <div class="item">Barra de progreso<small>enviados ÷ total</small></div>
+            </div>
+          </div>
+          <div class="grade g3 revelar">
+            <div class="cartao"><h4>Tres formas de enviar recordatorios</h4><p>Individual, desde la tarjeta atrasada o crítica; consolidado, por gerente; o todos a la vez, agrupados por dirección de correo.</p></div>
+            <div class="cartao"><h4>Envío guiado</h4><p>En el lote, el panel abre un correo a la vez. Al volver, “marcar enviado y abrir siguiente” registra el recordatorio y sigue con la fila.</p></div>
+            <div class="cartao"><h4>Último recordatorio de la etapa actual</h4><p>La fila de la gerente muestra solo los recordatorios enviados después de la entrada en la etapa actual, para no confundirlos con recordatorios antiguos.</p></div>
+          </div>
+          <figure class="revelar"><img src="../assets/painel-cobrancas.jpg" alt="Panel de recordatorios con gerentes expandidas, correos, historial de recordatorios y botones Enviar recordatorio a la gerente y Enviar recordatorio a todas las gerentes" loading="lazy" width="1440" height="900"><figcaption>Panel de recordatorios: gerentes, candidatas pendientes e historial de recordatorios.</figcaption></figure>
+        </section>
+
+        <!-- 06 -->
+        <section class="capitulo" id="c06">
+          <span class="rotulo-cap">06 · Datos y reglas</span>
+          <h2>Una candidatura lleva su propia historia.</h2>
+          <p>Cada candidatura es un registro único con la etapa actual, el momento en que entró en ella (<code>entrouEm</code>) y dos listas: el <strong>historial de etapas</strong> y los <strong>recordatorios</strong>. Los indicadores se calculan a partir de esas listas.</p>
+          <figure class="diagrama revelar">
+            <svg viewBox="0 0 960 430" role="img" aria-label="Estructura: la candidatura al centro, vinculada al historial de etapas, a los recordatorios, a las fechas de agenda y al cierre; usuarios y bloqueos de edición abajo">
+              <path class="liga forte" d="M365 120 C 300 120, 310 69, 260 69"/><path class="liga forte" d="M365 160 C 300 160, 310 179, 260 179"/>
+              <path class="liga forte" d="M595 120 C 650 120, 650 69, 700 69"/><path class="liga forte" d="M595 160 C 650 160, 650 179, 700 179"/>
+              <path class="liga" d="M260 320 H 365"/><path class="liga" d="M595 320 H 700"/>
+              <g class="no dim"><rect x="30" y="40" width="230" height="58" rx="10"/><text x="145" y="64" text-anchor="middle">historico[]</text><text class="sub" x="145" y="84" text-anchor="middle">etapa, fecha, usuario, observación</text></g>
+              <g class="no dim"><rect x="30" y="150" width="230" height="58" rx="10"/><text x="145" y="174" text-anchor="middle">cobrancas[]</text><text class="sub" x="145" y="194" text-anchor="middle">fecha, usuario, correo, gerente</text></g>
+              <g class="no fato"><rect x="365" y="90" width="230" height="100" rx="10"/><text x="480" y="122" text-anchor="middle">candidatura</text><text class="sub" x="480" y="144" text-anchor="middle">nombre, tienda, horario, gerente</text><text class="sub" x="480" y="164" text-anchor="middle">correo de la gerente</text><text class="sub" x="480" y="180" text-anchor="middle">etapa · entrouEm · cerrada</text></g>
+              <g class="no apoio"><rect x="700" y="40" width="230" height="58" rx="10"/><text x="815" y="64" text-anchor="middle">agenda</text><text class="sub" x="815" y="84" text-anchor="middle">entrevista, inicio previsto, examen</text></g>
+              <g class="no apoio"><rect x="700" y="150" width="230" height="58" rx="10"/><text x="815" y="174" text-anchor="middle">cierre</text><text class="sub" x="815" y="194" text-anchor="middle">motivo, detalle, etapa, usuario</text></g>
+              <g class="no"><rect x="30" y="291" width="230" height="58" rx="10"/><text x="145" y="315" text-anchor="middle">usuarios</text><text class="sub" x="145" y="335" text-anchor="middle">login, correo, perfil, activo</text></g>
+              <g class="no"><rect x="365" y="291" width="230" height="58" rx="10"/><text x="480" y="315" text-anchor="middle">sesión</text><text class="sub" x="480" y="335" text-anchor="middle">usuario conectado en cada acción</text></g>
+              <g class="no"><rect x="700" y="291" width="230" height="58" rx="10"/><text x="815" y="315" text-anchor="middle">bloqueos de edición</text><text class="sub" x="815" y="335" text-anchor="middle">quién está editando cada tarjeta</text></g>
+            </svg>
+            <figcaption>Rojo: la candidatura. Verde: listas que crecen con cada acción. Discontinuo: datos completados en etapas específicas. Abajo: acceso y edición.</figcaption>
+          </figure>
+          <h3>Reglas que mantienen los números honestos</h3>
+          <div class="revelar">
+            <div class="mudanca"><div class="antes"><b>Problema</b>Regresar a una candidata de etapa dejaría en el historial pasos que ya no valen.</div><div class="seta">→</div><div class="depois"><b>Solución</b>El historial se recorta: al volver a una etapa ya vivida, se eliminan los pasos posteriores a ella; al avanzar, solo se agrega la nueva etapa.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Los registros antiguos usaban otros nombres de etapa, como “Feedback dado” o “Contratada”.</div><div class="seta">→</div><div class="depois"><b>Solución</b>Una tabla de equivalencias traduce los nombres antiguos, y una migración ajusta la etapa una sola vez (marca <code>etapasMigradasV2</code>).</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Nombres, tiendas y gerentes escritos de formas distintas romperían agrupaciones y filtros.</div><div class="seta">→</div><div class="depois"><b>Solución</b>Nombre de la candidata en mayúsculas, tienda y gerente con iniciales mayúsculas, espacios normalizados y búsqueda sin tildes.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Dos personas de RR. HH. editando la misma tarjeta podrían sobrescribirse mutuamente.</div><div class="seta">→</div><div class="depois"><b>Solución</b>Bloqueo de edición por tarjeta, renovado cada 8 segundos: quien abre una tarjeta en uso ve “en edición por…”. En la demo, sin servidor, la lista de bloqueos queda vacía.</div></div>
+            <div class="mudanca"><div class="antes"><b>Problema</b>Una fecha AAAA-MM-DD leída como UTC puede caer en el día anterior en el horario de Brasil.</div><div class="seta">→</div><div class="depois"><b>Solución</b>Entrevista, examen e inicio previsto se leen como fecha local, y las comparaciones con hoy se hacen en días corridos.</div></div>
+          </div>
+        </section>
+
+        <!-- 07 -->
+        <section class="capitulo" id="c07">
+          <span class="rotulo-cap">07 · Pantallas y acceso</span>
+          <h2>Una página de trabajo y una de usuarios.</h2>
+          <p>La pantalla principal reúne, de arriba abajo: resumen general, filtros rápidos, embudo, actividades para hoy, panel de recordatorios, tablero por etapa, ranking por gerente e historial de candidaturas (cerradas sin contratación y contrataciones concluidas). El nombre de cada candidata abre la línea de tiempo completa, con fecha, hora y usuario de cada paso.</p>
+          <div class="galeria revelar">
+            <figure><img src="../assets/painel-quadro.jpg" alt="Tablero con siete columnas de etapas, tarjetas abiertas que muestran historial y acciones, y una tarjeta crítica en rojo en la columna Esperando asignación" loading="lazy" width="1440" height="900"><figcaption>Tablero por etapa: semáforo, próxima acción e historial en la tarjeta.</figcaption></figure>
+            <figure><img src="../assets/painel-historico.jpg" alt="Ventana de historial de una candidata con cada etapa, fecha, hora y usuario" loading="lazy" width="1440" height="900"><figcaption>Línea de tiempo de la candidata: etapa, fecha y usuario.</figcaption></figure>
+          </div>
+          <h3>Perfiles de acceso</h3>
+          <div class="grade g3 revelar">
+            <div class="cartao violeta"><span class="num">ADMIN</span><h4>Administrador</h4><p>Accede al Control de usuarios: crea, edita, activa, desactiva y elimina usuarios.</p></div>
+            <div class="cartao azul"><span class="num">USUARIO</span><h4>Usuario de RR. HH.</h4><p>Opera el panel. Para abrir el Control de usuarios, tiene que iniciar sesión con un acceso de administrador.</p></div>
+            <div class="cartao ambar"><span class="num">PRINCIPAL</span><h4>Administrador principal</h4><p>No se puede eliminar, desactivar, degradar ni renombrar; aparece como “Adm pai” (administrador padre) en la lista.</p></div>
+          </div>
+          <p>El registro pide login, correo para restablecer la contraseña, perfil, estado y una contraseña de al menos 6 caracteres. La pantalla de acceso tiene “Olvidé mi contraseña”, con un enlace de restablecimiento enviado al correo registrado; en la demo, no se envía nada.</p>
+          <figure class="revelar"><img src="../assets/painel-usuarios.jpg" alt="Control de usuarios con login, correo, perfil, estado y acciones de editar, desactivar y eliminar" loading="lazy" width="1440" height="900"><figcaption>Control de usuarios: el administrador principal queda protegido.</figcaption></figure>
+        </section>
+
+        <!-- 08 -->
+        <section class="capitulo" id="c08">
+          <span class="rotulo-cap">08 · Demostración</span>
+          <h2>Todo en el navegador, en un solo archivo.</h2>
+          <div class="arquitetura revelar">
+            <div class="caixa"><span class="tag">GitHub Pages</span><b>Un archivo HTML</b><ul><li>HTML, CSS y JS puro</li><li>sin dependencias de build</li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">Navegador</span><b>Lógica del panel</b><ul><li>etapas, semáforo e indicadores</li><li>arrastrar y soltar entre columnas</li><li>correos vía <code>mailto:</code></li></ul></div>
+            <div class="seta">⇄</div>
+            <div class="caixa"><span class="tag">localStorage</span><b>Datos de la demo</b><ul><li>11 candidaturas ficticias</li><li>usuarios de la demo</li></ul></div>
+          </div>
+          <p>Esta versión no tiene servidor, base de datos ni login real: el acceso es directo, las llamadas de usuarios y candidaturas se responden en el propio navegador y los cambios quedan guardados en el <code>localStorage</code> de quien prueba. Las fechas de la demo se generan en relación con el día de hoy, así que siempre hay una entrevista del día, una asignación atrasada y una candidata crítica para ver.</p>
+          <h3>Tecnologías</h3>
+          <div class="pilulas">
+            <span>HTML</span><span>CSS</span><span>JavaScript sin framework</span><span>Drag and drop HTML5</span><span>localStorage · sessionStorage</span><span>mailto: (Outlook)</span><span>Intl pt-BR</span><span>Space Grotesk · IBM Plex</span><span>GitHub Pages</span>
+          </div>
+          <div class="encerramento revelar">
+            <span class="rotulo-cap">Pruébalo</span>
+            <h2>Arrastra una candidata a Esperando asignación.</h2>
+            <p class="texto">Recorrido sugerido: lleva una tarjeta de Retroalimentación dada a Esperando asignación, indica un inicio para pasado mañana y mira cómo la tarjeta se vuelve crítica. Después, en el Panel de recordatorios, haz clic en Enviar recordatorio a la gerente y revisa el recordatorio registrado.</p>
+            <div class="acoes"><a class="btn primario" href="../painel/">Abrir el panel →</a><a class="btn" href="https://github.com/lariantunez/painel-de-contratacao">Ver el código</a></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span><strong>Larissa Antunez</strong> · Analytics &amp; Desarrollo</span>
+      <span>Demostración estática · datos ficticios</span>
+    </div>
+  </footer>
+  <script src="../assets/estudo.js"></script>
+</body>
+</html>
