@@ -1,6 +1,6 @@
 # Painel de Contratação
 
-Funil de contratação do RH em 8 etapas, do currículo recebido à contratação concluída, com foco na etapa que mais trava: a espera pelo roteiro da gestora.
+Funil de contratação do RH em 9 etapas, do currículo recebido à contratação concluída, com foco na etapa que mais trava: a espera pelo roteiro da gestora.
 
 **[Ler o estudo de caso](https://lariantunez.github.io/painel-de-contratacao/)** · **[Abrir a demo do painel](https://lariantunez.github.io/painel-de-contratacao/painel/)**
 
@@ -14,7 +14,7 @@ Depois que a candidata é aprovada, o processo sai das mãos do RH: a gestora da
 
 ## O que eu construí
 
-- **Quadro kanban de 8 etapas** com arrastar e soltar. Cada etapa exige o dado que a define: entrevista pede data e hora, "aguardando roteiro" pede a data prevista de início.
+- **Quadro kanban de 9 etapas** com arrastar e soltar, incluindo a aprovação do gestor RH antes da entrevista. Cada etapa exige o dado que a define: entrevista pede data e hora, "aguardando roteiro" pede a data prevista de início.
 - **Semáforo do roteiro** com 4 faixas (no prazo, atenção, atrasada, crítica). A regra crítica vem primeiro: início em 2 dias ou menos já é crítico, mesmo que a espera tenha sido curta.
 - **7 indicadores clicáveis.** Cada um abre as candidatas por trás do número e mostra a conta por extenso.
 - **Ranking por gestor** com pontuação que premia o prazo e pesa os atrasos, além de outras 5 ordenações.
@@ -26,6 +26,7 @@ Depois que a candidata é aprovada, o processo sai das mãos do RH: a gestora da
 - A etapa gargalo é tratada como caso especial no código: cor própria, ordenação por urgência, filtros e indicadores dedicados.
 - Cada candidatura é um registro único com duas listas que só crescem (`historico[]` e `cobrancas[]`). Todos os indicadores são calculados a partir delas, nunca guardados prontos.
 - Nomes antigos de etapas são normalizados por uma tabela de equivalência, para que registros antigos e novos entrem nas mesmas contas.
+- Incluir uma etapa no meio do funil com o painel em uso exigiu migrar os registros (a etapa é gravada como número) uma única vez e bloquear, no servidor, salvamentos vindos de abas com a versão anterior.
 
 ## Stack
 
@@ -46,4 +47,4 @@ npx serve .
 
 ---
 
-**🇺🇸 English:** an 8-stage hiring funnel for HR, from résumé to hire. It focuses on the stage that stalls the most (waiting for the store manager's assignment), with a 4-level deadline alert, 7 clickable KPIs that show their own math, a ranking by manager and guided e-mail follow-ups that are logged. Built in plain HTML, CSS and JavaScript. Portfolio version with fictional data; the original runs in production.
+**🇺🇸 English:** a 9-stage hiring funnel for HR, from résumé to hire. It focuses on the stage that stalls the most (waiting for the store manager's assignment), with a 4-level deadline alert, 7 clickable KPIs that show their own math, a ranking by manager and guided e-mail follow-ups that are logged. Built in plain HTML, CSS and JavaScript. Portfolio version with fictional data; the original runs in production.

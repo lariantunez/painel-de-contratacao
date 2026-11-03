@@ -10,7 +10,7 @@
   <title>Hiring Dashboard · Case study</title>
   <meta name="description" content="Case study: a dashboard that tracks candidates from résumé screening to hire, with the manager's assignment hand-off at its center. Deadline traffic light, email follow-ups, indicators and a ranking. Demo with fictional data.">
   <meta property="og:title" content="Hiring Dashboard · from résumé to hire">
-  <meta property="og:description" content="Eight stages, one bottleneck watched closely: an assignment traffic light, manager follow-ups, indicators that show their math and a ranking by manager.">
+  <meta property="og:description" content="Nine stages, one bottleneck watched closely: an assignment traffic light, manager follow-ups, indicators that show their math and a ranking by manager.">
   <meta property="og:image" content="../assets/painel-visao.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,7 +50,7 @@
           <a class="btn" href="#c00">Read the case study</a>
         </div>
         <div class="numeros">
-          <div><strong>8</strong><span>stages, from résumé to hire</span></div>
+          <div><strong>9</strong><span>stages, from résumé to hire</span></div>
           <div><strong>7</strong><span>clickable indicators in the summary</span></div>
           <div><strong>4</strong><span>bands in the assignment traffic light</span></div>
           <div><strong>7</strong><span>quick filters by deadline, manager and store</span></div>
@@ -69,7 +69,7 @@
         <ol>
           <li><a href="#c00"><b>00</b>The challenge</a></li>
           <li><a href="#c01"><b>01</b>Principles</a></li>
-          <li><a href="#c02"><b>02</b>The eight stages</a></li>
+          <li><a href="#c02"><b>02</b>The nine stages</a></li>
           <li><a href="#c03"><b>03</b>Assignment traffic light</a></li>
           <li><a href="#c04"><b>04</b>Indicators and ranking</a></li>
           <li><a href="#c05"><b>05</b>Manager follow-ups</a></li>
@@ -99,7 +99,7 @@
           <h2>The bottleneck at the center, the history intact.</h2>
           <p>Four rules guided the dashboard's decisions:</p>
           <div class="grade g2 revelar">
-            <div class="cartao"><span class="num">01</span><h4>Watch the stage that stalls</h4><p>Stage 05, Awaiting assignment, is treated as the bottleneck in the code: it has its own color in the funnel, urgency sorting, filters, follow-ups and dedicated indicators.</p></div>
+            <div class="cartao"><span class="num">01</span><h4>Watch the stage that stalls</h4><p>Stage 06, Awaiting assignment, is treated as the bottleneck in the code: it has its own color in the funnel, urgency sorting, filters, follow-ups and dedicated indicators.</p></div>
             <div class="cartao"><span class="num">02</span><h4>Each stage asks for the data that defines it</h4><p>Dragging to Interview scheduled asks for date and time; to Awaiting assignment, the expected start date; to Medical exam, the exam's date and time. Without that data, the candidate doesn't advance.</p></div>
             <div class="cartao"><span class="num">03</span><h4>Nothing disappears without a record</h4><p>Closing requires a reason and a detail, both saved to the history. Removing is separate, asks for confirmation and warns that it can't be undone. Any closed process can be reopened.</p></div>
             <div class="cartao"><span class="num">04</span><h4>The next action always in sight</h4><p>Each card says what HR needs to do now, and the Activities for today list brings together the day's interviews, exams, feedback and overdue assignments, by priority.</p></div>
@@ -108,11 +108,12 @@
 
         <!-- 02 -->
         <section class="capitulo" id="c02">
-          <span class="rotulo-cap">02 · The eight stages</span>
+          <span class="rotulo-cap">02 · The nine stages</span>
           <h2>From résumé received to hire completed.</h2>
-          <p>The board has one column for each of the first seven stages; the eighth, Hire completed, goes to the history. Each card shows HR's next action:</p>
+          <p>The board has one column for each of the first eight stages; the ninth, Hire completed, goes to the history. Each card shows HR's next action:</p>
           <div class="etapas revelar">
-            <div class="etapa"><div><h4>Résumé received</h4><p>schedule an interview with the candidate</p></div></div>
+            <div class="etapa"><div><h4>Résumé received</h4><p>send the résumé to the HR manager for approval</p></div></div>
+            <div class="etapa"><div><h4>HR manager approval</h4><p>wait for the HR manager's approval and schedule the interview</p></div></div>
             <div class="etapa"><div><h4>Interview scheduled</h4><p>conduct the interview · date and time required on entry</p></div></div>
             <div class="etapa"><div><h4>Interview completed</h4><p>record the interview feedback</p></div></div>
             <div class="etapa"><div><h4>Feedback given</h4><p>request the start date to wait for the assignment to be released</p></div></div>
@@ -154,7 +155,7 @@
           <p>The overall summary has seven indicators. Clicking any of them opens the list of candidates behind the number and, for calculated ones, the math written out in full, for example: <em>“3 assignment(s) received outside the red/critical bands ÷ 3 assignment(s) received = 100%”</em>.</p>
           <div class="grade g4 revelar">
             <div class="cartao azul"><h4>In progress</h4><p>Neither closed nor hired.</p></div>
-            <div class="cartao ambar"><h4>Awaiting assignment</h4><p>In stage 05, with time in the stage.</p></div>
+            <div class="cartao ambar"><h4>Awaiting assignment</h4><p>In stage 06, with time in the stage.</p></div>
             <div class="cartao ambar"><h4>Attention</h4><p>3 to 4 days waiting.</p></div>
             <div class="cartao vermelho"><h4>Critical</h4><p>Upcoming start with no assignment.</p></div>
             <div class="cartao violeta"><h4>Average time</h4><p>Sum of completed waits ÷ assignments received.</p></div>
@@ -232,6 +233,7 @@
           <div class="revelar">
             <div class="mudanca"><div class="antes"><b>Problem</b>Moving a candidate back a stage would leave passages in the history that no longer apply.</div><div class="seta">→</div><div class="depois"><b>Solution</b>The history is trimmed: when going back to a stage already visited, the later passages are removed; when advancing, only the new stage is appended.</div></div>
             <div class="mudanca"><div class="antes"><b>Problem</b>Older records used different stage names, such as “Feedback dado” or “Contratada”.</div><div class="seta">→</div><div class="depois"><b>Solution</b>A mapping table translates the old names, and a migration adjusts the stage only once (flag <code>etapasMigradasV2</code>).</div></div>
+            <div class="mudanca"><div class="antes"><b>Problem</b>Each candidate's stage is stored as a number. Adding “HR manager approval” as stage 02, with the panel already in use, would have shown every candidate one column behind.</div><div class="seta">→</div><div class="depois"><b>Solution</b>A second migration (<code>etapasMigradasV3</code>) moves stages from 02 onward up one position, only once per record. The server rejects saves from tabs still running the previous version and asks for a page reload, and the change was tested on a copy of the database before release.</div></div>
             <div class="mudanca"><div class="antes"><b>Problem</b>Names, stores and managers typed in different ways would break grouping and filters.</div><div class="seta">→</div><div class="depois"><b>Solution</b>Candidate name in uppercase, store and manager in title case, normalized spaces and accent-insensitive search.</div></div>
             <div class="mudanca"><div class="antes"><b>Problem</b>Two HR people editing the same card could overwrite each other.</div><div class="seta">→</div><div class="depois"><b>Solution</b>A per-card edit lock, renewed every 8 seconds: anyone who opens a card in use sees “being edited by…”. In the demo, with no server, the lock list stays empty.</div></div>
             <div class="mudanca"><div class="antes"><b>Problem</b>A YYYY-MM-DD date read as UTC can fall on the previous day in Brazil's time zone.</div><div class="seta">→</div><div class="depois"><b>Solution</b>Interview, exam and expected start are read as local dates, and comparisons with today are made in calendar days.</div></div>

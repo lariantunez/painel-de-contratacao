@@ -250,7 +250,7 @@ padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap;
 .threshold{font-size:14px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
 .threshold input{width:44px;font-family:'IBM Plex Mono',monospace;border:1px solid var(--line);border-radius:3px;padding:4px 6px;text-align:center;}
 
-.board{display:grid;grid-template-columns:repeat(7,minmax(136px,1fr));gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:30px;}
+.board{display:grid;grid-template-columns:repeat(8,minmax(136px,1fr));gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:30px;}
 .col{background:#EFF0EE;border-radius:4px;min-width:0;padding:7px;}
 .col.drag-over{outline:2px solid var(--amber);outline-offset:-2px;background:var(--amber-soft);}
 .col-head{font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:0;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin-bottom:8px;overflow-wrap:anywhere;}
@@ -782,6 +782,7 @@ dias parada em "Aguardando roteiro"
 <script>
 const ETAPAS = [
 "Currículo recebido",
+"Aprovação gestor RH",
 "Entrevista agendada",
 "Entrevista realizada",
 "Feedback realizado",
@@ -790,11 +791,14 @@ const ETAPAS = [
 "Exame admissional agendado",
 "Contratação concluída"
 ];
-const ENTREVISTA_IDX = 1;
-const BOTTLENECK_IDX = 4;
-const ROTEIRO_RECEBIDO_IDX = 5;
-const EXAME_IDX = 6;
-const CONTRATADA_IDX = 7;
+const APROVACAO_GESTOR_IDX = 1;
+const ENTREVISTA_IDX = 2;
+const ENTREVISTA_REALIZADA_IDX = 3;
+const FEEDBACK_IDX = 4;
+const BOTTLENECK_IDX = 5;
+const ROTEIRO_RECEBIDO_IDX = 6;
+const EXAME_IDX = 7;
+const CONTRATADA_IDX = 8;
 const AUTO_REFRESH_MS = 8000;
 const resetToken = new URLSearchParams(window.location.search).get("resetToken");
 
@@ -830,7 +834,7 @@ let carregandoCandidatosEmSegundoPlano = false;
 let salvandoCandidatos = false;
 let candidatosSnapshot = '';
 const DEMO_USER = {login:'larissa', email:'portfolio@demo.com', role:'admin'};
-const DEMO_CANDIDATOS_KEY = 'painelPortfolioDemoCandidatosV2';
+const DEMO_CANDIDATOS_KEY = 'painelPortfolioDemoCandidatosV3';
 const DEMO_USUARIOS_KEY = 'painelPortfolioDemoUsuariosV2';
 let editClientId = sessionStorage.getItem('painelEditClientId');
 if(!editClientId){
@@ -854,17 +858,18 @@ const h = 3600000;
 const d = 86400000;
 return [
 {id:'demo-c1',nome:'Aline Souza',loja:'Shopping Jardim',horario:'08:00h às 17:00h',gestora:'Marina',emailGestora:'marina.gestora@empresa.com.br',etapa:0,entrouEm:now-2*h,encerrada:false,historico:[{etapa:ETAPAS[0],data:now-2*h,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c2',nome:'Bianca Lima',loja:'Loja Centro',horario:'10:00h às 19:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:1,entrouEm:now-26*h,entrevistaData:demoDataIso(now+d),entrevistaHora:'10:30',entrevistaAgendadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'larissa',obs:''},{etapa:ETAPAS[1],data:now-26*h,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c3',nome:'Camila Rocha',loja:'Quiosque Norte',horario:'12:00h às 21:00h',gestora:'Rafael',emailGestora:'rafael.gestor@empresa.com.br',etapa:2,entrouEm:now-6*h,entrevistaData:demoDataIso(now),entrevistaHora:'09:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-5*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-6*h,usuario:'rh1',obs:''}],cobrancas:[]},
-{id:'demo-c4',nome:'Daniela Martins',loja:'Shopping Sul',horario:'09:00h às 18:00h',gestora:'Viviane',emailGestora:'viviane.gestora@empresa.com.br',etapa:3,entrouEm:now-4*h,entrevistaData:demoDataIso(now-d),entrevistaHora:'15:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-6*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c5',nome:'Elisa Pereira',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:4,entrouEm:now-6*d,dataPrevista:demoDataIso(now+d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-10*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d-2*h,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'tatiane.gestora@empresa.com.br',gestora:'Tatiane'}]},
-{id:'demo-c6',nome:'Fernanda Alves',loja:'Shopping Jardim',horario:'13:00h às 22:00h',gestora:'Marina',emailGestora:'marina.gestora@empresa.com.br',etapa:4,entrouEm:now-3*d,dataPrevista:demoDataIso(now+5*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-8*d,usuario:'rh2',obs:''},{etapa:ETAPAS[1],data:now-7*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-3*d,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c7',nome:'Giovana Melo',loja:'Loja Praia',horario:'09:00h às 18:00h',gestora:'Renata',emailGestora:'renata.gestora@empresa.com.br',etapa:4,entrouEm:now-8*h,dataPrevista:demoDataIso(now+8*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'rh3',obs:''},{etapa:ETAPAS[1],data:now-2*d,usuario:'rh3',obs:''},{etapa:ETAPAS[2],data:now-d,usuario:'rh3',obs:''},{etapa:ETAPAS[3],data:now-12*h,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-8*h,usuario:'rh3',obs:''}],cobrancas:[]},
-{id:'demo-c8',nome:'Helena Castro',loja:'Shopping Sul',horario:'10:00h às 19:00h',gestora:'Marina',emailGestora:'marina.gestora@empresa.com.br',etapa:5,entrouEm:now-2*h,dataPrevista:demoDataIso(now+7*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-2*h,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'marina.gestora@empresa.com.br',gestora:'Marina'}]},
-{id:'demo-c9',nome:'Isabela Nunes',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:6,entrouEm:now-4*h,dataPrevista:demoDataIso(now+4*d),exameData:demoDataIso(now),exameHora:'14:30',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-12*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-2*d,usuario:'rh2',obs:''},{etapa:ETAPAS[6],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
-{id:'demo-c10',nome:'Juliana Gomes',loja:'Shopping Jardim',horario:'09:00h às 18:00h',gestora:'Renata',emailGestora:'renata.gestora@empresa.com.br',etapa:7,entrouEm:now-d,contratadaEm:now-d,contratadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-15*d,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-9*d,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-7*d,usuario:'rh3',obs:''},{etapa:ETAPAS[7],data:now-d,usuario:'larissa',obs:''}],cobrancas:[]},
-{id:'demo-c11',nome:'Karina Lopes',loja:'Loja Praia',horario:'11:00h às 20:00h',gestora:'Rafael',emailGestora:'rafael.gestor@empresa.com.br',etapa:2,entrouEm:now-4*d,encerrada:true,encerradaEm:now-2*d,encerradaNaEtapa:ETAPAS[2],encerradaPor:'rh2',motivo:'Reprovada pelo RH (perfil/feedback)',detalhe:'Disponibilidade diferente da vaga.',historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh2',obs:''},{etapa:'Processo encerrado - Reprovada pelo RH (perfil/feedback)',data:now-2*d,usuario:'rh2',obs:'Disponibilidade diferente da vaga.'}],cobrancas:[]}
-];
+{id:'demo-c12',nome:'Luana Prado',loja:'Quiosque Norte',horario:'10:00h às 19:00h',gestora:'Viviane',emailGestora:'viviane.gestora@empresa.com.br',etapa:1,entrouEm:now-20*h,encerrada:false,historico:[{etapa:ETAPAS[0],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[1],data:now-20*h,usuario:'rh1',obs:''}],cobrancas:[]},
+{id:'demo-c2',nome:'Bianca Lima',loja:'Loja Centro',horario:'10:00h às 19:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:2,entrouEm:now-26*h,entrevistaData:demoDataIso(now+d),entrevistaHora:'10:30',entrevistaAgendadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'larissa',obs:''},{etapa:ETAPAS[2],data:now-26*h,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c3',nome:'Camila Rocha',loja:'Quiosque Norte',horario:'12:00h às 21:00h',gestora:'Rafael',emailGestora:'rafael.gestor@empresa.com.br',etapa:3,entrouEm:now-6*h,entrevistaData:demoDataIso(now),entrevistaHora:'09:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-5*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-6*h,usuario:'rh1',obs:''}],cobrancas:[]},
+{id:'demo-c4',nome:'Daniela Martins',loja:'Shopping Sul',horario:'09:00h às 18:00h',gestora:'Viviane',emailGestora:'viviane.gestora@empresa.com.br',etapa:4,entrouEm:now-4*h,entrevistaData:demoDataIso(now-d),entrevistaHora:'15:00',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-6*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c5',nome:'Elisa Pereira',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:5,entrouEm:now-6*d,dataPrevista:demoDataIso(now+d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-10*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d-2*h,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-6*d,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'tatiane.gestora@empresa.com.br',gestora:'Tatiane'}]},
+{id:'demo-c6',nome:'Fernanda Alves',loja:'Shopping Jardim',horario:'13:00h às 22:00h',gestora:'Marina',emailGestora:'marina.gestora@empresa.com.br',etapa:5,entrouEm:now-3*d,dataPrevista:demoDataIso(now+5*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-8*d,usuario:'rh2',obs:''},{etapa:ETAPAS[2],data:now-7*d,usuario:'rh2',obs:''},{etapa:ETAPAS[3],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[4],data:now-4*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-3*d,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c7',nome:'Giovana Melo',loja:'Loja Praia',horario:'09:00h às 18:00h',gestora:'Renata',emailGestora:'renata.gestora@empresa.com.br',etapa:5,entrouEm:now-8*h,dataPrevista:demoDataIso(now+8*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-3*d,usuario:'rh3',obs:''},{etapa:ETAPAS[2],data:now-2*d,usuario:'rh3',obs:''},{etapa:ETAPAS[3],data:now-d,usuario:'rh3',obs:''},{etapa:ETAPAS[4],data:now-12*h,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-8*h,usuario:'rh3',obs:''}],cobrancas:[]},
+{id:'demo-c8',nome:'Helena Castro',loja:'Shopping Sul',horario:'10:00h às 19:00h',gestora:'Marina',emailGestora:'marina.gestora@empresa.com.br',etapa:6,entrouEm:now-2*h,dataPrevista:demoDataIso(now+7*d),encerrada:false,historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh1',obs:''},{etapa:ETAPAS[2],data:now-8*d,usuario:'rh1',obs:''},{etapa:ETAPAS[3],data:now-7*d,usuario:'rh1',obs:''},{etapa:ETAPAS[4],data:now-6*d,usuario:'rh1',obs:''},{etapa:ETAPAS[5],data:now-2*d,usuario:'rh1',obs:''},{etapa:ETAPAS[6],data:now-2*h,usuario:'rh1',obs:''}],cobrancas:[{data:now-d,usuario:'rh1',email:'marina.gestora@empresa.com.br',gestora:'Marina'}]},
+{id:'demo-c9',nome:'Isabela Nunes',loja:'Loja Centro',horario:'08:00h às 17:00h',gestora:'Tatiane',emailGestora:'tatiane.gestora@empresa.com.br',etapa:7,entrouEm:now-4*h,dataPrevista:demoDataIso(now+4*d),exameData:demoDataIso(now),exameHora:'14:30',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-12*d,usuario:'rh2',obs:''},{etapa:ETAPAS[5],data:now-5*d,usuario:'rh2',obs:''},{etapa:ETAPAS[6],data:now-2*d,usuario:'rh2',obs:''},{etapa:ETAPAS[7],data:now-4*h,usuario:'rh2',obs:''}],cobrancas:[]},
+{id:'demo-c10',nome:'Juliana Gomes',loja:'Shopping Jardim',horario:'09:00h às 18:00h',gestora:'Renata',emailGestora:'renata.gestora@empresa.com.br',etapa:8,entrouEm:now-d,contratadaEm:now-d,contratadaPor:'larissa',encerrada:false,historico:[{etapa:ETAPAS[0],data:now-15*d,usuario:'rh3',obs:''},{etapa:ETAPAS[5],data:now-9*d,usuario:'rh3',obs:''},{etapa:ETAPAS[6],data:now-7*d,usuario:'rh3',obs:''},{etapa:ETAPAS[8],data:now-d,usuario:'larissa',obs:''}],cobrancas:[]},
+{id:'demo-c11',nome:'Karina Lopes',loja:'Loja Praia',horario:'11:00h às 20:00h',gestora:'Rafael',emailGestora:'rafael.gestor@empresa.com.br',etapa:3,entrouEm:now-4*d,encerrada:true,encerradaEm:now-2*d,encerradaNaEtapa:ETAPAS[3],encerradaPor:'rh2',motivo:'Reprovada pelo RH (perfil/feedback)',detalhe:'Disponibilidade diferente da vaga.',historico:[{etapa:ETAPAS[0],data:now-9*d,usuario:'rh2',obs:''},{etapa:'Processo encerrado - Reprovada pelo RH (perfil/feedback)',data:now-2*d,usuario:'rh2',obs:'Disponibilidade diferente da vaga.'}],cobrancas:[]}
+].map(c=>({...c, etapasMigradasV2:true, etapasMigradasV3:true}));
 }
 function demoUsuariosIniciais(){
 return [
@@ -919,7 +924,8 @@ return dataAberturaCard(a) - dataAberturaCard(b);
 }
 function proximaAcaoRH(etapa){
 const acoes = [
-'Agendar entrevista com a candidata',
+'Enviar currículo para aprovação do gestor RH',
+'Aguardar aprovação do gestor RH e agendar entrevista',
 'Realizar entrevista com a candidata',
 'Registrar feedback da entrevista',
 'Solicitar data de início para aguardar liberação de roteiro',
@@ -937,9 +943,9 @@ return filtrado.filter((h, i, arr)=>i===0 || indiceEtapaHistorico(h) !== indiceE
 function indiceEtapaHistorico(registro){
 const nome = String(registro?.etapa || '').replace(/^Processo reaberto em /, '');
 const aliases = {
-'Feedback dado': 2,
-'Aprovada pelo RH': 3,
-'Aguardando roteiro (gestora)': 4,
+'Feedback dado': ENTREVISTA_REALIZADA_IDX,
+'Aprovada pelo RH': FEEDBACK_IDX,
+'Aguardando roteiro (gestora)': BOTTLENECK_IDX,
 'Exame admissional': EXAME_IDX,
 'Contratada': CONTRATADA_IDX
 };
@@ -963,18 +969,26 @@ return idx === -1 || idx < novaEtapa;
 c.historico.push({ etapa: ETAPAS[novaEtapa], data: ts, usuario, obs: "" });
 }
 function migrarEtapaLegada(c){
-if(!c || c.etapasMigradasV2) return c;
+if(!c) return c;
+// V2 usa a numeração anterior à etapa "Aprovação gestor RH" (exame = 6, contratada = 7).
+if(!c.etapasMigradasV2){
 const historico = Array.isArray(c.historico) ? c.historico : [];
 const temRoteiroRecebido = historico.some(h=>String(h.etapa || '') === 'Roteiro recebido');
 const temExame = Boolean(c.exameData) || historico.some(h=>['Exame admissional', 'Exame admissional agendado'].includes(String(h.etapa || '')));
 const temContratada = Boolean(c.contratadaEm) || historico.some(h=>['Contratada', 'Contratação concluída'].includes(String(h.etapa || '')));
 if(Number(c.etapa) === 5 && !temRoteiroRecebido && temExame){
-c.etapa = EXAME_IDX;
+c.etapa = 6;
 }
 if(Number(c.etapa) === 6 && temContratada){
-c.etapa = CONTRATADA_IDX;
+c.etapa = 7;
 }
 c.etapasMigradasV2 = true;
+}
+// V3: inclusão de "Aprovação gestor RH" como etapa 02; as etapas seguintes avançam uma posição.
+if(!c.etapasMigradasV3){
+if(Number(c.etapa) >= APROVACAO_GESTOR_IDX) c.etapa = Number(c.etapa) + 1;
+c.etapasMigradasV3 = true;
+}
 return c;
 }
 function fmtData(ts){
@@ -1639,7 +1653,7 @@ return;
 }
 candidatos.push({
 id: uid(), nome, loja, horario, gestora, emailGestora, dataPrevista: '',
-etapa: 0, entrouEm: hoje(), encerrada: false,
+etapa: 0, entrouEm: hoje(), encerrada: false, etapasMigradasV2: true, etapasMigradasV3: true,
 motivo: "", detalhe: "", encerradaEm: null, encerradaNaEtapa: null,
 historico: [{ etapa: ETAPAS[0], data: hoje(), usuario: usuarioAtual?.login || usuarioAtual?.email || 'usuário', obs: "" }]
 });
@@ -2226,7 +2240,10 @@ const nome = nomeCandidata(c.nome);
 const loja = textoPadrao(c.loja) || '-';
 const gestora = textoPadrao(c.gestora) || '-';
 if(c.etapa===0){
-atividades.push(atividadeCard(c, 'Pendente', `Avaliar candidato para agendar entrevista`, `${nome} · ${loja} · Gestora: ${gestora}`, 9));
+atividades.push(atividadeCard(c, 'Pendente', `Enviar currículo de ${nome} para aprovação do gestor RH`, `${loja} · Gestora: ${gestora}`, 9));
+}
+if(c.etapa===APROVACAO_GESTOR_IDX){
+atividades.push(atividadeCard(c, 'Pendente', `Acompanhar aprovação do gestor RH para ${nome}`, `${loja} · Gestora: ${gestora}`, 9));
 }
 if(c.entrevistaData){
 const diffEntrevista = compararDataLocal(c.entrevistaData, hojeIso);
@@ -2244,7 +2261,7 @@ atividades.push(atividadeCard(c, 'Hoje', `Acompanhar exame admissional de ${nome
 atividades.push(atividadeCard(c, 'Atrasada', `Verificar exame admissional de ${nome}`, `${loja} · Exame previsto para ${formatarExameAdmissional(c)}`, 21));
 }
 }
-if(c.etapa===2){
+if(c.etapa===ENTREVISTA_REALIZADA_IDX){
 atividades.push(atividadeCard(c, 'Pendente', `Realizar feedback com ${nome}`, `${loja} · Gestora: ${gestora}${c.entrevistaData ? ' · Entrevista: ' + formatarEntrevistaAgendada(c) : ''}`, 12));
 }
 if(c.etapa===BOTTLENECK_IDX){
@@ -2258,7 +2275,7 @@ atividades.push(atividadeCard(c, 'Atrasada', `Solicitar ao gestor(a) ${gestora} 
 atividades.push(atividadeCard(c, 'Atenção', `Acompanhar roteiro com ${gestora}`, `${nome} · ${loja} · ${dias} dia(s) aguardando`, 30));
 }
 }
-if(c.etapa===3){
+if(c.etapa===FEEDBACK_IDX){
 atividades.push(atividadeCard(c, 'Pendente', `Solicitar à gestora a data de início de ${nome}`, `${loja} · Gestora: ${gestora}`, 40));
 }
 if(c.etapa===ROTEIRO_RECEBIDO_IDX){
